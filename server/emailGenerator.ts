@@ -3,14 +3,14 @@ import { emailStyles } from "../client/src/lib/emailStyles";
 
 interface EmailGenerationParams {
   style: string;
-  emailType: string;
-  recipientName: string;
+  emailType?: string;
+  recipientName?: string;
   recipientLinkedIn?: string;
-  senderName: string;
+  senderName?: string;
   senderLinkedIn?: string;
-  subject: string;
-  topic: string;
-  length: 'short' | 'medium' | 'long';
+  subject?: string;
+  topic?: string;
+  length?: 'short' | 'medium' | 'long';
   sampleEmail?: string;
   jobDescription?: string;
   additionalContext?: string;
@@ -26,6 +26,14 @@ export async function generateEmail(params: EmailGenerationParams): Promise<stri
   const selectedStyle = emailStyles.find(s => s.id === params.style);
   const styleName = selectedStyle?.name || 'Professional';
   const styleDescription = selectedStyle?.description || 'Professional tone';
+
+  // Set defaults for optional fields
+  const emailType = params.emailType || 'Email';
+  const recipientName = params.recipientName || 'Recipient';
+  const senderName = params.senderName || 'Sender';
+  const subject = params.subject || 'Message';
+  const topic = params.topic || params.subject || 'General message';
+  const length = params.length || 'medium';
 
   // Build context from optional fields
   let context = '';
@@ -60,13 +68,13 @@ Key guidelines:
 5. Include proper punctuation and formatting
 6. Make the email ready to send (no placeholders like [Your Name])`;
 
-  let userPrompt = `Generate a ${params.length} ${params.emailType} email with the following details:
+  let userPrompt = `Generate a ${length} ${emailType} email with the following details:
 
-Recipient: ${params.recipientName}
-Sender: ${params.senderName}
-Subject/Purpose: ${params.subject}
-Main Topic: ${params.topic}
-Target Length: ${lengthGuidelines[params.length]}${context}`;
+Recipient: ${recipientName}
+Sender: ${senderName}
+Subject/Purpose: ${subject}
+Main Topic: ${topic}
+Target Length: ${lengthGuidelines[length]}${context}`;
 
   if (params.sampleEmail) {
     userPrompt += `\n\nSample Email for Style Reference:\n${params.sampleEmail}\n\nPlease match the tone and style of the sample email above.`;
@@ -77,31 +85,53 @@ Target Length: ${lengthGuidelines[params.length]}${context}`;
 2. Addresses the recipient by name
 3. Clearly communicates the purpose
 4. Maintains appropriate tone throughout
-5. Includes a proper signature from ${params.senderName}
-6. Is approximately ${lengthGuidelines[params.length]} in length
+5. Includes a proper signature from ${senderName}
+6. Is approximately ${lengthGuidelines[length]} in length
 
 Return ONLY the email content, no additional commentary or explanations.`;
 
   try {
+    console.log('Generating email with params:', { 
+      style: params.style, 
+      emailType, 
+      senderName, 
+      recipientName, 
+      subject, 
+      topic, 
+      length 
+    });
+
     // the newest OpenAI model is "gpt-5" which was released August 7, 2025. do not change this unless explicitly requested by the user
+    // GPT-5 uses reasoning tokens + output tokens, so we need a higher limit to accommodate both
     const completion = await openai.chat.completions.create({
       model: "gpt-5",
       messages: [
         { role: "system", content: systemPrompt },
         { role: "user", content: userPrompt },
       ],
-      max_completion_tokens: 2000,
+      max_completion_tokens: 5000,
+    });
+
+    console.log('OpenAI response received:', { 
+      hasChoices: !!completion.choices?.length,
+      hasContent: !!completion.choices?.[0]?.message?.content 
     });
 
     const generatedEmail = completion.choices[0]?.message?.content || '';
     
     if (!generatedEmail) {
+      console.error('No content in OpenAI response:', JSON.stringify(completion, null, 2));
       throw new Error('No email content generated');
     }
 
     return generatedEmail;
-  } catch (error) {
+  } catch (error: any) {
     console.error('Error generating email:', error);
-    throw new Error('Failed to generate email. Please try again.');
+    console.error('Error details:', { 
+      message: error.message, 
+      response: error.response?.data,
+      status: error.response?.status 
+    });
+    throw new Error(`Failed to generate email: ${error.message}`);
   }
 }
