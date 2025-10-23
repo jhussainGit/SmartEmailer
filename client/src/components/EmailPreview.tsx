@@ -1,15 +1,20 @@
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Copy, Download, RefreshCw } from "lucide-react";
+import { Copy, Download, RefreshCw, Save } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { useAuth } from "@/hooks/useAuth";
+import { useState } from "react";
 
 interface EmailPreviewProps {
   content: string;
   onRefine?: () => void;
+  onSave?: () => void;
 }
 
-export default function EmailPreview({ content, onRefine }: EmailPreviewProps) {
+export default function EmailPreview({ content, onRefine, onSave }: EmailPreviewProps) {
   const { toast } = useToast();
+  const { isAuthenticated } = useAuth();
+  const [isSaving, setIsSaving] = useState(false);
 
   const copyToClipboard = () => {
     navigator.clipboard.writeText(content);
@@ -35,15 +40,24 @@ export default function EmailPreview({ content, onRefine }: EmailPreviewProps) {
     });
   };
 
+  const handleSave = async () => {
+    if (onSave) {
+      setIsSaving(true);
+      await onSave();
+      setIsSaving(false);
+    }
+  };
+
   return (
     <Card className="p-6">
       <div className="flex items-center justify-between mb-4">
         <h3 className="text-lg font-semibold">Email Preview</h3>
-        <div className="flex gap-2">
+        <div className="flex gap-2 flex-wrap">
           <Button
             variant="outline"
             size="sm"
             onClick={copyToClipboard}
+            disabled={!content}
             data-testid="button-copy-email"
           >
             <Copy className="w-4 h-4 mr-2" />
@@ -53,12 +67,25 @@ export default function EmailPreview({ content, onRefine }: EmailPreviewProps) {
             variant="outline"
             size="sm"
             onClick={downloadEmail}
+            disabled={!content}
             data-testid="button-download-email"
           >
             <Download className="w-4 h-4 mr-2" />
             Download
           </Button>
-          {onRefine && (
+          {isAuthenticated && onSave && content && (
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={handleSave}
+              disabled={isSaving}
+              data-testid="button-save-draft"
+            >
+              <Save className="w-4 h-4 mr-2" />
+              {isSaving ? 'Saving...' : 'Save Draft'}
+            </Button>
+          )}
+          {onRefine && content && (
             <Button
               variant="outline"
               size="sm"

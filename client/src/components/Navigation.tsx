@@ -2,16 +2,27 @@ import { Link, useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import ThemeToggle from "@/components/ThemeToggle";
 import LanguageSelector from "@/components/LanguageSelector";
-import { Mail, Menu, X } from "lucide-react";
+import { Mail, Menu, X, LogOut } from "lucide-react";
 import { useState } from "react";
+import { useAuth } from "@/hooks/useAuth";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 export default function Navigation() {
   const [location] = useLocation();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const { user, isAuthenticated } = useAuth();
 
   const navLinks = [
     { href: '/', label: 'Home' },
     { href: '/composer', label: 'Composer' },
+    { href: '/drafts', label: 'Drafts', authRequired: true },
     { href: '/faq', label: 'FAQs' },
     { href: '/contact', label: 'Contact' },
   ];
@@ -28,24 +39,53 @@ export default function Navigation() {
           </Link>
 
           <div className="hidden md:flex items-center gap-1">
-            {navLinks.map(link => (
-              <Link key={link.href} href={link.href}>
-                <Button
-                  variant={location === link.href ? 'secondary' : 'ghost'}
-                  data-testid={`nav-link-${link.label.toLowerCase()}`}
-                >
-                  {link.label}
-                </Button>
-              </Link>
-            ))}
+            {navLinks.map(link => {
+              if (link.authRequired && !isAuthenticated) return null;
+              return (
+                <Link key={link.href} href={link.href}>
+                  <Button
+                    variant={location === link.href ? 'secondary' : 'ghost'}
+                    data-testid={`nav-link-${link.label.toLowerCase()}`}
+                  >
+                    {link.label}
+                  </Button>
+                </Link>
+              );
+            })}
           </div>
 
           <div className="flex items-center gap-2">
-            <Link href="/login">
-              <Button variant="outline" size="sm" className="hidden md:inline-flex" data-testid="button-login">
-                Log In
-              </Button>
-            </Link>
+            {isAuthenticated && user ? (
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="ghost" className="hidden md:inline-flex gap-2" data-testid="button-user-menu">
+                    <Avatar className="w-7 h-7">
+                      <AvatarImage src={user.profileImageUrl || undefined} />
+                      <AvatarFallback>{user.email?.[0]?.toUpperCase() || 'U'}</AvatarFallback>
+                    </Avatar>
+                    <span className="text-sm">{user.firstName || user.email}</span>
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end">
+                  <DropdownMenuItem disabled className="text-xs text-muted-foreground">
+                    {user.email}
+                  </DropdownMenuItem>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem asChild>
+                    <a href="/api/logout" data-testid="button-logout">
+                      <LogOut className="w-4 h-4 mr-2" />
+                      Log Out
+                    </a>
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            ) : (
+              <Link href="/login">
+                <Button variant="outline" size="sm" className="hidden md:inline-flex" data-testid="button-login">
+                  Log In
+                </Button>
+              </Link>
+            )}
             <LanguageSelector />
             <ThemeToggle />
             <Button
@@ -63,28 +103,45 @@ export default function Navigation() {
         {mobileMenuOpen && (
           <div className="md:hidden py-4 border-t">
             <div className="flex flex-col gap-2">
-              {navLinks.map(link => (
-                <Link key={link.href} href={link.href}>
+              {navLinks.map(link => {
+                if (link.authRequired && !isAuthenticated) return null;
+                return (
+                  <Link key={link.href} href={link.href}>
+                    <Button
+                      variant={location === link.href ? 'secondary' : 'ghost'}
+                      className="w-full justify-start"
+                      onClick={() => setMobileMenuOpen(false)}
+                      data-testid={`mobile-nav-link-${link.label.toLowerCase()}`}
+                    >
+                      {link.label}
+                    </Button>
+                  </Link>
+                );
+              })}
+              {isAuthenticated ? (
+                <a href="/api/logout">
                   <Button
-                    variant={location === link.href ? 'secondary' : 'ghost'}
+                    variant="outline"
                     className="w-full justify-start"
                     onClick={() => setMobileMenuOpen(false)}
-                    data-testid={`mobile-nav-link-${link.label.toLowerCase()}`}
+                    data-testid="mobile-button-logout"
                   >
-                    {link.label}
+                    <LogOut className="w-4 h-4 mr-2" />
+                    Log Out
+                  </Button>
+                </a>
+              ) : (
+                <Link href="/login">
+                  <Button
+                    variant="outline"
+                    className="w-full justify-start"
+                    onClick={() => setMobileMenuOpen(false)}
+                    data-testid="mobile-button-login"
+                  >
+                    Log In
                   </Button>
                 </Link>
-              ))}
-              <Link href="/login">
-                <Button
-                  variant="outline"
-                  className="w-full justify-start"
-                  onClick={() => setMobileMenuOpen(false)}
-                  data-testid="mobile-button-login"
-                >
-                  Log In
-                </Button>
-              </Link>
+              )}
             </div>
           </div>
         )}

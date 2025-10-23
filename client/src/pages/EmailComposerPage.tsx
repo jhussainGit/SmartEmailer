@@ -6,6 +6,9 @@ import { emailStyles, emailCategories } from "@/lib/emailStyles";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Search } from "lucide-react";
+import { useToast } from "@/hooks/use-toast";
+import { useAuth } from "@/hooks/useAuth";
+import { apiRequest } from "@/lib/queryClient";
 
 export default function EmailComposerPage() {
   const [selectedStyle, setSelectedStyle] = useState(emailStyles[0].id);
@@ -13,6 +16,9 @@ export default function EmailComposerPage() {
   const [searchTerm, setSearchTerm] = useState('');
   const [generatedEmail, setGeneratedEmail] = useState('');
   const [isGenerating, setIsGenerating] = useState(false);
+  const [currentFormData, setCurrentFormData] = useState<EmailFormData | null>(null);
+  const { toast } = useToast();
+  const { isAuthenticated } = useAuth();
 
   const filteredStyles = emailStyles.filter(style => {
     const matchesCategory = selectedCategory === 'all' || style.category === selectedCategory;
@@ -23,28 +29,58 @@ export default function EmailComposerPage() {
 
   const handleGenerate = async (formData: EmailFormData) => {
     setIsGenerating(true);
+    setCurrentFormData(formData);
     
-    // Simulate AI generation
-    await new Promise(resolve => setTimeout(resolve, 2000));
-    
-    const styleName = emailStyles.find(s => s.id === selectedStyle)?.name || 'Professional';
-    const mockEmail = `Dear ${formData.recipientName || 'Recipient'},
+    try {
+      const response = await fetch('/api/generate-email', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          style: selectedStyle,
+          ...formData,
+        }),
+      });
 
-I hope this message finds you well. I am writing to you regarding ${formData.subject || 'the matter we discussed'}.
+      if (!response.ok) {
+        throw new Error('Failed to generate email');
+      }
 
-${formData.topic ? `I wanted to elaborate on ${formData.topic}. ` : ''}${formData.additionalContext || 'This is an important matter that requires your attention and consideration.'}
+      const data = await response.json();
+      setGeneratedEmail(data.email);
+    } catch (error) {
+      console.error('Error generating email:', error);
+      setGeneratedEmail('Error generating email. Please try again.');
+    } finally {
+      setIsGenerating(false);
+    }
+  };
 
-${formData.sampleEmail ? 'Following the style and tone of our previous correspondence, ' : ''}I believe this approach aligns well with our mutual interests and objectives.
+  const handleSaveDraft = async () => {
+    if (!currentFormData || !generatedEmail) return;
 
-I would appreciate the opportunity to discuss this further at your earliest convenience.
+    try {
+      await apiRequest('POST', '/api/drafts', {
+        title: currentFormData.subject || 'Untitled Email',
+        emailType: currentFormData.emailType,
+        style: selectedStyle,
+        content: generatedEmail,
+        formData: currentFormData,
+      });
 
-Thank you for your time and consideration.
-
-Best regards,
-${formData.senderName || 'Your Name'}`;
-
-    setGeneratedEmail(mockEmail);
-    setIsGenerating(false);
+      toast({
+        title: "Draft Saved!",
+        description: "Your email draft has been saved successfully.",
+      });
+    } catch (error) {
+      console.error('Error saving draft:', error);
+      toast({
+        title: "Error",
+        description: "Failed to save draft. Please try again.",
+        variant: "destructive",
+      });
+    }
   };
 
   return (
@@ -112,6 +148,7 @@ ${formData.senderName || 'Your Name'}`;
             <EmailPreview
               content={generatedEmail}
               onRefine={() => console.log('Refine email')}
+              onSave={isAuthenticated ? handleSaveDraft : undefined}
             />
           </div>
         </div>

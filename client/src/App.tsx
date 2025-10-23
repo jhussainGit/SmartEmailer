@@ -10,6 +10,7 @@ import EmailComposerPage from "@/pages/EmailComposerPage";
 import FAQ from "@/pages/FAQ";
 import Contact from "@/pages/Contact";
 import Login from "@/pages/Login";
+import Drafts from "@/pages/Drafts";
 import NotFound from "@/pages/not-found";
 
 function Router() {
@@ -17,6 +18,7 @@ function Router() {
     <Switch>
       <Route path="/" component={Landing} />
       <Route path="/composer" component={EmailComposerPage} />
+      <Route path="/drafts" component={Drafts} />
       <Route path="/faq" component={FAQ} />
       <Route path="/contact" component={Contact} />
       <Route path="/login" component={Login} />
