@@ -54,14 +54,18 @@ export default function Footer() {
             <h3 className="font-semibold mb-4">Legal</h3>
             <ul className="space-y-2">
               <li>
-                <a href="#" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
-                  Privacy Policy
-                </a>
+                <Link href="/privacy" data-testid="link-privacy">
+                  <a className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+                    Privacy Policy
+                  </a>
+                </Link>
               </li>
               <li>
-                <a href="#" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
-                  Terms of Service
-                </a>
+                <Link href="/terms" data-testid="link-terms">
+                  <a className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+                    Terms of Service
+                  </a>
+                </Link>
               </li>
             </ul>
           </div>
@@ -69,7 +73,7 @@ export default function Footer() {
 
         <div className="border-t pt-8 text-center">
           <p className="text-sm text-muted-foreground">
-            © {new Date().getFullYear()} ProEmail AI. All rights reserved.
+            © {new Date().getFullYear()} ProEmail AI. A digital asset owned by Indus Bridge Ventures Inc. All rights reserved.
           </p>
         </div>
       </div>

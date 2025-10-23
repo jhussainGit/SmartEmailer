@@ -12,9 +12,14 @@ All core features are implemented and tested:
 - ✅ User-specific draft saving and management
 - ✅ Gmail-integrated contact form
 - ✅ Comprehensive FAQ page
+- ✅ Privacy Policy and Terms of Service (GDPR/CCPA compliant)
 - ✅ Responsive design with modern UI
 - ✅ Security: Draft deletion with ownership verification
 - ✅ End-to-end tested and working
+
+## Ownership
+
+ProEmail AI is a digital asset owned and operated by **Indus Bridge Ventures Inc.** All legal documents, footer copyright, and platform communications reflect this ownership.
 
 ## User Preferences
 
@@ -37,7 +42,9 @@ Preferred communication style: Simple, everyday language.
 - Design approach follows Linear/Notion hybrid principles: clarity, progressive disclosure, professional credibility
 
 **Component Structure**
-- Page components in `client/src/pages/` for route-level views
+- Page components in `client/src/pages/` for route-level views:
+  - Landing, EmailComposerPage, Drafts, FAQ, Contact
+  - PrivacyPolicy, TermsOfService (legal compliance pages)
 - Reusable UI components in `client/src/components/`
 - Atomic design with shadcn/ui primitives in `client/src/components/ui/`
 - Path aliases (@, @shared, @assets) for clean imports
@@ -64,10 +71,19 @@ Preferred communication style: Simple, everyday language.
 
 **API Structure**
 - `/api/auth/*` - Authentication endpoints (user info, login callback)
-- `/api/drafts` - CRUD operations for saved email drafts
-- `/api/generate-email` - AI email generation endpoint
-- `/api/contact` - Contact form submission
+- `/api/drafts` - CRUD operations for saved email drafts (protected)
+- `/api/generate-email` - AI email generation endpoint (public)
+- `/api/contact` - Contact form submission (public)
 - Protected routes use `isAuthenticated` middleware
+
+**Page Routes**
+- `/` - Landing page
+- `/composer` - Email generation interface
+- `/drafts` - User drafts (requires authentication)
+- `/faq` - Frequently Asked Questions
+- `/contact` - Contact form
+- `/privacy` - Privacy Policy (GDPR/CCPA compliant)
+- `/terms` - Terms of Service
 
 **AI Integration**
 - OpenAI API integration via Replit AI Integrations service (automatic secret management)
