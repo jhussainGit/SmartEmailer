@@ -38,6 +38,10 @@ export default function LandingHero({ onGetStarted }: LandingHeroProps) {
           <Button
             variant="outline"
             size="lg"
+            onClick={() => {
+              const element = document.getElementById('examples-section');
+              element?.scrollIntoView({ behavior: 'smooth' });
+            }}
             data-testid="button-hero-learn-more"
             className="text-base px-8"
           >

@@ -10,7 +10,7 @@ export default function Landing() {
     <div className="min-h-screen">
       <LandingHero onGetStarted={() => setLocation('/composer')} />
       
-      <div className="bg-muted/30 py-20 px-4">
+      <div id="examples-section" className="bg-muted/30 py-20 px-4">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">Why Choose ProEmail AI?</h2>

@@ -41,6 +41,11 @@ export default function Navigation() {
           </div>
 
           <div className="flex items-center gap-2">
+            <Link href="/login">
+              <Button variant="outline" size="sm" className="hidden md:inline-flex" data-testid="button-login">
+                Log In
+              </Button>
+            </Link>
             <LanguageSelector />
             <ThemeToggle />
             <Button
@@ -70,6 +75,16 @@ export default function Navigation() {
                   </Button>
                 </Link>
               ))}
+              <Link href="/login">
+                <Button
+                  variant="outline"
+                  className="w-full justify-start"
+                  onClick={() => setMobileMenuOpen(false)}
+                  data-testid="mobile-button-login"
+                >
+                  Log In
+                </Button>
+              </Link>
             </div>
           </div>
         )}
