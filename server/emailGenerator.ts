@@ -24,6 +24,18 @@ const lengthGuidelines = {
   long: '400-600 words (5-7 paragraphs)',
 };
 
+function getAttachmentType(emailType: string, fileName: string): string {
+  if (emailType === 'follow-up') return 'Previous Email Thread';
+  if (emailType === 'cover-letter') return 'Resume/CV Content';
+  if (emailType === 'business') return 'Proposal/Presentation Content';
+  return 'Attached Document Content';
+}
+
+function truncateAttachment(content: string, maxChars: number = 10000): string {
+  if (content.length <= maxChars) return content;
+  return content.substring(0, maxChars) + '\n\n[Content truncated for length...]';
+}
+
 export async function generateEmail(params: any): Promise<string> {
   const selectedStyle = emailStyles.find(s => s.id === params.style);
   const styleName = selectedStyle?.name || 'Professional';
@@ -61,18 +73,6 @@ export async function generateEmail(params: any): Promise<string> {
   if (params.additionalContext) {
     context += `\nAdditional Context: ${params.additionalContext}`;
   }
-
-function getAttachmentType(emailType: string, fileName: string): string {
-  if (emailType === 'follow-up') return 'Previous Email Thread';
-  if (emailType === 'cover-letter') return 'Resume/CV Content';
-  if (emailType === 'business') return 'Proposal/Presentation Content';
-  return 'Attached Document Content';
-}
-
-function truncateAttachment(content: string, maxChars: number = 10000): string {
-  if (content.length <= maxChars) return content;
-  return content.substring(0, maxChars) + '\n\n[Content truncated for length...]';
-}
 
   let attachmentGuidance = '';
   if (params.attachmentContent && params.attachmentName) {
