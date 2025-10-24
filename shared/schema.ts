@@ -39,7 +39,7 @@ export const emailDrafts = pgTable("email_drafts", {
   id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
   userId: varchar("user_id").notNull().references(() => users.id, { onDelete: 'cascade' }),
   title: varchar("title").notNull(),
-  emailType: varchar("email_type").notNull(),
+  emailType: varchar("email_type"),
   style: varchar("style").notNull(),
   content: text("content").notNull(),
   formData: jsonb("form_data"),
