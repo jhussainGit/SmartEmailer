@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -13,6 +13,7 @@ import {
 import { Card } from "@/components/ui/card";
 import { Loader2, Sparkles, Upload, X } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { emailStyles } from "@/lib/emailStyles";
 
 interface EmailComposerProps {
   selectedStyle: string;
@@ -21,7 +22,6 @@ interface EmailComposerProps {
 }
 
 export interface EmailFormData {
-  emailType: string;
   recipientName: string;
   recipientLinkedIn: string;
   senderName: string;
@@ -42,7 +42,6 @@ export interface EmailFormData {
 export default function EmailComposer({ selectedStyle, onGenerate, isGenerating = false }: EmailComposerProps) {
   const { toast } = useToast();
   const [formData, setFormData] = useState<EmailFormData>({
-    emailType: 'business',
     recipientName: '',
     recipientLinkedIn: '',
     senderName: '',
@@ -58,26 +57,18 @@ export default function EmailComposer({ selectedStyle, onGenerate, isGenerating 
     outputLanguage: 'English',
   });
 
-  const getAttachmentConfig = (emailType: string) => {
-    const configs: Record<string, { label: string; accept: string; placeholder: string } | null> = {
-      'follow-up': {
-        label: 'Previous Email Thread',
-        accept: '.txt,.eml,.msg,.html',
-        placeholder: 'Upload the previous email conversation for context...'
-      },
-      'cover-letter': {
-        label: 'Resume/CV',
-        accept: '.pdf,.doc,.docx,.txt',
-        placeholder: 'Upload your resume to tailor the cover letter...'
-      },
-      'business': {
-        label: 'Proposal/Presentation (Optional)',
-        accept: '.pdf,.ppt,.pptx,.doc,.docx',
-        placeholder: 'Upload supporting documents for your proposal...'
-      },
-    };
-    return configs[emailType] || null;
+  const getAttachmentConfig = () => {
+    const style = emailStyles.find(s => s.id === selectedStyle);
+    return style?.attachmentConfig || null;
   };
+
+  useEffect(() => {
+    setFormData(prev => ({
+      ...prev,
+      attachmentContent: undefined,
+      attachmentName: undefined,
+    }));
+  }, [selectedStyle]);
 
   const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -121,15 +112,6 @@ export default function EmailComposer({ selectedStyle, onGenerate, isGenerating 
     });
   };
 
-  const handleEmailTypeChange = (newEmailType: string) => {
-    setFormData({
-      ...formData,
-      emailType: newEmailType,
-      attachmentContent: undefined,
-      attachmentName: undefined,
-    });
-  };
-
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     onGenerate(formData);
@@ -142,26 +124,6 @@ export default function EmailComposer({ selectedStyle, onGenerate, isGenerating 
           <h3 className="text-lg font-semibold mb-4">Email Details</h3>
           
           <div className="space-y-4">
-            <div>
-              <Label htmlFor="emailType" className="text-sm font-medium mb-2">Email Type</Label>
-              <Select
-                value={formData.emailType}
-                onValueChange={handleEmailTypeChange}
-              >
-                <SelectTrigger id="emailType" data-testid="select-email-type">
-                  <SelectValue placeholder="Select type" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="business">Business Email</SelectItem>
-                  <SelectItem value="cover-letter">Cover Letter</SelectItem>
-                  <SelectItem value="networking">Networking</SelectItem>
-                  <SelectItem value="follow-up">Follow-Up</SelectItem>
-                  <SelectItem value="thank-you">Thank You</SelectItem>
-                  <SelectItem value="academic">Academic</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
-
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
                 <Label htmlFor="recipientName" className="text-sm font-medium mb-2">Recipient Name</Label>
@@ -322,7 +284,7 @@ export default function EmailComposer({ selectedStyle, onGenerate, isGenerating 
               </div>
             </div>
 
-            {formData.emailType === 'cover-letter' && (
+            {selectedStyle === 'cover-letter' && (
               <div>
                 <Label htmlFor="jobDescription" className="text-sm font-medium mb-2">Job Description URL (Optional)</Label>
                 <Input
@@ -335,10 +297,10 @@ export default function EmailComposer({ selectedStyle, onGenerate, isGenerating 
               </div>
             )}
 
-            {getAttachmentConfig(formData.emailType) && (
+            {getAttachmentConfig() && (
               <div>
                 <Label className="text-sm font-medium mb-2">
-                  {getAttachmentConfig(formData.emailType)!.label}
+                  {getAttachmentConfig()!.label}
                 </Label>
                 
                 {!formData.attachmentName ? (
@@ -346,7 +308,7 @@ export default function EmailComposer({ selectedStyle, onGenerate, isGenerating 
                     <Input
                       type="file"
                       id="fileUpload"
-                      accept={getAttachmentConfig(formData.emailType)!.accept}
+                      accept={getAttachmentConfig()!.accept}
                       onChange={handleFileUpload}
                       className="hidden"
                       data-testid="input-file-upload"
@@ -354,10 +316,10 @@ export default function EmailComposer({ selectedStyle, onGenerate, isGenerating 
                     <label htmlFor="fileUpload" className="cursor-pointer">
                       <Upload className="w-8 h-8 mx-auto mb-2 text-muted-foreground" />
                       <p className="text-sm text-muted-foreground mb-1">
-                        {getAttachmentConfig(formData.emailType)!.placeholder}
+                        {getAttachmentConfig()!.placeholder}
                       </p>
                       <p className="text-xs text-muted-foreground">
-                        Supports {getAttachmentConfig(formData.emailType)!.accept.split(',').join(', ')} (max 5MB)
+                        Supports {getAttachmentConfig()!.accept.split(',').join(', ')} (max 5MB)
                       </p>
                       <Button
                         type="button"
