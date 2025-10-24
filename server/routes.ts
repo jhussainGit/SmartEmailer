@@ -59,6 +59,17 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  app.delete('/api/drafts', isAuthenticated, async (req: any, res) => {
+    try {
+      const userId = req.user.claims.sub;
+      await storage.deleteAllDrafts(userId);
+      res.json({ success: true });
+    } catch (error) {
+      console.error("Error deleting all drafts:", error);
+      res.status(500).json({ message: "Failed to delete all drafts" });
+    }
+  });
+
   // Email history routes
   app.get('/api/history', isAuthenticated, async (req: any, res) => {
     try {

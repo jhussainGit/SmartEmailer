@@ -23,6 +23,7 @@ export interface IStorage {
   getDraft(id: string): Promise<EmailDraft | undefined>;
   updateDraft(id: string, content: string): Promise<EmailDraft>;
   deleteDraft(id: string, userId: string): Promise<void>;
+  deleteAllDrafts(userId: string): Promise<void>;
   
   // Email history operations
   createHistoryEntry(entry: InsertEmailHistory): Promise<EmailHistory>;
@@ -95,6 +96,12 @@ export class DatabaseStorage implements IStorage {
     if (result.length === 0) {
       throw new Error('Draft not found or unauthorized');
     }
+  }
+
+  async deleteAllDrafts(userId: string): Promise<void> {
+    await db
+      .delete(emailDrafts)
+      .where(eq(emailDrafts.userId, userId));
   }
 
   // Email history operations
