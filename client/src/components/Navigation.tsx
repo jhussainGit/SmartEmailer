@@ -1,7 +1,6 @@
 import { Link, useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import ThemeToggle from "@/components/ThemeToggle";
-import LanguageSelector from "@/components/LanguageSelector";
 import { Mail, Menu, X, LogOut } from "lucide-react";
 import { useState } from "react";
 import { useAuth } from "@/hooks/useAuth";
@@ -86,7 +85,6 @@ export default function Navigation() {
                 </Button>
               </Link>
             )}
-            <LanguageSelector />
             <ThemeToggle />
             <Button
               variant="ghost"
