@@ -11,6 +11,8 @@ import FAQ from "@/pages/FAQ";
 import Contact from "@/pages/Contact";
 import Login from "@/pages/Login";
 import Drafts from "@/pages/Drafts";
+import Blog from "@/pages/Blog";
+import BlogPost from "@/pages/BlogPost";
 import PrivacyPolicy from "@/pages/PrivacyPolicy";
 import TermsOfService from "@/pages/TermsOfService";
 import NotFound from "@/pages/not-found";
@@ -21,6 +23,8 @@ function Router() {
       <Route path="/" component={Landing} />
       <Route path="/composer" component={EmailComposerPage} />
       <Route path="/drafts" component={Drafts} />
+      <Route path="/blog" component={Blog} />
+      <Route path="/blog/:slug" component={BlogPost} />
       <Route path="/faq" component={FAQ} />
       <Route path="/contact" component={Contact} />
       <Route path="/login" component={Login} />
