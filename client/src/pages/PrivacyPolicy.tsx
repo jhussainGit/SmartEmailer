@@ -18,7 +18,7 @@ export default function PrivacyPolicy() {
             <h2 className="text-2xl font-semibold mb-4">1. Introduction</h2>
             <p>
               This Privacy Policy describes how Indus Bridge Ventures Inc. ("we," "us," or "our") collects, uses, 
-              and protects your information when you use Email Helper (the "Service"), our AI-powered email 
+              and protects your information when you use Smart Emailer Pro (the "Service"), our AI-powered email 
               generation platform. We are committed to protecting your privacy and handling your data with 
               transparency and security.
             </p>
@@ -32,7 +32,7 @@ export default function PrivacyPolicy() {
             <h2 className="text-2xl font-semibold mb-4">2. Information We Collect</h2>
             
             <h3 className="text-xl font-semibold mb-3 mt-6">2.1 Information You Provide</h3>
-            <p>When you use Email Helper, we collect information you provide directly to us, including:</p>
+            <p>When you use Smart Emailer Pro, we collect information you provide directly to us, including:</p>
             <ul className="list-disc pl-6 space-y-2 mt-3">
               <li><strong>Account Information:</strong> Email address, name, and profile information through Replit authentication</li>
               <li><strong>Email Generation Data:</strong> Information you input for email generation including sender/recipient names, 
@@ -69,7 +69,7 @@ export default function PrivacyPolicy() {
             
             <h3 className="text-xl font-semibold mb-3 mt-6">4.1 AI-Powered Email Generation</h3>
             <p>
-              Email Helper uses OpenAI's GPT-5 model to generate email content. When you use our email generation feature:
+              Smart Emailer Pro uses OpenAI's GPT-5 model to generate email content. When you use our email generation feature:
             </p>
             <ul className="list-disc pl-6 space-y-2 mt-3">
               <li>Your input data (prompts, context, preferences) is sent to OpenAI's API for processing</li>
@@ -244,7 +244,7 @@ export default function PrivacyPolicy() {
 
           <section className="border-t pt-8 mt-8">
             <p className="text-sm text-muted-foreground">
-              This Privacy Policy is effective as of October 23, 2025. Email Helper is a digital asset owned 
+              This Privacy Policy is effective as of October 23, 2025. Smart Emailer Pro is a digital asset owned 
               and operated by Indus Bridge Ventures Inc. All rights reserved.
             </p>
           </section>

@@ -65,7 +65,7 @@ Message:
 ${message}
 
 ---
-This email was sent from the Email Helper contact form.`;
+This email was sent from the Smart Emailer Pro contact form.`;
 
   const encodedMessage = Buffer.from(emailContent)
     .toString('base64')

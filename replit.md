@@ -1,8 +1,8 @@
-# Email Helper - Free AI Email Writing Platform
+# Smart Emailer Pro - Free AI Email Writing Platform
 
 ## Overview
 
-Email Helper is a fully functional web-based AI-powered email generation platform that helps users create professional, academic, and business emails across 30+ writing styles - completely FREE. The application uses OpenAI's GPT-5 model to generate contextually appropriate emails based on user inputs including style preferences, recipient information, LinkedIn profiles, job descriptions, and custom context. Authenticated users can save drafts for later use. The platform includes a Gmail-integrated contact form for user inquiries.
+Smart Emailer Pro is a fully functional web-based AI-powered email generation platform that helps users create professional, academic, and business emails across 30+ writing styles - completely FREE. The application uses OpenAI's GPT-5 model to generate contextually appropriate emails based on user inputs including style preferences, recipient information, LinkedIn profiles, job descriptions, and custom context. Authenticated users can save drafts for later use. The platform includes a Gmail-integrated contact form for user inquiries.
 
 ## Current Status (October 24, 2025)
 
@@ -67,7 +67,7 @@ Previous Session Improvements (October 24, 2025 - Session 4):
 - **Testing**: All features verified with comprehensive end-to-end Playwright tests
 
 Previous Session Improvements (October 24, 2025 - Session 3):
-- **Rebranding**: Complete rebrand from "ProEmail AI" to "Email Helper" across entire platform to avoid implying paid service
+- **Rebranding**: Complete rebrand from "ProEmail AI" to "Smart Emailer Pro" across entire platform
 - **Dual Language Selectors**: Moved language selection from site-level to composer-level with TWO selectors:
   - Input Language: Language of context/inputs provided by user
   - Output Language: Language for generated email
@@ -102,7 +102,7 @@ Earlier Session Improvements (October 24, 2025 - Session 1):
 
 ## Ownership & Contact
 
-Email Helper is a digital asset owned and operated by **Indus Bridge Ventures Inc.** All legal documents, footer copyright, and platform communications reflect this ownership.
+Smart Emailer Pro is a digital asset owned and operated by **Indus Bridge Ventures Inc.** All legal documents, footer copyright, and platform communications reflect this ownership.
 
 **Contact Information:**
 - Physical Address: Indus Bridge Ventures Inc., 801 Route 1 #1017, Iselin, NJ 08831, United States
