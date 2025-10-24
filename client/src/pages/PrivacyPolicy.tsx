@@ -161,10 +161,10 @@ export default function PrivacyPolicy() {
 
             <h3 className="text-xl font-semibold mb-3 mt-6">7.4 Exercising Your Rights</h3>
             <p>
-              To exercise any of these rights, please contact us at{" "}
-              <a href="mailto:privacy@indusbridgeventures.com" className="text-primary hover:underline">
-                privacy@indusbridgeventures.com
-              </a>. We will respond to your request within 30 days.
+              To exercise any of these rights, please contact us through our{" "}
+              <Link href="/contact" className="text-primary hover:underline">
+                Contact Form
+              </Link>. We will respond to your request within 30 days.
             </p>
           </section>
 
@@ -197,10 +197,10 @@ export default function PrivacyPolicy() {
             <p>
               Our Service is not intended for individuals under the age of 13. We do not knowingly collect 
               personal information from children under 13. If you believe we have inadvertently collected 
-              information from a child under 13, please contact us immediately at{" "}
-              <a href="mailto:privacy@indusbridgeventures.com" className="text-primary hover:underline">
-                privacy@indusbridgeventures.com
-              </a>.
+              information from a child under 13, please contact us immediately through our{" "}
+              <Link href="/contact" className="text-primary hover:underline">
+                Contact Form
+              </Link>.
             </p>
           </section>
 

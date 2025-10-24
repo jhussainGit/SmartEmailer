@@ -8,21 +8,33 @@ ProEmail AI is a fully functional web-based AI-powered email generation platform
 
 All core features are implemented and tested:
 - ✅ Email generation with 30+ styles using GPT-5
+- ✅ Multi-language support: 20+ languages for generated emails
+- ✅ Email examples showcase: 5 professional examples on landing page
 - ✅ Replit Auth authentication with admin support
 - ✅ User-specific draft saving and management
 - ✅ Email history tracking with auto-save for authenticated users
 - ✅ Word count and reading time display for generated emails
 - ✅ Regenerate functionality for creating email variations
 - ✅ Gmail-integrated contact form
-- ✅ Comprehensive FAQ page
-- ✅ Privacy Policy and Terms of Service (GDPR/CCPA compliant)
+- ✅ Comprehensive FAQ page with language clarifications
+- ✅ Privacy Policy and Terms of Service (GDPR/CCPA compliant, no email addresses)
 - ✅ Responsive design with modern UI
 - ✅ Security: Draft and history deletion with ownership verification
 - ✅ Clean production code (removed debug logging)
 - ✅ Theme-aware 404 page
 - ✅ End-to-end tested and working
 
-Recent Improvements (October 24, 2025):
+Recent Improvements (October 24, 2025 - Session 2):
+- **Language Feature**: Added comprehensive language selector with 20+ major world languages (English, Spanish, French, German, Italian, Portuguese, Chinese, Japanese, Korean, Arabic, Russian, Hindi, Dutch, Polish, Turkish, Swedish, Vietnamese, Thai, Hebrew, Greek)
+- **Language Integration**: Language parameter now properly affects GPT-5 email generation - emails are written in the selected language
+- **Email Examples**: Added 5 professional email examples to landing page showing different styles (Professional Cover Letter, Networking, Business Proposal, Academic Inquiry, Thank You Note) with complete inputs and outputs
+- **Privacy Compliance**: Removed ALL email addresses from the site (Privacy Policy, Terms of Service) and replaced with Contact Form links
+- **Contact Information**: Physical address (Indus Bridge Ventures Inc., 801 Route 1 #1017, Iselin, NJ 08831, United States) displayed in footer and legal pages
+- **FAQ Updates**: Added clarification that language selector affects only generated email output, not site UI; browser settings control site language
+- **Draft Loading Fix**: Fixed draft query to always refetch fresh data with staleTime: 0
+- **Testing**: All features verified with end-to-end Playwright tests
+
+Previous Session Improvements (October 24, 2025 - Session 1):
 - Added email history feature: automatically saves all generated emails for authenticated users
 - Enhanced email preview with word count and estimated reading time
 - Added regenerate button to create variations of the same email
@@ -31,9 +43,14 @@ Recent Improvements (October 24, 2025):
 - Updated login page to accurately reflect available features
 - Cleaned up server-side logging for production readiness
 
-## Ownership
+## Ownership & Contact
 
 ProEmail AI is a digital asset owned and operated by **Indus Bridge Ventures Inc.** All legal documents, footer copyright, and platform communications reflect this ownership.
+
+**Contact Information:**
+- Physical Address: Indus Bridge Ventures Inc., 801 Route 1 #1017, Iselin, NJ 08831, United States
+- Contact Method: Contact Form only (no email addresses displayed on site for privacy)
+- Admin Account: jaffer.hussain@gmail.com (password: Immay123$)
 
 ## User Preferences
 

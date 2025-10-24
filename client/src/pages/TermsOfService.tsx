@@ -260,10 +260,10 @@ export default function TermsOfService() {
             <h3 className="text-xl font-semibold mb-3 mt-6">11.1 Termination by You</h3>
             <p>
               You may stop using the Service at any time. To delete your account and associated data, 
-              contact us at{" "}
-              <a href="mailto:jaffer.hussain@gmail.com" className="text-primary hover:underline">
-                jaffer.hussain@gmail.com
-              </a>.
+              contact us through our{" "}
+              <Link href="/contact" className="text-primary hover:underline">
+                Contact Form
+              </Link>.
             </p>
 
             <h3 className="text-xl font-semibold mb-3 mt-6">11.2 Termination by Us</h3>
@@ -310,10 +310,10 @@ export default function TermsOfService() {
             
             <h3 className="text-xl font-semibold mb-3 mt-6">13.1 Informal Resolution</h3>
             <p>
-              Before filing a formal claim, you agree to contact us at{" "}
-              <a href="mailto:legal@indusbridgeventures.com" className="text-primary hover:underline">
-                legal@indusbridgeventures.com
-              </a>{" "}
+              Before filing a formal claim, you agree to contact us through our{" "}
+              <Link href="/contact" className="text-primary hover:underline">
+                Contact Form
+              </Link>{" "}
               to attempt to resolve the dispute informally.
             </p>
 

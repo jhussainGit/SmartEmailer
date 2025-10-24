@@ -65,11 +65,11 @@ export default function EmailPreview({ content, onRefine, onSave, onRegenerate }
           <h3 className="text-lg font-semibold mb-1">Email Preview</h3>
           {content && (
             <div className="flex gap-4 text-xs text-muted-foreground">
-              <span className="flex items-center gap-1">
+              <span className="flex items-center gap-1" data-testid="text-word-count">
                 <FileText className="w-3 h-3" />
                 {wordCount} words
               </span>
-              <span className="flex items-center gap-1">
+              <span className="flex items-center gap-1" data-testid="text-reading-time">
                 <Clock className="w-3 h-3" />
                 {readingTime} min read
               </span>
