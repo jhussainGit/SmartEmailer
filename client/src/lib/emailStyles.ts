@@ -13,6 +13,11 @@ export interface EmailStyle {
   icon: any;
   description: string;
   category: 'professional' | 'academic' | 'casual' | 'creative';
+  attachmentConfig?: {
+    label: string;
+    accept: string;
+    placeholder: string;
+  };
 }
 
 export const emailStyles: EmailStyle[] = [
@@ -21,16 +26,16 @@ export const emailStyles: EmailStyle[] = [
   { id: 'executive', name: 'Executive', icon: Building, description: 'C-suite level communication', category: 'professional' },
   { id: 'sales-pitch', name: 'Sales Pitch', icon: TrendingUp, description: 'Persuasive and compelling', category: 'professional' },
   { id: 'networking', name: 'Networking', icon: Users, description: 'Build professional relationships', category: 'professional' },
-  { id: 'follow-up', name: 'Follow-Up', icon: ChevronRight, description: 'Polite reminder emails', category: 'professional' },
+  { id: 'follow-up', name: 'Follow-Up', icon: ChevronRight, description: 'Polite reminder emails', category: 'professional', attachmentConfig: { label: 'Previous Email Thread (Optional)', accept: '.txt,.eml,.msg,.html', placeholder: 'Upload the previous email conversation for context...' } },
   { id: 'thank-you', name: 'Thank You', icon: ThumbsUp, description: 'Express gratitude professionally', category: 'professional' },
   { id: 'introduction', name: 'Introduction', icon: UserPlus, description: 'Introduce yourself effectively', category: 'professional' },
   
-  { id: 'cover-letter', name: 'Cover Letter', icon: FileText, description: 'Job application letters', category: 'professional' },
+  { id: 'cover-letter', name: 'Cover Letter', icon: FileText, description: 'Job application letters', category: 'professional', attachmentConfig: { label: 'Resume/CV (Optional)', accept: '.pdf,.doc,.docx,.txt', placeholder: 'Upload your resume to tailor the cover letter...' } },
   { id: 'resignation', name: 'Resignation', icon: Send, description: 'Professional departure notice', category: 'professional' },
   { id: 'recommendation', name: 'Recommendation', icon: Award, description: 'Reference letters', category: 'professional' },
   { id: 'complaint', name: 'Complaint', icon: AlertCircle, description: 'Address issues diplomatically', category: 'professional' },
   { id: 'apology', name: 'Apology', icon: Heart, description: 'Express regret professionally', category: 'professional' },
-  { id: 'proposal', name: 'Business Proposal', icon: Handshake, description: 'Pitch ideas and partnerships', category: 'professional' },
+  { id: 'proposal', name: 'Business Proposal', icon: Handshake, description: 'Pitch ideas and partnerships', category: 'professional', attachmentConfig: { label: 'Proposal/Presentation (Optional)', accept: '.pdf,.ppt,.pptx,.doc,.docx', placeholder: 'Upload supporting documents for your proposal...' } },
   
   { id: 'academic-formal', name: 'Academic Formal', icon: GraduationCap, description: 'Scholarly communication', category: 'academic' },
   { id: 'research-inquiry', name: 'Research Inquiry', icon: Sparkles, description: 'Academic research requests', category: 'academic' },
@@ -49,7 +54,7 @@ export const emailStyles: EmailStyle[] = [
   { id: 'invitation', name: 'Invitation', icon: Calendar, description: 'Event invitations', category: 'creative' },
   { id: 'newsletter', name: 'Newsletter', icon: Mail, description: 'Regular updates', category: 'creative' },
   { id: 'customer-service', name: 'Customer Service', icon: Shield, description: 'Support and assistance', category: 'professional' },
-  { id: 'invoice', name: 'Invoice Request', icon: DollarSign, description: 'Payment requests', category: 'professional' },
+  { id: 'invoice', name: 'Invoice Request', icon: DollarSign, description: 'Payment requests', category: 'professional', attachmentConfig: { label: 'Invoice/Supporting Documents (Optional)', accept: '.pdf,.doc,.docx,.xlsx,.xls,.txt', placeholder: 'Upload invoice or supporting documents...' } },
   { id: 'order-confirmation', name: 'Order Confirmation', icon: Package, description: 'Transaction confirmations', category: 'professional' },
 ];
 
