@@ -11,7 +11,8 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Card } from "@/components/ui/card";
-import { Loader2, Sparkles } from "lucide-react";
+import { Loader2, Sparkles, Upload, X } from "lucide-react";
+import { useToast } from "@/hooks/use-toast";
 
 interface EmailComposerProps {
   selectedStyle: string;
@@ -34,9 +35,12 @@ export interface EmailFormData {
   additionalContext: string;
   inputLanguage: string;
   outputLanguage: string;
+  attachmentContent?: string;
+  attachmentName?: string;
 }
 
 export default function EmailComposer({ selectedStyle, onGenerate, isGenerating = false }: EmailComposerProps) {
+  const { toast } = useToast();
   const [formData, setFormData] = useState<EmailFormData>({
     emailType: 'business',
     recipientName: '',
@@ -53,6 +57,69 @@ export default function EmailComposer({ selectedStyle, onGenerate, isGenerating 
     inputLanguage: 'English',
     outputLanguage: 'English',
   });
+
+  const getAttachmentConfig = (emailType: string) => {
+    const configs: Record<string, { label: string; accept: string; placeholder: string } | null> = {
+      'follow-up': {
+        label: 'Previous Email Thread',
+        accept: '.txt,.eml,.msg,.html',
+        placeholder: 'Upload the previous email conversation for context...'
+      },
+      'cover-letter': {
+        label: 'Resume/CV',
+        accept: '.pdf,.doc,.docx,.txt',
+        placeholder: 'Upload your resume to tailor the cover letter...'
+      },
+      'business': {
+        label: 'Proposal/Presentation (Optional)',
+        accept: '.pdf,.ppt,.pptx,.doc,.docx',
+        placeholder: 'Upload supporting documents for your proposal...'
+      },
+    };
+    return configs[emailType] || null;
+  };
+
+  const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    const maxSize = 5 * 1024 * 1024;
+    if (file.size > maxSize) {
+      toast({
+        title: "File Too Large",
+        description: "Please upload a file smaller than 5MB.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    try {
+      const text = await file.text();
+      setFormData({
+        ...formData,
+        attachmentContent: text,
+        attachmentName: file.name,
+      });
+      toast({
+        title: "File Uploaded",
+        description: `${file.name} has been attached successfully.`,
+      });
+    } catch (error) {
+      toast({
+        title: "Upload Failed",
+        description: "Could not read the file. Please try again.",
+        variant: "destructive",
+      });
+    }
+  };
+
+  const removeAttachment = () => {
+    setFormData({
+      ...formData,
+      attachmentContent: undefined,
+      attachmentName: undefined,
+    });
+  };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -256,6 +323,63 @@ export default function EmailComposer({ selectedStyle, onGenerate, isGenerating 
                   onChange={(e) => setFormData({ ...formData, jobDescription: e.target.value })}
                   data-testid="input-job-description"
                 />
+              </div>
+            )}
+
+            {getAttachmentConfig(formData.emailType) && (
+              <div>
+                <Label className="text-sm font-medium mb-2">
+                  {getAttachmentConfig(formData.emailType)!.label}
+                </Label>
+                
+                {!formData.attachmentName ? (
+                  <div className="border-2 border-dashed rounded-lg p-6 text-center hover-elevate">
+                    <Input
+                      type="file"
+                      id="fileUpload"
+                      accept={getAttachmentConfig(formData.emailType)!.accept}
+                      onChange={handleFileUpload}
+                      className="hidden"
+                      data-testid="input-file-upload"
+                    />
+                    <label htmlFor="fileUpload" className="cursor-pointer">
+                      <Upload className="w-8 h-8 mx-auto mb-2 text-muted-foreground" />
+                      <p className="text-sm text-muted-foreground mb-1">
+                        {getAttachmentConfig(formData.emailType)!.placeholder}
+                      </p>
+                      <p className="text-xs text-muted-foreground">
+                        Supports {getAttachmentConfig(formData.emailType)!.accept.split(',').join(', ')} (max 5MB)
+                      </p>
+                      <Button
+                        type="button"
+                        variant="outline"
+                        size="sm"
+                        className="mt-3"
+                        data-testid="button-upload-trigger"
+                      >
+                        Choose File
+                      </Button>
+                    </label>
+                  </div>
+                ) : (
+                  <div className="flex items-center gap-2 p-3 bg-muted/50 rounded-lg">
+                    <div className="flex-1 flex items-center gap-2">
+                      <Upload className="w-4 h-4 text-primary" />
+                      <span className="text-sm font-medium truncate" data-testid="text-attachment-name">
+                        {formData.attachmentName}
+                      </span>
+                    </div>
+                    <Button
+                      type="button"
+                      variant="ghost"
+                      size="icon"
+                      onClick={removeAttachment}
+                      data-testid="button-remove-attachment"
+                    >
+                      <X className="w-4 h-4" />
+                    </Button>
+                  </div>
+                )}
               </div>
             )}
 
