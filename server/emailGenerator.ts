@@ -14,6 +14,8 @@ interface EmailGenerationParams {
   sampleEmail?: string;
   jobDescription?: string;
   additionalContext?: string;
+  attachmentContent?: string;
+  attachmentName?: string;
 }
 
 const lengthGuidelines = {
@@ -33,7 +35,7 @@ export async function generateEmail(params: any): Promise<string> {
   const senderName = params.senderName || 'Sender';
   const subject = params.subject || 'Message';
   const topic = params.topic || params.subject || 'General message';
-  const length = params.length || 'medium';
+  const length: 'short' | 'medium' | 'long' = params.length || 'medium';
   const outputLanguage = params.outputLanguage || 'English';
 
   // Build context from optional fields
@@ -51,8 +53,36 @@ export async function generateEmail(params: any): Promise<string> {
     context += `\nJob Description URL: ${params.jobDescription}`;
   }
   
+  if (params.attachmentContent && params.attachmentName) {
+    const attachmentType = getAttachmentType(params.emailType || '', params.attachmentName);
+    context += `\n\n${attachmentType} (${params.attachmentName}):\n${truncateAttachment(params.attachmentContent)}`;
+  }
+  
   if (params.additionalContext) {
     context += `\nAdditional Context: ${params.additionalContext}`;
+  }
+
+function getAttachmentType(emailType: string, fileName: string): string {
+  if (emailType === 'follow-up') return 'Previous Email Thread';
+  if (emailType === 'cover-letter') return 'Resume/CV Content';
+  if (emailType === 'business') return 'Proposal/Presentation Content';
+  return 'Attached Document Content';
+}
+
+function truncateAttachment(content: string, maxChars: number = 10000): string {
+  if (content.length <= maxChars) return content;
+  return content.substring(0, maxChars) + '\n\n[Content truncated for length...]';
+}
+
+  let attachmentGuidance = '';
+  if (params.attachmentContent && params.attachmentName) {
+    if (emailType === 'follow-up') {
+      attachmentGuidance = '\n\nATTACHMENT GUIDANCE: A previous email thread has been provided. Reference key points from the conversation naturally, acknowledge previous messages, and build upon the existing discussion thread.';
+    } else if (emailType === 'cover-letter') {
+      attachmentGuidance = '\n\nATTACHMENT GUIDANCE: A resume/CV has been provided. Use relevant skills, experiences, and qualifications from the resume to strengthen your cover letter. Highlight achievements that align with the position.';
+    } else if (emailType === 'business') {
+      attachmentGuidance = '\n\nATTACHMENT GUIDANCE: Supporting documents (proposal/presentation) have been provided. Reference key points, data, or highlights from the attached materials to strengthen your message.';
+    }
   }
 
   const systemPrompt = `You are an expert email writer specializing in ${styleName} style emails. 
@@ -70,7 +100,7 @@ Key guidelines:
 4. Use natural, conversational language appropriate to the style
 5. Include proper punctuation and formatting
 6. Make the email ready to send (no placeholders like [Your Name])
-7. Write the entire email in ${outputLanguage}`;
+7. Write the entire email in ${outputLanguage}${attachmentGuidance}`;
 
   let userPrompt = `Generate a ${length} ${emailType} email with the following details:
 
