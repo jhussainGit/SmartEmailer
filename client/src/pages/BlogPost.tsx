@@ -15,6 +15,36 @@ export default function BlogPost() {
     return <NotFound />;
   }
 
+  const articleStructuredData = {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": post.title,
+    "description": post.excerpt,
+    "image": "https://smart-emailer-pro.replit.app/og-image.png",
+    "datePublished": post.publishedDate,
+    "dateModified": post.publishedDate,
+    "author": {
+      "@type": "Organization",
+      "name": "Indus Bridge Ventures Inc.",
+      "url": "https://smart-emailer-pro.replit.app"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Smart Emailer Pro",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://smart-emailer-pro.replit.app/logo.png"
+      }
+    },
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": `https://smart-emailer-pro.replit.app/blog/${post.slug}`
+    },
+    "keywords": post.keywords.join(', '),
+    "articleSection": post.category,
+    "wordCount": post.content.split(/\s+/).length
+  };
+
   return (
     <>
       <Helmet>
@@ -31,6 +61,9 @@ export default function BlogPost() {
         ))}
         <meta name="keywords" content={post.keywords.join(', ')} />
         <link rel="canonical" href={`https://smart-emailer-pro.replit.app/blog/${post.slug}`} />
+        <script type="application/ld+json">
+          {JSON.stringify(articleStructuredData)}
+        </script>
       </Helmet>
 
       <div className="min-h-screen bg-background">
