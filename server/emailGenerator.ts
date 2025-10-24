@@ -34,7 +34,7 @@ export async function generateEmail(params: any): Promise<string> {
   const subject = params.subject || 'Message';
   const topic = params.topic || params.subject || 'General message';
   const length = params.length || 'medium';
-  const language = params.language || 'English';
+  const outputLanguage = params.outputLanguage || 'English';
 
   // Build context from optional fields
   let context = '';
@@ -61,7 +61,7 @@ Your task is to generate professional, well-structured emails that match the spe
 Style: ${styleName}
 Description: ${styleDescription}
 
-IMPORTANT: The email MUST be written entirely in ${language}. All content, including greeting, body, and signature, should be in ${language}.
+IMPORTANT: The email MUST be written entirely in ${outputLanguage}. All content, including greeting, body, and signature, should be in ${outputLanguage}.
 
 Key guidelines:
 1. Match the tone and formality level of the specified style
@@ -70,7 +70,7 @@ Key guidelines:
 4. Use natural, conversational language appropriate to the style
 5. Include proper punctuation and formatting
 6. Make the email ready to send (no placeholders like [Your Name])
-7. Write the entire email in ${language}`;
+7. Write the entire email in ${outputLanguage}`;
 
   let userPrompt = `Generate a ${length} ${emailType} email with the following details:
 
@@ -91,9 +91,9 @@ Target Length: ${lengthGuidelines[length]}${context}`;
 4. Maintains appropriate tone throughout
 5. Includes a proper signature from ${senderName}
 6. Is approximately ${lengthGuidelines[length]} in length
-7. Is written ENTIRELY in ${language}
+7. Is written ENTIRELY in ${outputLanguage}
 
-Return ONLY the email content in ${language}, no additional commentary or explanations.`;
+Return ONLY the email content in ${outputLanguage}, no additional commentary or explanations.`;
 
   try {
     // the newest OpenAI model is "gpt-5" which was released August 7, 2025. do not change this unless explicitly requested by the user
