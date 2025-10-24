@@ -1,20 +1,30 @@
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Copy, Download, RefreshCw, Save } from "lucide-react";
+import { Copy, Download, RefreshCw, Save, Clock, FileText } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { useAuth } from "@/hooks/useAuth";
-import { useState } from "react";
+import { useState, useMemo } from "react";
 
 interface EmailPreviewProps {
   content: string;
   onRefine?: () => void;
   onSave?: () => void;
+  onRegenerate?: () => void;
 }
 
-export default function EmailPreview({ content, onRefine, onSave }: EmailPreviewProps) {
+export default function EmailPreview({ content, onRefine, onSave, onRegenerate }: EmailPreviewProps) {
   const { toast } = useToast();
   const { isAuthenticated } = useAuth();
   const [isSaving, setIsSaving] = useState(false);
+
+  // Calculate word count and reading time
+  const { wordCount, readingTime } = useMemo(() => {
+    if (!content) return { wordCount: 0, readingTime: 0 };
+    const words = content.trim().split(/\s+/).filter(word => word.length > 0);
+    const count = words.length;
+    const time = Math.ceil(count / 200); // Average reading speed: 200 words per minute
+    return { wordCount: count, readingTime: time };
+  }, [content]);
 
   const copyToClipboard = () => {
     navigator.clipboard.writeText(content);
@@ -51,7 +61,21 @@ export default function EmailPreview({ content, onRefine, onSave }: EmailPreview
   return (
     <Card className="p-6">
       <div className="flex items-center justify-between mb-4">
-        <h3 className="text-lg font-semibold">Email Preview</h3>
+        <div>
+          <h3 className="text-lg font-semibold mb-1">Email Preview</h3>
+          {content && (
+            <div className="flex gap-4 text-xs text-muted-foreground">
+              <span className="flex items-center gap-1">
+                <FileText className="w-3 h-3" />
+                {wordCount} words
+              </span>
+              <span className="flex items-center gap-1">
+                <Clock className="w-3 h-3" />
+                {readingTime} min read
+              </span>
+            </div>
+          )}
+        </div>
         <div className="flex gap-2 flex-wrap">
           <Button
             variant="outline"
@@ -85,15 +109,15 @@ export default function EmailPreview({ content, onRefine, onSave }: EmailPreview
               {isSaving ? 'Saving...' : 'Save Draft'}
             </Button>
           )}
-          {onRefine && content && (
+          {onRegenerate && content && (
             <Button
               variant="outline"
               size="sm"
-              onClick={onRefine}
-              data-testid="button-refine-email"
+              onClick={onRegenerate}
+              data-testid="button-regenerate-email"
             >
               <RefreshCw className="w-4 h-4 mr-2" />
-              Refine
+              Regenerate
             </Button>
           )}
         </div>

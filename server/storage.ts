@@ -1,10 +1,13 @@
 import {
   users,
   emailDrafts,
+  emailHistory,
   type User,
   type UpsertUser,
   type EmailDraft,
   type InsertEmailDraft,
+  type EmailHistory,
+  type InsertEmailHistory,
 } from "@shared/schema";
 import { db } from "./db";
 import { eq, desc, and } from "drizzle-orm";
@@ -20,6 +23,11 @@ export interface IStorage {
   getDraft(id: string): Promise<EmailDraft | undefined>;
   updateDraft(id: string, content: string): Promise<EmailDraft>;
   deleteDraft(id: string, userId: string): Promise<void>;
+  
+  // Email history operations
+  createHistoryEntry(entry: InsertEmailHistory): Promise<EmailHistory>;
+  getUserHistory(userId: string): Promise<EmailHistory[]>;
+  deleteHistoryEntry(id: string, userId: string): Promise<void>;
 }
 
 export class DatabaseStorage implements IStorage {
@@ -86,6 +94,35 @@ export class DatabaseStorage implements IStorage {
     
     if (result.length === 0) {
       throw new Error('Draft not found or unauthorized');
+    }
+  }
+
+  // Email history operations
+  async createHistoryEntry(entryData: InsertEmailHistory): Promise<EmailHistory> {
+    const [entry] = await db
+      .insert(emailHistory)
+      .values(entryData)
+      .returning();
+    return entry;
+  }
+
+  async getUserHistory(userId: string): Promise<EmailHistory[]> {
+    return await db
+      .select()
+      .from(emailHistory)
+      .where(eq(emailHistory.userId, userId))
+      .orderBy(desc(emailHistory.createdAt))
+      .limit(50); // Limit to last 50 generations
+  }
+
+  async deleteHistoryEntry(id: string, userId: string): Promise<void> {
+    const result = await db
+      .delete(emailHistory)
+      .where(and(eq(emailHistory.id, id), eq(emailHistory.userId, userId)))
+      .returning();
+    
+    if (result.length === 0) {
+      throw new Error('History entry not found or unauthorized');
     }
   }
 }

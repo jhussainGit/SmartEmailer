@@ -49,11 +49,42 @@ export default function EmailComposerPage() {
 
       const data = await response.json();
       setGeneratedEmail(data.email);
+      
+      // Save to history for authenticated users
+      if (isAuthenticated && data.email) {
+        saveToHistory(data.email, formData);
+      }
     } catch (error) {
       console.error('Error generating email:', error);
       setGeneratedEmail('Error generating email. Please try again.');
     } finally {
       setIsGenerating(false);
+    }
+  };
+
+  const saveToHistory = async (emailContent: string, formData: EmailFormData) => {
+    try {
+      // Calculate word count
+      const words = emailContent.trim().split(/\s+/).filter(word => word.length > 0);
+      const wordCount = words.length.toString();
+
+      await apiRequest('POST', '/api/history', {
+        emailContent,
+        style: selectedStyle,
+        emailType: formData.emailType,
+        subject: formData.subject,
+        formData,
+        wordCount,
+      });
+    } catch (error) {
+      // Silently fail - history saving shouldn't interrupt the user experience
+      console.error('Error saving to history:', error);
+    }
+  };
+
+  const handleRegenerate = () => {
+    if (currentFormData) {
+      handleGenerate(currentFormData);
     }
   };
 
@@ -147,8 +178,8 @@ export default function EmailComposerPage() {
           <div className="lg:col-span-4">
             <EmailPreview
               content={generatedEmail}
-              onRefine={() => console.log('Refine email')}
               onSave={isAuthenticated ? handleSaveDraft : undefined}
+              onRegenerate={currentFormData ? handleRegenerate : undefined}
             />
           </div>
         </div>

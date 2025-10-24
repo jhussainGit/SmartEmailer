@@ -91,16 +91,6 @@ Target Length: ${lengthGuidelines[length]}${context}`;
 Return ONLY the email content, no additional commentary or explanations.`;
 
   try {
-    console.log('Generating email with params:', { 
-      style: params.style, 
-      emailType, 
-      senderName, 
-      recipientName, 
-      subject, 
-      topic, 
-      length 
-    });
-
     // the newest OpenAI model is "gpt-5" which was released August 7, 2025. do not change this unless explicitly requested by the user
     // GPT-5 uses reasoning tokens + output tokens, so we need a higher limit to accommodate both
     const completion = await openai.chat.completions.create({
@@ -112,26 +102,16 @@ Return ONLY the email content, no additional commentary or explanations.`;
       max_completion_tokens: 5000,
     });
 
-    console.log('OpenAI response received:', { 
-      hasChoices: !!completion.choices?.length,
-      hasContent: !!completion.choices?.[0]?.message?.content 
-    });
-
     const generatedEmail = completion.choices[0]?.message?.content || '';
     
     if (!generatedEmail) {
-      console.error('No content in OpenAI response:', JSON.stringify(completion, null, 2));
+      console.error('Email generation failed: No content in OpenAI response');
       throw new Error('No email content generated');
     }
 
     return generatedEmail;
   } catch (error: any) {
-    console.error('Error generating email:', error);
-    console.error('Error details:', { 
-      message: error.message, 
-      response: error.response?.data,
-      status: error.response?.status 
-    });
+    console.error('Email generation error:', error.message);
     throw new Error(`Failed to generate email: ${error.message}`);
   }
 }

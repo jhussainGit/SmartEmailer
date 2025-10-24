@@ -64,11 +64,11 @@ export default function Login() {
               </li>
               <li className="flex items-start gap-2">
                 <span className="text-primary">✓</span>
-                <span>Email generation history</span>
+                <span>Advanced customization options</span>
               </li>
               <li className="flex items-start gap-2">
                 <span className="text-primary">✓</span>
-                <span>Personalized AI recommendations</span>
+                <span>LinkedIn & job description integration</span>
               </li>
             </ul>
           </div>

@@ -59,6 +59,49 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Email history routes
+  app.get('/api/history', isAuthenticated, async (req: any, res) => {
+    try {
+      const userId = req.user.claims.sub;
+      const history = await storage.getUserHistory(userId);
+      res.json(history);
+    } catch (error) {
+      console.error("Error fetching history:", error);
+      res.status(500).json({ message: "Failed to fetch history" });
+    }
+  });
+
+  app.post('/api/history', isAuthenticated, async (req: any, res) => {
+    try {
+      const { insertEmailHistorySchema } = await import('@shared/schema');
+      const validatedData = insertEmailHistorySchema.parse(req.body);
+      
+      const userId = req.user.claims.sub;
+      const historyEntry = await storage.createHistoryEntry({
+        userId,
+        ...validatedData,
+      });
+      res.json(historyEntry);
+    } catch (error: any) {
+      console.error("Error saving to history:", error);
+      if (error.name === 'ZodError') {
+        return res.status(400).json({ message: "Invalid request data", errors: error.errors });
+      }
+      res.status(500).json({ message: "Failed to save to history" });
+    }
+  });
+
+  app.delete('/api/history/:id', isAuthenticated, async (req: any, res) => {
+    try {
+      const userId = req.user.claims.sub;
+      await storage.deleteHistoryEntry(req.params.id, userId);
+      res.json({ success: true });
+    } catch (error: any) {
+      console.error("Error deleting history entry:", error);
+      res.status(500).json({ message: "Failed to delete history entry" });
+    }
+  });
+
   // Email generation route (public - works without auth)
   app.post('/api/generate-email', async (req, res) => {
     try {

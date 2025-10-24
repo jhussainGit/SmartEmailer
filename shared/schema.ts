@@ -47,6 +47,19 @@ export const emailDrafts = pgTable("email_drafts", {
   updatedAt: timestamp("updated_at").defaultNow(),
 });
 
+// Email history table for tracking generated emails
+export const emailHistory = pgTable("email_history", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  userId: varchar("user_id").references(() => users.id, { onDelete: 'cascade' }),
+  emailContent: text("email_content").notNull(),
+  style: varchar("style").notNull(),
+  emailType: varchar("email_type"),
+  subject: varchar("subject"),
+  formData: jsonb("form_data"),
+  wordCount: varchar("word_count"),
+  createdAt: timestamp("created_at").defaultNow(),
+});
+
 export type UpsertUser = typeof users.$inferInsert;
 export type User = typeof users.$inferSelect;
 
@@ -58,3 +71,11 @@ export const insertEmailDraftSchema = createInsertSchema(emailDrafts).omit({
 
 export type InsertEmailDraft = z.infer<typeof insertEmailDraftSchema>;
 export type EmailDraft = typeof emailDrafts.$inferSelect;
+
+export const insertEmailHistorySchema = createInsertSchema(emailHistory).omit({
+  id: true,
+  createdAt: true,
+});
+
+export type InsertEmailHistory = z.infer<typeof insertEmailHistorySchema>;
+export type EmailHistory = typeof emailHistory.$inferSelect;
