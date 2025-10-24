@@ -1,4 +1,5 @@
 import { useQuery, useMutation } from "@tanstack/react-query";
+import { Helmet } from "react-helmet-async";
 import { useAuth } from "@/hooks/useAuth";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -132,9 +133,20 @@ ${draft.content}
   }
 
   return (
-    <div className="min-h-screen bg-background">
-      <div className="max-w-6xl mx-auto p-4 md:p-6">
-        <div className="mb-8">
+    <>
+      <Helmet>
+        <title>My Email Drafts | Smart Emailer Pro</title>
+        <meta 
+          name="description" 
+          content="Access and manage your saved email drafts. View, edit, copy, and download your AI-generated emails. Requires authentication."
+        />
+        <meta name="robots" content="noindex, nofollow" />
+        <link rel="canonical" href="https://smart-emailer-pro.replit.app/drafts" />
+      </Helmet>
+
+      <div className="min-h-screen bg-background">
+        <div className="max-w-6xl mx-auto p-4 md:p-6">
+          <div className="mb-8">
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-4">
             <div>
               <h1 className="text-3xl font-bold mb-2">My Drafts</h1>
@@ -255,5 +267,6 @@ ${draft.content}
         )}
       </div>
     </div>
+    </>
   );
 }

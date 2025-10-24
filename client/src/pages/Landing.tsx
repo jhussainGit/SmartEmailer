@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { Helmet } from "react-helmet-async";
 import LandingHero from "@/components/LandingHero";
 import { useLocation } from "wouter";
 import { Check, ArrowRight } from "lucide-react";
@@ -121,9 +122,65 @@ Robert Chen`
 export default function Landing() {
   const [, setLocation] = useLocation();
 
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Smart Emailer Pro",
+    "description": "Free AI-powered email writing platform with 30+ professional writing styles. Generate perfect emails instantly using GPT-5 technology.",
+    "url": "https://smart-emailer-pro.replit.app",
+    "applicationCategory": "BusinessApplication",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "featureList": [
+      "30+ professional writing styles",
+      "Multi-language support (20+ languages)",
+      "AI-powered email generation with GPT-5",
+      "Draft management for authenticated users",
+      "LinkedIn profile integration",
+      "Job description parsing",
+      "Context-aware file attachments"
+    ],
+    "creator": {
+      "@type": "Organization",
+      "name": "Indus Bridge Ventures Inc.",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "801 Route 1 #1017",
+        "addressLocality": "Iselin",
+        "addressRegion": "NJ",
+        "postalCode": "08831",
+        "addressCountry": "US"
+      }
+    }
+  };
+
   return (
-    <div className="min-h-screen">
-      <LandingHero onGetStarted={() => setLocation('/composer')} />
+    <>
+      <Helmet>
+        <title>Smart Emailer Pro - Free AI Email Writer | 30+ Professional Styles</title>
+        <meta 
+          name="description" 
+          content="Generate professional emails instantly with Smart Emailer Pro. Free AI-powered email writing tool with 30+ styles, multi-language support, and GPT-5 technology. Perfect for business, academic, and personal emails."
+        />
+        <meta 
+          name="keywords" 
+          content="AI email writer, free email generator, professional email, business email, email templates, GPT-5, email writing tool, cold email, cover letter, follow-up email, AI writing assistant"
+        />
+        <meta property="og:title" content="Smart Emailer Pro - Free AI Email Writer | 30+ Professional Styles" />
+        <meta property="og:description" content="Generate professional emails instantly with Smart Emailer Pro. Free AI-powered email writing tool with 30+ styles, multi-language support, and GPT-5 technology." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://smart-emailer-pro.replit.app" />
+        <link rel="canonical" href="https://smart-emailer-pro.replit.app" />
+        <script type="application/ld+json">
+          {JSON.stringify(structuredData)}
+        </script>
+      </Helmet>
+
+      <div className="min-h-screen">
+        <LandingHero onGetStarted={() => setLocation('/composer')} />
       
       <div id="examples-section" className="bg-muted/30 py-20 px-4">
         <div className="max-w-6xl mx-auto mb-16">
@@ -233,5 +290,6 @@ export default function Landing() {
         </div>
       </div>
     </div>
+    </>
   );
 }

@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { Helmet } from "react-helmet-async";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Mail, Loader2 } from "lucide-react";
@@ -28,8 +29,19 @@ export default function Login() {
   };
 
   return (
-    <div className="min-h-screen bg-background flex items-center justify-center p-4">
-      <Card className="w-full max-w-md p-8">
+    <>
+      <Helmet>
+        <title>Login | Smart Emailer Pro</title>
+        <meta 
+          name="description" 
+          content="Sign in to Smart Emailer Pro to access your saved email drafts, generate history, and personalized AI email writing features."
+        />
+        <meta name="robots" content="noindex, nofollow" />
+        <link rel="canonical" href="https://smart-emailer-pro.replit.app/login" />
+      </Helmet>
+
+      <div className="min-h-screen bg-background flex items-center justify-center p-4">
+        <Card className="w-full max-w-md p-8">
         <div className="text-center mb-8">
           <div className="bg-primary text-primary-foreground w-16 h-16 rounded-lg flex items-center justify-center mx-auto mb-4">
             <Mail className="w-8 h-8" />
@@ -81,5 +93,6 @@ export default function Login() {
         </div>
       </Card>
     </div>
+    </>
   );
 }

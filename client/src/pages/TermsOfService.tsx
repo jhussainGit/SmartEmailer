@@ -1,14 +1,33 @@
 import { Link } from "wouter";
+import { Helmet } from "react-helmet-async";
 
 export default function TermsOfService() {
   return (
-    <div className="min-h-screen bg-background">
-      <div className="max-w-4xl mx-auto px-4 py-12">
-        <Link href="/">
-          <a className="text-sm text-muted-foreground hover:text-foreground mb-8 inline-block" data-testid="link-home">
-            ← Back to Home
-          </a>
-        </Link>
+    <>
+      <Helmet>
+        <title>Terms of Service | Smart Emailer Pro</title>
+        <meta 
+          name="description" 
+          content="Read the terms of service for Smart Emailer Pro. Understand your rights and responsibilities when using our AI-powered email writing platform."
+        />
+        <meta 
+          name="keywords" 
+          content="terms of service, user agreement, terms and conditions, legal terms, usage policy"
+        />
+        <meta property="og:title" content="Terms of Service | Smart Emailer Pro" />
+        <meta property="og:description" content="Read the terms of service for Smart Emailer Pro AI email writing platform." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://smart-emailer-pro.replit.app/terms" />
+        <link rel="canonical" href="https://smart-emailer-pro.replit.app/terms" />
+      </Helmet>
+
+      <div className="min-h-screen bg-background">
+        <div className="max-w-4xl mx-auto px-4 py-12">
+          <Link href="/">
+            <a className="text-sm text-muted-foreground hover:text-foreground mb-8 inline-block" data-testid="link-home">
+              ← Back to Home
+            </a>
+          </Link>
 
         <h1 className="text-4xl font-bold mb-2">Terms of Service</h1>
         <p className="text-muted-foreground mb-8">Last Updated: October 23, 2025</p>
@@ -388,5 +407,6 @@ export default function TermsOfService() {
         </div>
       </div>
     </div>
+    </>
   );
 }

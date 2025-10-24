@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Helmet } from "react-helmet-async";
 import EmailStyleCard from "@/components/EmailStyleCard";
 import EmailComposer, { EmailFormData } from "@/components/EmailComposer";
 import EmailPreview from "@/components/EmailPreview";
@@ -113,12 +114,30 @@ export default function EmailComposerPage() {
   };
 
   return (
-    <div className="min-h-screen bg-background">
-      <div className="max-w-[1800px] mx-auto p-4 md:p-6">
-        <div className="mb-8">
-          <h1 className="text-3xl font-bold mb-2">Email Composer</h1>
-          <p className="text-muted-foreground">Choose a style and customize your email</p>
-        </div>
+    <>
+      <Helmet>
+        <title>Email Composer - AI-Powered Email Generator | Smart Emailer Pro</title>
+        <meta 
+          name="description" 
+          content="Create professional emails instantly with our AI-powered composer. Choose from 30+ writing styles including business, academic, technical, and casual. Free email generation with GPT-5 technology."
+        />
+        <meta 
+          name="keywords" 
+          content="email composer, AI email generator, write email, professional email writer, business email generator, email creator, GPT-5 email, automated email writing"
+        />
+        <meta property="og:title" content="Email Composer - AI-Powered Email Generator | Smart Emailer Pro" />
+        <meta property="og:description" content="Create professional emails instantly with our AI-powered composer. Choose from 30+ writing styles and generate perfect emails in seconds." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://smart-emailer-pro.replit.app/composer" />
+        <link rel="canonical" href="https://smart-emailer-pro.replit.app/composer" />
+      </Helmet>
+
+      <div className="min-h-screen bg-background">
+        <div className="max-w-[1800px] mx-auto p-4 md:p-6">
+          <div className="mb-8">
+            <h1 className="text-3xl font-bold mb-2">Email Composer</h1>
+            <p className="text-muted-foreground">Choose a style and customize your email</p>
+          </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
           <div className="lg:col-span-3 space-y-4">
@@ -183,5 +202,6 @@ export default function EmailComposerPage() {
         </div>
       </div>
     </div>
+    </>
   );
 }

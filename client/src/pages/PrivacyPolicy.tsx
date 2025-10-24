@@ -1,14 +1,33 @@
 import { Link } from "wouter";
+import { Helmet } from "react-helmet-async";
 
 export default function PrivacyPolicy() {
   return (
-    <div className="min-h-screen bg-background">
-      <div className="max-w-4xl mx-auto px-4 py-12">
-        <Link href="/">
-          <a className="text-sm text-muted-foreground hover:text-foreground mb-8 inline-block" data-testid="link-home">
-            ← Back to Home
-          </a>
-        </Link>
+    <>
+      <Helmet>
+        <title>Privacy Policy | Smart Emailer Pro</title>
+        <meta 
+          name="description" 
+          content="Read our privacy policy to understand how Smart Emailer Pro collects, uses, and protects your personal information. GDPR and CCPA compliant."
+        />
+        <meta 
+          name="keywords" 
+          content="privacy policy, data protection, GDPR, CCPA, personal information, data security"
+        />
+        <meta property="og:title" content="Privacy Policy | Smart Emailer Pro" />
+        <meta property="og:description" content="Read our privacy policy to understand how Smart Emailer Pro protects your personal information." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://smart-emailer-pro.replit.app/privacy" />
+        <link rel="canonical" href="https://smart-emailer-pro.replit.app/privacy" />
+      </Helmet>
+
+      <div className="min-h-screen bg-background">
+        <div className="max-w-4xl mx-auto px-4 py-12">
+          <Link href="/">
+            <a className="text-sm text-muted-foreground hover:text-foreground mb-8 inline-block" data-testid="link-home">
+              ← Back to Home
+            </a>
+          </Link>
 
         <h1 className="text-4xl font-bold mb-2">Privacy Policy</h1>
         <p className="text-muted-foreground mb-8">Last Updated: October 23, 2025</p>
@@ -251,5 +270,6 @@ export default function PrivacyPolicy() {
         </div>
       </div>
     </div>
+    </>
   );
 }
