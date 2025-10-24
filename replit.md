@@ -11,6 +11,12 @@ All core features are implemented and tested:
 - ✅ Multi-language support: 20+ languages for generated emails
 - ✅ Dual language selectors: Input Language and Output Language with auto-sync
 - ✅ Both language selectors default to English
+- ✅ Context-aware file attachments based on email type:
+  - Follow-up emails: Previous email thread attachments (.txt, .eml, .msg, .html)
+  - Cover letters: Resume/CV attachments (.pdf, .doc, .docx, .txt)
+  - Business emails: Proposal/presentation attachments (.pdf, .ppt, .pptx, .doc, .docx)
+  - Automatic clearing when switching email types
+  - 5MB file size limit with user-friendly error handling
 - ✅ Email examples showcase: 5 professional examples on landing page
 - ✅ Replit Auth authentication with admin support
 - ✅ User-specific draft saving and management with enhanced features:
@@ -34,6 +40,14 @@ All core features are implemented and tested:
 - ✅ End-to-end tested and working
 
 Recent Improvements (October 24, 2025 - Session 4):
+- **Context-Aware File Attachments**: Implemented intelligent file upload system based on email type:
+  - Follow-up emails: Upload previous email threads (.txt, .eml, .msg, .html) for GPT-5 to reference conversation history
+  - Cover letters: Upload resume/CV (.pdf, .doc, .docx, .txt) for GPT-5 to extract skills and experience
+  - Business emails: Upload proposals/presentations (.pdf, .ppt, .pptx, .doc, .docx) for GPT-5 to reference key points
+  - Drag-and-drop style upload UI with 5MB file size limit
+  - Automatic attachment clearing when switching email types
+  - Toast notifications for upload success/failure
+  - Email-type-specific GPT-5 prompt guidance for using attachment content
 - **Enhanced Draft Management**: Added three powerful draft management features:
   - Copy to Clipboard: One-click copy button on each draft card
   - Delete All: Bulk delete all drafts with confirmation dialog (AlertDialog)
@@ -41,7 +55,8 @@ Recent Improvements (October 24, 2025 - Session 4):
 - **Backend Enhancement**: New DELETE /api/drafts endpoint for bulk deletion
 - **Storage Layer**: Added deleteAllDrafts method to storage interface
 - **User Experience**: Toast notifications for all draft actions (copy, export, delete)
-- **Testing**: All draft features verified with comprehensive end-to-end Playwright tests
+- **Email Generation Enhancement**: GPT-5 now receives attachment content (truncated to 10,000 chars) in prompt context with type-specific guidance
+- **Testing**: All features verified with comprehensive end-to-end Playwright tests
 
 Previous Session Improvements (October 24, 2025 - Session 3):
 - **Rebranding**: Complete rebrand from "ProEmail AI" to "Email Helper" across entire platform to avoid implying paid service
