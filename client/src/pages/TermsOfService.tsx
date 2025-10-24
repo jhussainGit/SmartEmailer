@@ -366,12 +366,12 @@ export default function TermsOfService() {
             </p>
             <div className="mt-4 p-4 bg-muted rounded-lg">
               <p className="font-semibold">Indus Bridge Ventures Inc.</p>
-              <p>Email: <a href="mailto:legal@indusbridgeventures.com" className="text-primary hover:underline">
-                legal@indusbridgeventures.com
-              </a></p>
-              <p>Support: <a href="mailto:jaffer.hussain@gmail.com" className="text-primary hover:underline">
-                jaffer.hussain@gmail.com
-              </a></p>
+              <p>801 Route 1 #1017</p>
+              <p>Iselin, NJ 08831</p>
+              <p>United States</p>
+              <p className="mt-3">
+                For inquiries, please use our <Link href="/contact" className="text-primary hover:underline">Contact Form</Link>
+              </p>
             </div>
           </section>
 

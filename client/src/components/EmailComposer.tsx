@@ -32,6 +32,7 @@ export interface EmailFormData {
   sampleEmail: string;
   jobDescription: string;
   additionalContext: string;
+  language: string;
 }
 
 export default function EmailComposer({ selectedStyle, onGenerate, isGenerating = false }: EmailComposerProps) {
@@ -48,6 +49,7 @@ export default function EmailComposer({ selectedStyle, onGenerate, isGenerating 
     sampleEmail: '',
     jobDescription: '',
     additionalContext: '',
+    language: 'English',
   });
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -126,6 +128,40 @@ export default function EmailComposer({ selectedStyle, onGenerate, isGenerating 
                   data-testid="input-sender-linkedin"
                 />
               </div>
+            </div>
+
+            <div>
+              <Label htmlFor="language" className="text-sm font-medium mb-2">Language</Label>
+              <Select
+                value={formData.language}
+                onValueChange={(value) => setFormData({ ...formData, language: value })}
+              >
+                <SelectTrigger id="language" data-testid="select-language">
+                  <SelectValue placeholder="Select language" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="English">English</SelectItem>
+                  <SelectItem value="Spanish">Spanish (Español)</SelectItem>
+                  <SelectItem value="French">French (Français)</SelectItem>
+                  <SelectItem value="German">German (Deutsch)</SelectItem>
+                  <SelectItem value="Italian">Italian (Italiano)</SelectItem>
+                  <SelectItem value="Portuguese">Portuguese (Português)</SelectItem>
+                  <SelectItem value="Chinese">Chinese (中文)</SelectItem>
+                  <SelectItem value="Japanese">Japanese (日本語)</SelectItem>
+                  <SelectItem value="Korean">Korean (한국어)</SelectItem>
+                  <SelectItem value="Arabic">Arabic (العربية)</SelectItem>
+                  <SelectItem value="Russian">Russian (Русский)</SelectItem>
+                  <SelectItem value="Hindi">Hindi (हिन्दी)</SelectItem>
+                  <SelectItem value="Dutch">Dutch (Nederlands)</SelectItem>
+                  <SelectItem value="Polish">Polish (Polski)</SelectItem>
+                  <SelectItem value="Turkish">Turkish (Türkçe)</SelectItem>
+                  <SelectItem value="Swedish">Swedish (Svenska)</SelectItem>
+                  <SelectItem value="Vietnamese">Vietnamese (Tiếng Việt)</SelectItem>
+                  <SelectItem value="Thai">Thai (ไทย)</SelectItem>
+                  <SelectItem value="Hebrew">Hebrew (עברית)</SelectItem>
+                  <SelectItem value="Greek">Greek (Ελληνικά)</SelectItem>
+                </SelectContent>
+              </Select>
             </div>
 
             <div>

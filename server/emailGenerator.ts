@@ -22,7 +22,7 @@ const lengthGuidelines = {
   long: '400-600 words (5-7 paragraphs)',
 };
 
-export async function generateEmail(params: EmailGenerationParams): Promise<string> {
+export async function generateEmail(params: any): Promise<string> {
   const selectedStyle = emailStyles.find(s => s.id === params.style);
   const styleName = selectedStyle?.name || 'Professional';
   const styleDescription = selectedStyle?.description || 'Professional tone';
@@ -34,6 +34,7 @@ export async function generateEmail(params: EmailGenerationParams): Promise<stri
   const subject = params.subject || 'Message';
   const topic = params.topic || params.subject || 'General message';
   const length = params.length || 'medium';
+  const language = params.language || 'English';
 
   // Build context from optional fields
   let context = '';
@@ -60,13 +61,16 @@ Your task is to generate professional, well-structured emails that match the spe
 Style: ${styleName}
 Description: ${styleDescription}
 
+IMPORTANT: The email MUST be written entirely in ${language}. All content, including greeting, body, and signature, should be in ${language}.
+
 Key guidelines:
 1. Match the tone and formality level of the specified style
 2. Use proper email structure (greeting, body, closing, signature)
 3. Be concise yet complete
 4. Use natural, conversational language appropriate to the style
 5. Include proper punctuation and formatting
-6. Make the email ready to send (no placeholders like [Your Name])`;
+6. Make the email ready to send (no placeholders like [Your Name])
+7. Write the entire email in ${language}`;
 
   let userPrompt = `Generate a ${length} ${emailType} email with the following details:
 
@@ -87,8 +91,9 @@ Target Length: ${lengthGuidelines[length]}${context}`;
 4. Maintains appropriate tone throughout
 5. Includes a proper signature from ${senderName}
 6. Is approximately ${lengthGuidelines[length]} in length
+7. Is written ENTIRELY in ${language}
 
-Return ONLY the email content, no additional commentary or explanations.`;
+Return ONLY the email content in ${language}, no additional commentary or explanations.`;
 
   try {
     // the newest OpenAI model is "gpt-5" which was released August 7, 2025. do not change this unless explicitly requested by the user

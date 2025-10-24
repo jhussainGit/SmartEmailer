@@ -71,10 +71,16 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="border-t pt-8 text-center">
-          <p className="text-sm text-muted-foreground">
-            © {new Date().getFullYear()} ProEmail AI. A digital asset owned by Indus Bridge Ventures Inc. All rights reserved.
-          </p>
+        <div className="border-t pt-8">
+          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+            <div className="text-sm text-muted-foreground">
+              <p className="font-semibold">Indus Bridge Ventures Inc.</p>
+              <p>801 Route 1 #1017, Iselin, NJ 08831, United States</p>
+            </div>
+            <p className="text-sm text-muted-foreground">
+              © {new Date().getFullYear()} ProEmail AI. All rights reserved.
+            </p>
+          </div>
         </div>
       </div>
     </footer>

@@ -30,6 +30,8 @@ export default function Drafts() {
   const { data: drafts, isLoading } = useQuery<EmailDraft[]>({
     queryKey: ["/api/drafts"],
     enabled: isAuthenticated,
+    staleTime: 0,  // Always refetch to ensure fresh data
+    refetchOnMount: true,
   });
 
   const deleteMutation = useMutation({

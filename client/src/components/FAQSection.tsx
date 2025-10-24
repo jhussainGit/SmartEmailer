@@ -51,8 +51,12 @@ const faqs = [
     category: "Technical",
     questions: [
       {
-        q: "Which languages are supported?",
-        a: "ProEmail AI supports multiple languages including English, Spanish, French, German, Chinese, Arabic, Portuguese, and Russian. You can switch languages using the language selector in the top navigation."
+        q: "Which languages are supported for generated emails?",
+        a: "ProEmail AI can generate emails in 20+ languages including English, Spanish, French, German, Italian, Portuguese, Chinese, Japanese, Korean, Arabic, Russian, Hindi, Dutch, Polish, Turkish, Swedish, Vietnamese, Thai, Hebrew, and Greek. Use the language selector in the email composer to choose your preferred language. Note: The language selector only affects the generated email content - to change the website interface language, please adjust your browser settings."
+      },
+      {
+        q: "How do I change the website language?",
+        a: "The ProEmail AI website interface is currently available in English. To view the site in a different language, you can use your browser's built-in translation feature (usually found in your browser settings or by right-clicking on the page). The language selector in the email composer is specifically for choosing what language your generated email will be written in."
       },
       {
         q: "How long does it take to generate an email?",
