@@ -3,7 +3,6 @@ import { emailStyles } from "../client/src/lib/emailStyles";
 
 interface EmailGenerationParams {
   style: string;
-  emailType?: string;
   recipientName?: string;
   recipientLinkedIn?: string;
   senderName?: string;
@@ -24,10 +23,11 @@ const lengthGuidelines = {
   long: '400-600 words (5-7 paragraphs)',
 };
 
-function getAttachmentType(emailType: string, fileName: string): string {
-  if (emailType === 'follow-up') return 'Previous Email Thread';
-  if (emailType === 'cover-letter') return 'Resume/CV Content';
-  if (emailType === 'business') return 'Proposal/Presentation Content';
+function getAttachmentType(styleId: string, fileName: string): string {
+  if (styleId === 'follow-up') return 'Previous Email Thread';
+  if (styleId === 'cover-letter') return 'Resume/CV Content';
+  if (styleId === 'proposal') return 'Proposal/Presentation Content';
+  if (styleId === 'invoice') return 'Invoice/Document Content';
   return 'Attached Document Content';
 }
 
@@ -42,7 +42,7 @@ export async function generateEmail(params: any): Promise<string> {
   const styleDescription = selectedStyle?.description || 'Professional tone';
 
   // Set defaults for optional fields
-  const emailType = params.emailType || 'Email';
+  const styleId = params.style || 'professional-formal';
   const recipientName = params.recipientName || 'Recipient';
   const senderName = params.senderName || 'Sender';
   const subject = params.subject || 'Message';
@@ -66,7 +66,7 @@ export async function generateEmail(params: any): Promise<string> {
   }
   
   if (params.attachmentContent && params.attachmentName) {
-    const attachmentType = getAttachmentType(params.emailType || '', params.attachmentName);
+    const attachmentType = getAttachmentType(styleId, params.attachmentName);
     context += `\n\n${attachmentType} (${params.attachmentName}):\n${truncateAttachment(params.attachmentContent)}`;
   }
   
@@ -76,12 +76,14 @@ export async function generateEmail(params: any): Promise<string> {
 
   let attachmentGuidance = '';
   if (params.attachmentContent && params.attachmentName) {
-    if (emailType === 'follow-up') {
+    if (styleId === 'follow-up') {
       attachmentGuidance = '\n\nATTACHMENT GUIDANCE: A previous email thread has been provided. Reference key points from the conversation naturally, acknowledge previous messages, and build upon the existing discussion thread.';
-    } else if (emailType === 'cover-letter') {
+    } else if (styleId === 'cover-letter') {
       attachmentGuidance = '\n\nATTACHMENT GUIDANCE: A resume/CV has been provided. Use relevant skills, experiences, and qualifications from the resume to strengthen your cover letter. Highlight achievements that align with the position.';
-    } else if (emailType === 'business') {
+    } else if (styleId === 'proposal') {
       attachmentGuidance = '\n\nATTACHMENT GUIDANCE: Supporting documents (proposal/presentation) have been provided. Reference key points, data, or highlights from the attached materials to strengthen your message.';
+    } else if (styleId === 'invoice') {
+      attachmentGuidance = '\n\nATTACHMENT GUIDANCE: Invoice or supporting documents have been provided. Reference key details, amounts, or relevant information from the attached materials in your message.';
     }
   }
 
@@ -102,7 +104,7 @@ Key guidelines:
 6. Make the email ready to send (no placeholders like [Your Name])
 7. Write the entire email in ${outputLanguage}${attachmentGuidance}`;
 
-  let userPrompt = `Generate a ${length} ${emailType} email with the following details:
+  let userPrompt = `Generate a ${length} ${styleName} style email with the following details:
 
 Recipient: ${recipientName}
 Sender: ${senderName}

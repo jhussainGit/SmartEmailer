@@ -71,7 +71,6 @@ export default function EmailComposerPage() {
       await apiRequest('POST', '/api/history', {
         emailContent,
         style: selectedStyle,
-        emailType: formData.emailType,
         subject: formData.subject,
         formData,
         wordCount,
@@ -94,7 +93,6 @@ export default function EmailComposerPage() {
     try {
       await apiRequest('POST', '/api/drafts', {
         title: currentFormData.subject || 'Untitled Email',
-        emailType: currentFormData.emailType,
         style: selectedStyle,
         content: generatedEmail,
         formData: currentFormData,
