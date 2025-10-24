@@ -1,30 +1,50 @@
-# ProEmail AI - Professional Email Writing Platform
+# Email Helper - Free AI Email Writing Platform
 
 ## Overview
 
-ProEmail AI is a fully functional web-based AI-powered email generation platform that helps users create professional, academic, and business emails across 30+ writing styles. The application uses OpenAI's GPT-5 model to generate contextually appropriate emails based on user inputs including style preferences, recipient information, LinkedIn profiles, job descriptions, and custom context. Authenticated users can save drafts for later use. The platform includes a Gmail-integrated contact form for user inquiries.
+Email Helper is a fully functional web-based AI-powered email generation platform that helps users create professional, academic, and business emails across 30+ writing styles - completely FREE. The application uses OpenAI's GPT-5 model to generate contextually appropriate emails based on user inputs including style preferences, recipient information, LinkedIn profiles, job descriptions, and custom context. Authenticated users can save drafts for later use. The platform includes a Gmail-integrated contact form for user inquiries.
 
 ## Current Status (October 24, 2025)
 
 All core features are implemented and tested:
 - ✅ Email generation with 30+ styles using GPT-5
 - ✅ Multi-language support: 20+ languages for generated emails
+- ✅ Dual language selectors: Input Language and Output Language with auto-sync
+- ✅ Both language selectors default to English
 - ✅ Email examples showcase: 5 professional examples on landing page
 - ✅ Replit Auth authentication with admin support
 - ✅ User-specific draft saving and management
 - ✅ Email history tracking with auto-save for authenticated users
 - ✅ Word count and reading time display for generated emails
 - ✅ Regenerate functionality for creating email variations
+- ✅ Generation time display: "Expected time: 20-40 seconds" shown on generate button
 - ✅ Gmail-integrated contact form
 - ✅ Comprehensive FAQ page with language clarifications
 - ✅ Privacy Policy and Terms of Service (GDPR/CCPA compliant, no email addresses)
+- ✅ FREE messaging on landing page with "100% Free" badge
+- ✅ Dark mode recommendation on landing page
 - ✅ Responsive design with modern UI
 - ✅ Security: Draft and history deletion with ownership verification
 - ✅ Clean production code (removed debug logging)
 - ✅ Theme-aware 404 page
 - ✅ End-to-end tested and working
 
-Recent Improvements (October 24, 2025 - Session 2):
+Recent Improvements (October 24, 2025 - Session 3):
+- **Rebranding**: Complete rebrand from "ProEmail AI" to "Email Helper" across entire platform to avoid implying paid service
+- **Dual Language Selectors**: Moved language selection from site-level to composer-level with TWO selectors:
+  - Input Language: Language of context/inputs provided by user
+  - Output Language: Language for generated email
+  - Auto-sync: When Input Language changes, Output Language automatically syncs to match
+  - Both default to English
+- **Language Integration**: outputLanguage parameter now properly influences GPT-5 email generation
+- **FREE Messaging**: Landing page prominently displays "100% Free • AI-Powered" badge
+- **Dark Mode Tip**: Landing page includes recommendation that app works better in dark mode
+- **Expected Generation Time**: Generate button displays "(20-40 seconds)" during generation
+- **No Public Email Addresses**: Removed ALL publicly visible email addresses to prevent scraper collection
+- **Footer Fix**: Fixed DOM nesting error with wouter Link components
+- **Testing**: All branding and features verified with comprehensive end-to-end Playwright tests
+
+Previous Session Improvements (October 24, 2025 - Session 2):
 - **Language Feature**: Added comprehensive language selector with 20+ major world languages (English, Spanish, French, German, Italian, Portuguese, Chinese, Japanese, Korean, Arabic, Russian, Hindi, Dutch, Polish, Turkish, Swedish, Vietnamese, Thai, Hebrew, Greek)
 - **Language Integration**: Language parameter now properly affects GPT-5 email generation - emails are written in the selected language
 - **Email Examples**: Added 5 professional email examples to landing page showing different styles (Professional Cover Letter, Networking, Business Proposal, Academic Inquiry, Thank You Note) with complete inputs and outputs
@@ -34,7 +54,7 @@ Recent Improvements (October 24, 2025 - Session 2):
 - **Draft Loading Fix**: Fixed draft query to always refetch fresh data with staleTime: 0
 - **Testing**: All features verified with end-to-end Playwright tests
 
-Previous Session Improvements (October 24, 2025 - Session 1):
+Earlier Session Improvements (October 24, 2025 - Session 1):
 - Added email history feature: automatically saves all generated emails for authenticated users
 - Enhanced email preview with word count and estimated reading time
 - Added regenerate button to create variations of the same email
@@ -45,7 +65,7 @@ Previous Session Improvements (October 24, 2025 - Session 1):
 
 ## Ownership & Contact
 
-ProEmail AI is a digital asset owned and operated by **Indus Bridge Ventures Inc.** All legal documents, footer copyright, and platform communications reflect this ownership.
+Email Helper is a digital asset owned and operated by **Indus Bridge Ventures Inc.** All legal documents, footer copyright, and platform communications reflect this ownership.
 
 **Contact Information:**
 - Physical Address: Indus Bridge Ventures Inc., 801 Route 1 #1017, Iselin, NJ 08831, United States
@@ -86,6 +106,14 @@ Preferred communication style: Simple, everyday language.
 - Custom hooks (useAuth, use-toast) for cross-cutting concerns
 - No global state management library (Redux/Zustand) - deliberately kept simple
 
+**Language Selection**
+- Dual language selectors at composer level (not site-wide):
+  - Input Language: Language of user's context/inputs
+  - Output Language: Desired language for generated email
+  - Auto-sync behavior: Input change triggers Output to match
+  - Both default to English on load
+- 20+ supported languages for email generation
+
 ### Backend Architecture
 
 **Server Framework**
@@ -104,13 +132,13 @@ Preferred communication style: Simple, everyday language.
 - `/api/auth/*` - Authentication endpoints (user info, login callback)
 - `/api/drafts` - CRUD operations for saved email drafts (protected)
 - `/api/history` - Email history tracking (protected, auto-saves on generation)
-- `/api/generate-email` - AI email generation endpoint (public)
+- `/api/generate-email` - AI email generation endpoint (public, uses outputLanguage parameter)
 - `/api/contact` - Contact form submission (public)
 - Protected routes use `isAuthenticated` middleware
 
 **Page Routes**
-- `/` - Landing page
-- `/composer` - Email generation interface
+- `/` - Landing page (FREE badge, dark mode tip)
+- `/composer` - Email generation interface (dual language selectors)
 - `/drafts` - User drafts (requires authentication)
 - `/faq` - Frequently Asked Questions
 - `/contact` - Contact form
@@ -123,7 +151,8 @@ Preferred communication style: Simple, everyday language.
 - max_completion_tokens set to 5000 to accommodate GPT-5's reasoning + output tokens
 - Email generation based on 30+ predefined style templates across 4 categories
 - Context-aware prompts with LinkedIn profile integration, job descriptions, sample emails
-- Generation time: 20-40 seconds due to reasoning process
+- Language parameter (outputLanguage) properly influences email generation output
+- Generation time: 20-40 seconds due to reasoning process (displayed to users)
 
 ### Data Storage
 
