@@ -34,7 +34,7 @@ export default function Login() {
           <div className="bg-primary text-primary-foreground w-16 h-16 rounded-lg flex items-center justify-center mx-auto mb-4">
             <Mail className="w-8 h-8" />
           </div>
-          <h1 className="text-2xl font-bold mb-2">Welcome to ProEmail AI</h1>
+          <h1 className="text-2xl font-bold mb-2">Welcome to Email Helper</h1>
           <p className="text-muted-foreground">
             Sign in to access your email templates and drafts
           </p>

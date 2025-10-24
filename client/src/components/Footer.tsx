@@ -11,7 +11,7 @@ export default function Footer() {
               <div className="bg-primary text-primary-foreground p-2 rounded-lg">
                 <Mail className="w-5 h-5" />
               </div>
-              <span className="font-bold text-lg">ProEmail AI</span>
+              <span className="font-bold text-lg">Email Helper</span>
             </div>
             <p className="text-sm text-muted-foreground">
               Professional email writing made simple with AI technology.
@@ -78,7 +78,7 @@ export default function Footer() {
               <p>801 Route 1 #1017, Iselin, NJ 08831, United States</p>
             </div>
             <p className="text-sm text-muted-foreground">
-              © {new Date().getFullYear()} ProEmail AI. All rights reserved.
+              © {new Date().getFullYear()} Email Helper. All rights reserved.
             </p>
           </div>
         </div>

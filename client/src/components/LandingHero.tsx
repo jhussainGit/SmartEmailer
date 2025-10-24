@@ -11,7 +11,7 @@ export default function LandingHero({ onGetStarted }: LandingHeroProps) {
       <div className="max-w-5xl mx-auto text-center">
         <div className="inline-flex items-center gap-2 bg-primary/10 text-primary px-4 py-2 rounded-full text-sm font-medium mb-6">
           <Sparkles className="w-4 h-4" />
-          AI-Powered Professional Email Writing
+          100% Free • AI-Powered Professional Email Writing
         </div>
         
         <h1 className="text-5xl md:text-6xl font-bold mb-6 leading-tight">
@@ -23,6 +23,10 @@ export default function LandingHero({ onGetStarted }: LandingHeroProps) {
         <p className="text-xl text-muted-foreground mb-8 max-w-3xl mx-auto leading-relaxed">
           Choose from 30+ professional writing styles. Generate cover letters, business emails, 
           academic correspondence, and more with AI assistance tailored to your needs.
+        </p>
+        
+        <p className="text-sm text-muted-foreground mb-8 max-w-2xl mx-auto">
+          💡 <strong>Tip:</strong> This app works better in dark mode for optimal viewing experience.
         </p>
         
         <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">

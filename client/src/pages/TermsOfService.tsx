@@ -19,7 +19,7 @@ export default function TermsOfService() {
             <p>
               These Terms of Service ("Terms") constitute a legally binding agreement between you and 
               Indus Bridge Ventures Inc. ("Company," "we," "us," or "our") governing your access to and 
-              use of ProEmail AI (the "Service"), an AI-powered email generation platform.
+              use of Email Helper (the "Service"), an AI-powered email generation platform.
             </p>
             <p className="mt-4">
               By accessing or using the Service, you agree to be bound by these Terms and our Privacy Policy. 
@@ -30,7 +30,7 @@ export default function TermsOfService() {
           <section>
             <h2 className="text-2xl font-semibold mb-4">2. Description of Service</h2>
             <p>
-              ProEmail AI is an artificial intelligence-powered platform that generates professional, 
+              Email Helper is an artificial intelligence-powered platform that generates professional, 
               academic, casual, and creative emails based on user inputs. The Service includes:
             </p>
             <ul className="list-disc pl-6 space-y-2 mt-3">
@@ -164,7 +164,7 @@ export default function TermsOfService() {
             <p>
               The Service, including its design, features, software, algorithms, and user interface, is 
               owned by Indus Bridge Ventures Inc. and protected by copyright, trademark, and other 
-              intellectual property laws. ProEmail AI is a registered trademark.
+              intellectual property laws. Email Helper is a registered trademark.
             </p>
 
             <h3 className="text-xl font-semibold mb-3 mt-6">7.2 Limited License</h3>
@@ -377,11 +377,11 @@ export default function TermsOfService() {
 
           <section className="border-t pt-8 mt-8">
             <p className="text-sm text-muted-foreground">
-              These Terms of Service are effective as of October 23, 2025. ProEmail AI is a digital asset 
+              These Terms of Service are effective as of October 23, 2025. Email Helper is a digital asset 
               owned and operated by Indus Bridge Ventures Inc. All rights reserved.
             </p>
             <p className="text-sm text-muted-foreground mt-4">
-              By using ProEmail AI, you acknowledge that you have read, understood, and agree to be bound 
+              By using Email Helper, you acknowledge that you have read, understood, and agree to be bound 
               by these Terms of Service and our Privacy Policy.
             </p>
           </section>

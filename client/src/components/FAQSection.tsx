@@ -13,12 +13,12 @@ const faqs = [
     category: "Getting Started",
     questions: [
       {
-        q: "How does ProEmail AI work?",
-        a: "ProEmail AI uses advanced AI to generate professional emails based on your selected style, context, and requirements. Simply choose a writing style, fill in the details, and our AI will create a polished email in seconds."
+        q: "How does Email Helper work?",
+        a: "Email Helper uses advanced AI to generate professional emails based on your selected style, context, and requirements. Simply choose a writing style, fill in the details, and our AI will create a polished email in seconds."
       },
       {
-        q: "Is ProEmail AI really free?",
-        a: "Yes! ProEmail AI is completely free to use. You can generate unlimited emails across all 30+ writing styles without any charges."
+        q: "Is Email Helper really free?",
+        a: "Yes! Email Helper is completely free to use. You can generate unlimited emails across all 30+ writing styles without any charges."
       },
       {
         q: "Do I need to create an account?",
@@ -52,11 +52,11 @@ const faqs = [
     questions: [
       {
         q: "Which languages are supported for generated emails?",
-        a: "ProEmail AI can generate emails in 20+ languages including English, Spanish, French, German, Italian, Portuguese, Chinese, Japanese, Korean, Arabic, Russian, Hindi, Dutch, Polish, Turkish, Swedish, Vietnamese, Thai, Hebrew, and Greek. Use the language selector in the email composer to choose your preferred language. Note: The language selector only affects the generated email content - to change the website interface language, please adjust your browser settings."
+        a: "Email Helper can generate emails in 20+ languages including English, Spanish, French, German, Italian, Portuguese, Chinese, Japanese, Korean, Arabic, Russian, Hindi, Dutch, Polish, Turkish, Swedish, Vietnamese, Thai, Hebrew, and Greek. Use the language selector in the email composer to choose your preferred language. Note: The language selector only affects the generated email content - to change the website interface language, please adjust your browser settings."
       },
       {
         q: "How do I change the website language?",
-        a: "The ProEmail AI website interface is currently available in English. To view the site in a different language, you can use your browser's built-in translation feature (usually found in your browser settings or by right-clicking on the page). The language selector in the email composer is specifically for choosing what language your generated email will be written in."
+        a: "The Email Helper website interface is currently available in English. To view the site in a different language, you can use your browser's built-in translation feature (usually found in your browser settings or by right-clicking on the page). The language selector in the email composer is specifically for choosing what language your generated email will be written in."
       },
       {
         q: "How long does it take to generate an email?",
@@ -107,7 +107,7 @@ export default function FAQSection() {
       <div className="text-center mb-12">
         <h2 className="text-4xl font-bold mb-4">Frequently Asked Questions</h2>
         <p className="text-lg text-muted-foreground">
-          Everything you need to know about ProEmail AI
+          Everything you need to know about Email Helper
         </p>
       </div>
 

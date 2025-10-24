@@ -130,7 +130,7 @@ export default function Landing() {
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">Real Email Examples</h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              See what ProEmail AI can create for you. Each example shows the inputs and the professional output.
+              See what Email Helper AI can create for you. Each example shows the inputs and the professional output.
             </p>
           </div>
 
@@ -175,7 +175,7 @@ export default function Landing() {
         
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">Why Choose ProEmail AI?</h2>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">Why Choose Email Helper AI?</h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
               Professional email writing made simple with advanced AI technology
             </p>
