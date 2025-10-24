@@ -25,9 +25,14 @@ export default function Blog() {
           name="description" 
           content="Master professional email writing with our comprehensive guides. Learn cold emailing, business communication, academic etiquette, and technical email best practices. Free AI-powered email templates and tools."
         />
+        <meta 
+          name="keywords" 
+          content="email writing, professional email, business email, cold email, email etiquette, email templates, email communication, academic email, technical email, email best practices, AI email writer" 
+        />
         <meta property="og:title" content="Email Writing Blog | Professional Email Tips & Guides - Smart Emailer Pro" />
         <meta property="og:description" content="Master professional email writing with our comprehensive guides. Learn cold emailing, business communication, academic etiquette, and technical email best practices." />
         <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://smart-emailer-pro.replit.app/blog" />
         <link rel="canonical" href="https://smart-emailer-pro.replit.app/blog" />
       </Helmet>
       
