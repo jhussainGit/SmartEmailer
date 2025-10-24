@@ -1,4 +1,5 @@
 import { useRoute, Link } from "wouter";
+import { Helmet } from "react-helmet-async";
 import { getBlogPostBySlug } from "@/lib/blogPosts";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -15,19 +16,32 @@ export default function BlogPost() {
   }
 
   return (
-    <div className="min-h-screen bg-background">
-      <article className="max-w-4xl mx-auto px-4 py-12">
-        <Link href="/blog">
-          <Button 
-            variant="ghost" 
-            size="sm" 
-            className="mb-8"
-            data-testid="button-back-to-blog"
-          >
-            <ArrowLeft className="w-4 h-4 mr-2" />
-            Back to Blog
-          </Button>
-        </Link>
+    <>
+      <Helmet>
+        <title>{post.title} | Smart Emailer Pro Blog</title>
+        <meta name="description" content={post.excerpt} />
+        <meta property="og:title" content={`${post.title} | Smart Emailer Pro Blog`} />
+        <meta property="og:description" content={post.excerpt} />
+        <meta property="og:type" content="article" />
+        <meta property="article:published_time" content={post.publishedDate} />
+        <meta property="article:section" content={post.category} />
+        <meta name="keywords" content={post.keywords.join(', ')} />
+        <link rel="canonical" href={`https://smart-emailer-pro.replit.app/blog/${post.slug}`} />
+      </Helmet>
+
+      <div className="min-h-screen bg-background">
+        <article className="max-w-4xl mx-auto px-4 py-12">
+          <Link href="/blog">
+            <Button 
+              variant="ghost" 
+              size="sm" 
+              className="mb-8"
+              data-testid="button-back-to-blog"
+            >
+              <ArrowLeft className="w-4 h-4 mr-2" />
+              Back to Blog
+            </Button>
+          </Link>
 
         <div className="mb-8">
           <div className="flex items-center gap-3 mb-4 flex-wrap">
@@ -108,5 +122,6 @@ export default function BlogPost() {
         </div>
       </article>
     </div>
+    </>
   );
 }

@@ -1,4 +1,5 @@
 import { Link } from "wouter";
+import { Helmet } from "react-helmet-async";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Clock, ArrowRight, BookOpen } from "lucide-react";
@@ -17,19 +18,32 @@ export default function Blog() {
     : allPosts.filter(post => post.category === selectedCategory);
 
   return (
-    <div className="min-h-screen bg-background">
-      <div className="bg-gradient-to-b from-primary/5 to-background border-b">
-        <div className="max-w-6xl mx-auto px-4 py-16">
-          <div className="flex items-center gap-2 mb-4">
-            <BookOpen className="w-8 h-8 text-primary" />
-            <h1 className="text-4xl font-bold" data-testid="text-blog-title">Email Writing Blog</h1>
+    <>
+      <Helmet>
+        <title>Email Writing Blog | Professional Email Tips & Guides - Smart Emailer Pro</title>
+        <meta 
+          name="description" 
+          content="Master professional email writing with our comprehensive guides. Learn cold emailing, business communication, academic etiquette, and technical email best practices. Free AI-powered email templates and tools."
+        />
+        <meta property="og:title" content="Email Writing Blog | Professional Email Tips & Guides - Smart Emailer Pro" />
+        <meta property="og:description" content="Master professional email writing with our comprehensive guides. Learn cold emailing, business communication, academic etiquette, and technical email best practices." />
+        <meta property="og:type" content="website" />
+        <link rel="canonical" href="https://smart-emailer-pro.replit.app/blog" />
+      </Helmet>
+      
+      <div className="min-h-screen bg-background">
+        <div className="bg-gradient-to-b from-primary/5 to-background border-b">
+          <div className="max-w-6xl mx-auto px-4 py-16">
+            <div className="flex items-center gap-2 mb-4">
+              <BookOpen className="w-8 h-8 text-primary" />
+              <h1 className="text-4xl font-bold" data-testid="text-blog-title">Email Writing Blog</h1>
+            </div>
+            <p className="text-lg text-muted-foreground max-w-2xl">
+              Master the art of professional email communication with our comprehensive guides. 
+              Learn best practices, templates, and techniques for every email situation.
+            </p>
           </div>
-          <p className="text-lg text-muted-foreground max-w-2xl">
-            Master the art of professional email communication with our comprehensive guides. 
-            Learn best practices, templates, and techniques for every email situation.
-          </p>
         </div>
-      </div>
 
       <div className="max-w-6xl mx-auto px-4 py-12">
         <div className="flex flex-wrap gap-2 mb-8">
@@ -104,5 +118,6 @@ export default function Blog() {
         </div>
       </div>
     </div>
+    </>
   );
 }
