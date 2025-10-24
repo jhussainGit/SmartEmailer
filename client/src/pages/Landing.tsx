@@ -160,7 +160,7 @@ export default function Landing() {
   return (
     <>
       <Helmet>
-        <title>Smart Emailer Pro - Free AI Email Writer | 30+ Professional Styles</title>
+        <title>Smart Emailer Pro - Free AI Email Writer | 30+ Professional Writing Styles</title>
         <meta 
           name="description" 
           content="Generate professional emails instantly with Smart Emailer Pro. Free AI-powered email writing tool with 30+ styles, multi-language support, and GPT-5 technology. Perfect for business, academic, and personal emails."
@@ -169,7 +169,7 @@ export default function Landing() {
           name="keywords" 
           content="AI email writer, free email generator, professional email, business email, email templates, GPT-5, email writing tool, cold email, cover letter, follow-up email, AI writing assistant"
         />
-        <meta property="og:title" content="Smart Emailer Pro - Free AI Email Writer | 30+ Professional Styles" />
+        <meta property="og:title" content="Smart Emailer Pro - Free AI Email Writer | 30+ Professional Writing Styles" />
         <meta property="og:description" content="Generate professional emails instantly with Smart Emailer Pro. Free AI-powered email writing tool with 30+ styles, multi-language support, and GPT-5 technology." />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://smart-emailer-pro.replit.app" />
