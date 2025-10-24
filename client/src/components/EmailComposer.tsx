@@ -121,6 +121,15 @@ export default function EmailComposer({ selectedStyle, onGenerate, isGenerating 
     });
   };
 
+  const handleEmailTypeChange = (newEmailType: string) => {
+    setFormData({
+      ...formData,
+      emailType: newEmailType,
+      attachmentContent: undefined,
+      attachmentName: undefined,
+    });
+  };
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     onGenerate(formData);
@@ -137,7 +146,7 @@ export default function EmailComposer({ selectedStyle, onGenerate, isGenerating 
               <Label htmlFor="emailType" className="text-sm font-medium mb-2">Email Type</Label>
               <Select
                 value={formData.emailType}
-                onValueChange={(value) => setFormData({ ...formData, emailType: value })}
+                onValueChange={handleEmailTypeChange}
               >
                 <SelectTrigger id="emailType" data-testid="select-email-type">
                   <SelectValue placeholder="Select type" />
