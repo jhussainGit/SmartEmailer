@@ -17,8 +17,8 @@ export default function TermsOfService() {
         <meta property="og:title" content="Terms of Service | Smart Emailer Pro" />
         <meta property="og:description" content="Read the terms of service for Smart Emailer Pro AI email writing platform." />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://smart-emailer-pro.replit.app/terms" />
-        <link rel="canonical" href="https://smart-emailer-pro.replit.app/terms" />
+        <meta property="og:url" content="https://smart-emailer-pro.replit.app/terms/" />
+        <link rel="canonical" href="https://smart-emailer-pro.replit.app/terms/" />
       </Helmet>
 
       <div className="min-h-screen bg-background">

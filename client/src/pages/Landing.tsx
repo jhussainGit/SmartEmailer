@@ -172,8 +172,8 @@ export default function Landing() {
         <meta property="og:title" content="Smart Emailer Pro - Free AI Email Writer | 30+ Professional Writing Styles" />
         <meta property="og:description" content="Generate professional emails instantly with Smart Emailer Pro. Free AI-powered email writing tool with 30+ styles, multi-language support, and GPT-5 technology." />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://smart-emailer-pro.replit.app" />
-        <link rel="canonical" href="https://smart-emailer-pro.replit.app" />
+        <meta property="og:url" content="https://smart-emailer-pro.replit.app/" />
+        <link rel="canonical" href="https://smart-emailer-pro.replit.app/" />
         <script type="application/ld+json">
           {JSON.stringify(structuredData)}
         </script>

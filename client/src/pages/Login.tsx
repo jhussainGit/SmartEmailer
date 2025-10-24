@@ -37,7 +37,7 @@ export default function Login() {
           content="Sign in to Smart Emailer Pro to access your saved email drafts, generate history, and personalized AI email writing features."
         />
         <meta name="robots" content="noindex, nofollow" />
-        <link rel="canonical" href="https://smart-emailer-pro.replit.app/login" />
+        <link rel="canonical" href="https://smart-emailer-pro.replit.app/login/" />
       </Helmet>
 
       <div className="min-h-screen bg-background flex items-center justify-center p-4">

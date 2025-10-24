@@ -141,7 +141,7 @@ ${draft.content}
           content="Access and manage your saved email drafts. View, edit, copy, and download your AI-generated emails. Requires authentication."
         />
         <meta name="robots" content="noindex, nofollow" />
-        <link rel="canonical" href="https://smart-emailer-pro.replit.app/drafts" />
+        <link rel="canonical" href="https://smart-emailer-pro.replit.app/drafts/" />
       </Helmet>
 
       <div className="min-h-screen bg-background">

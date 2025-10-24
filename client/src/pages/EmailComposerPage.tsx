@@ -128,8 +128,8 @@ export default function EmailComposerPage() {
         <meta property="og:title" content="Email Composer - AI-Powered Email Generator | Smart Emailer Pro" />
         <meta property="og:description" content="Create professional emails instantly with our AI-powered composer. Choose from 30+ writing styles and generate perfect emails in seconds." />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://smart-emailer-pro.replit.app/composer" />
-        <link rel="canonical" href="https://smart-emailer-pro.replit.app/composer" />
+        <meta property="og:url" content="https://smart-emailer-pro.replit.app/composer/" />
+        <link rel="canonical" href="https://smart-emailer-pro.replit.app/composer/" />
       </Helmet>
 
       <div className="min-h-screen bg-background">

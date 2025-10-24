@@ -32,8 +32,8 @@ export default function Blog() {
         <meta property="og:title" content="Email Writing Blog | Professional Email Tips & Guides - Smart Emailer Pro" />
         <meta property="og:description" content="Master professional email writing with our comprehensive guides. Learn cold emailing, business communication, academic etiquette, and technical email best practices." />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://smart-emailer-pro.replit.app/blog" />
-        <link rel="canonical" href="https://smart-emailer-pro.replit.app/blog" />
+        <meta property="og:url" content="https://smart-emailer-pro.replit.app/blog/" />
+        <link rel="canonical" href="https://smart-emailer-pro.replit.app/blog/" />
       </Helmet>
       
       <div className="min-h-screen bg-background">
