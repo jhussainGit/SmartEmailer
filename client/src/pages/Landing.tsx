@@ -182,6 +182,27 @@ export default function Landing() {
       <div className="min-h-screen">
         <LandingHero onGetStarted={() => setLocation('/composer')} />
       
+      {/* Beta Release Notice */}
+      <div className="bg-primary/10 border-y border-primary/20 py-4 px-4">
+        <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-center gap-3 text-center sm:text-left">
+          <div className="flex items-center gap-2">
+            <Badge variant="default" className="text-xs font-semibold">BETA</Badge>
+            <p className="text-sm font-medium">
+              This is a beta release. We'd love to hear your feedback!
+            </p>
+          </div>
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => setLocation('/contact')}
+            data-testid="button-beta-feedback"
+            className="bg-background/50 hover:bg-background"
+          >
+            Send Feedback
+          </Button>
+        </div>
+      </div>
+      
       <div id="examples-section" className="bg-muted/30 py-20 px-4">
         <div className="max-w-6xl mx-auto mb-16">
           <div className="text-center mb-12">
