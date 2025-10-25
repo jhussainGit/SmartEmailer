@@ -3,6 +3,10 @@
 ## Overview
 Smart Emailer Pro is a free, web-based AI-powered email generation platform designed to help users create professional, academic, and business emails across 30+ writing styles. It leverages OpenAI's GPT-5 model to generate contextually appropriate emails based on user inputs including style preferences, recipient information, LinkedIn profiles, job descriptions, and custom context. The platform supports multi-language email generation, offers robust draft management for authenticated users, and includes a Gmail-integrated contact form. Its primary purpose is to provide a comprehensive, free tool for efficient and high-quality email composition, aiming for broad market adoption through its free-to-use model and SEO-optimized content.
 
+**Ownership**: Smart Emailer Pro is a digital asset owned by Indus Bridge Ventures Inc. (801 Route 1 #1017, Iselin, NJ 08831, United States).
+
+**Support**: info@indus-bridge.com
+
 **Current Status**: Beta Release - Users are encouraged to provide feedback via the contact form.
 
 ## User Preferences
@@ -39,6 +43,13 @@ Preferred communication style: Simple, everyday language.
 - **Design Assets**: Google Fonts (Inter, DM Sans, Geist Mono, etc.), Lucide icons.
 
 ## Recent Updates
+
+### Ownership & Contact Information Update (October 25, 2025)
+- Added ownership statement across the site: Smart Emailer Pro is a digital asset owned by Indus Bridge Ventures Inc.
+- Updated support email from support@proemail.ai to info@indus-bridge.com
+- Updated footer with ownership statement and copyright to Indus Bridge Ventures Inc.
+- Contact form now sends inquiries to info@indus-bridge.com
+- Structured data on landing page includes Indus Bridge Ventures Inc. as creator
 
 ### UI Improvements & Tips Enhancement (October 25, 2025)
 - **Fixed**: Email previewer now properly adjusts contrast for both light and dark modes
