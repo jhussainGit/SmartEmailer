@@ -116,12 +116,34 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Email generation route (public - works without auth)
   app.post('/api/generate-email', async (req, res) => {
     try {
+      console.log('[Email Generation] Request received with style:', req.body.style);
+      
+      // Log attachment info if present
+      if (req.body.attachmentName) {
+        const attachmentSize = req.body.attachmentContent?.length || 0;
+        console.log(`[Email Generation] Attachment: ${req.body.attachmentName} (${attachmentSize} characters)`);
+      }
+      
       const { generateEmail } = await import('./emailGenerator');
       const email = await generateEmail(req.body);
+      
+      console.log('[Email Generation] Email generated successfully');
       res.json({ email });
     } catch (error: any) {
-      console.error("Error generating email:", error);
-      res.status(500).json({ message: error.message || "Failed to generate email" });
+      console.error("[Email Generation] Error:", error);
+      console.error("[Email Generation] Error details:", {
+        message: error.message,
+        stack: error.stack,
+        requestBody: {
+          style: req.body.style,
+          hasAttachment: !!req.body.attachmentName,
+          attachmentSize: req.body.attachmentContent?.length || 0
+        }
+      });
+      res.status(500).json({ 
+        message: error.message || "Failed to generate email",
+        details: process.env.NODE_ENV === 'development' ? error.stack : undefined
+      });
     }
   });
 

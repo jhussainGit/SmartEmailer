@@ -33,19 +33,28 @@ export default function EmailComposerPage() {
     setCurrentFormData(formData);
     
     try {
+      const payload = {
+        style: selectedStyle,
+        ...formData,
+      };
+      
+      // Log attachment info for debugging
+      if (formData.attachmentName) {
+        console.log(`[Client] Generating with attachment: ${formData.attachmentName}`);
+        console.log(`[Client] Attachment size: ${formData.attachmentContent?.length || 0} characters`);
+      }
+      
       const response = await fetch('/api/generate-email', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-          style: selectedStyle,
-          ...formData,
-        }),
+        body: JSON.stringify(payload),
       });
 
       if (!response.ok) {
-        throw new Error('Failed to generate email');
+        const errorData = await response.json().catch(() => ({ message: 'Failed to generate email' }));
+        throw new Error(errorData.message || 'Failed to generate email');
       }
 
       const data = await response.json();
@@ -55,9 +64,24 @@ export default function EmailComposerPage() {
       if (isAuthenticated && data.email) {
         saveToHistory(data.email, formData);
       }
-    } catch (error) {
+      
+      toast({
+        title: "Email Generated!",
+        description: formData.attachmentName 
+          ? `Email generated successfully with attachment: ${formData.attachmentName}` 
+          : "Email generated successfully",
+      });
+    } catch (error: any) {
       console.error('Error generating email:', error);
-      setGeneratedEmail('Error generating email. Please try again.');
+      
+      const errorMessage = error.message || 'Failed to generate email';
+      setGeneratedEmail('');
+      
+      toast({
+        title: "Generation Failed",
+        description: errorMessage,
+        variant: "destructive",
+      });
     } finally {
       setIsGenerating(false);
     }
