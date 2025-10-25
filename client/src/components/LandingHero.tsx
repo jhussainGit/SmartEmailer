@@ -26,8 +26,8 @@ export default function LandingHero({ onGetStarted }: LandingHeroProps) {
         </p>
         
         <div className="text-sm text-muted-foreground mb-8 max-w-2xl mx-auto space-y-1">
-          <p>💡 <strong>Pro Tip:</strong> The more context you provide (LinkedIn profiles, job descriptions, key points), the better your email will be!</p>
-          <p>📎 Attach files for context-aware emails (resumes for cover letters, documents for proposals, etc.)</p>
+          <p><strong>Pro Tip:</strong> The more context you provide (LinkedIn profiles, job descriptions, key points), the better your email will be!</p>
+          <p><strong>File Attachments:</strong> Attach resumes for cover letters, documents for proposals, or email threads for follow-ups (up to 5MB).</p>
         </div>
         
         <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">

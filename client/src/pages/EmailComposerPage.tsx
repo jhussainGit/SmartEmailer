@@ -193,9 +193,9 @@ export default function EmailComposerPage() {
               </div>
               
               <div className="border-t border-primary/20 pt-3 space-y-1.5 text-xs text-muted-foreground">
-                <p>💡 <strong>Pro Tip:</strong> More context = better results! Add LinkedIn profiles, job descriptions, and detailed key points.</p>
-                <p>📎 <strong>File Attachments:</strong> Upload resumes, documents, or email threads for context-aware generation (up to 5MB).</p>
-                <p>🌍 <strong>Multi-Language:</strong> Select different input/output languages for international correspondence.</p>
+                <p><strong>Pro Tip:</strong> More context = better results! Add LinkedIn profiles, job descriptions, and detailed key points.</p>
+                <p><strong>File Attachments:</strong> Upload resumes, documents, or email threads for context-aware generation (up to 5MB).</p>
+                <p><strong>Multi-Language:</strong> Select different input/output languages for international correspondence.</p>
               </div>
             </div>
           </div>
