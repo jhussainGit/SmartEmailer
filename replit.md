@@ -40,6 +40,14 @@ Preferred communication style: Simple, everyday language.
 
 ## Recent Updates
 
+### UI Improvements & Tips Enhancement (October 25, 2025)
+- **Fixed**: Email previewer now properly adjusts contrast for both light and dark modes
+- Removed outdated dark mode tip (contrast issue resolved)
+- Added helpful tips on Landing page and Composer encouraging users to:
+  - Provide more context (LinkedIn profiles, job descriptions, key points) for better results
+  - Use file attachments for context-aware generation (resumes, documents, email threads)
+  - Utilize multi-language support for international correspondence
+
 ### Beta Release Messaging (October 25, 2025)
 - Added prominent beta release notices on Landing and Composer pages
 - Beta banners include direct feedback CTAs linking to the contact form

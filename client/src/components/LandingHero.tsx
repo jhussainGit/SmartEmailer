@@ -25,9 +25,10 @@ export default function LandingHero({ onGetStarted }: LandingHeroProps) {
           academic correspondence, and more with AI assistance tailored to your needs.
         </p>
         
-        <p className="text-sm text-muted-foreground mb-8 max-w-2xl mx-auto">
-          💡 <strong>Tip:</strong> This app works better in dark mode for optimal viewing experience.
-        </p>
+        <div className="text-sm text-muted-foreground mb-8 max-w-2xl mx-auto space-y-1">
+          <p>💡 <strong>Pro Tip:</strong> The more context you provide (LinkedIn profiles, job descriptions, key points), the better your email will be!</p>
+          <p>📎 Attach files for context-aware emails (resumes for cover letters, documents for proposals, etc.)</p>
+        </div>
         
         <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
           <Button

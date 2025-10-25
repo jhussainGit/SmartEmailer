@@ -166,29 +166,37 @@ export default function EmailComposerPage() {
             <p className="text-muted-foreground">Choose a style and customize your email</p>
           </div>
           
-          {/* Beta Release Notice */}
+          {/* Beta Release Notice & Tips */}
           <div className="bg-primary/10 border border-primary/20 rounded-lg p-4 mb-6">
-            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
-              <div className="flex items-start gap-2">
-                <Badge variant="default" className="text-xs font-semibold mt-0.5">BETA</Badge>
-                <div>
-                  <p className="text-sm font-medium mb-1">
-                    This is a beta release. Help us improve!
-                  </p>
-                  <p className="text-xs text-muted-foreground">
-                    Experiencing issues? Please send us your feedback using the contact form.
-                  </p>
+            <div className="flex flex-col gap-3">
+              <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+                <div className="flex items-start gap-2">
+                  <Badge variant="default" className="text-xs font-semibold mt-0.5">BETA</Badge>
+                  <div>
+                    <p className="text-sm font-medium mb-1">
+                      This is a beta release. Help us improve!
+                    </p>
+                    <p className="text-xs text-muted-foreground">
+                      Experiencing issues? Please send us your feedback using the contact form.
+                    </p>
+                  </div>
                 </div>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => setLocation('/contact')}
+                  data-testid="button-composer-beta-feedback"
+                  className="bg-background/50 hover:bg-background shrink-0"
+                >
+                  Send Feedback
+                </Button>
               </div>
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={() => setLocation('/contact')}
-                data-testid="button-composer-beta-feedback"
-                className="bg-background/50 hover:bg-background shrink-0"
-              >
-                Send Feedback
-              </Button>
+              
+              <div className="border-t border-primary/20 pt-3 space-y-1.5 text-xs text-muted-foreground">
+                <p>💡 <strong>Pro Tip:</strong> More context = better results! Add LinkedIn profiles, job descriptions, and detailed key points.</p>
+                <p>📎 <strong>File Attachments:</strong> Upload resumes, documents, or email threads for context-aware generation (up to 5MB).</p>
+                <p>🌍 <strong>Multi-Language:</strong> Select different input/output languages for international correspondence.</p>
+              </div>
             </div>
           </div>
 
