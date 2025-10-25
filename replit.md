@@ -45,7 +45,9 @@ Preferred communication style: Simple, everyday language.
 - Beta banners include direct feedback CTAs linking to the contact form
 - Encourages users to report issues and provide feedback during beta phase
 
-### File Attachment Error Handling (October 25, 2025)
+### File Attachment Fix (October 25, 2025)
+- **Fixed**: Increased Express body size limit from 100kb to 10mb to support file attachments
+- File attachments now successfully transmit to the AI engine as context for email generation
 - Enhanced backend logging for email generation requests with attachment details
 - Improved frontend error handling with detailed toast notifications
 - Added client-side and server-side logging for debugging attachment issues
