@@ -124,11 +124,9 @@ export default function EmailPreview({ content, onRefine, onSave, onRegenerate }
       </div>
       
       <div className="bg-muted/50 rounded-lg p-6 min-h-96">
-        <div className="prose prose-sm max-w-none dark:prose-invert">
-          <pre className="whitespace-pre-wrap font-sans text-foreground leading-relaxed">
-            {content || "Your generated email will appear here..."}
-          </pre>
-        </div>
+        <pre className="whitespace-pre-wrap font-sans text-foreground leading-relaxed text-sm">
+          {content || "Your generated email will appear here..."}
+        </pre>
       </div>
     </Card>
   );
