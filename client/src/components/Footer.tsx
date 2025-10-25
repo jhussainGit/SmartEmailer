@@ -13,8 +13,11 @@ export default function Footer() {
               </div>
               <span className="font-bold text-lg">Smart Emailer Pro</span>
             </div>
-            <p className="text-sm text-muted-foreground">
+            <p className="text-sm text-muted-foreground mb-3">
               Professional email writing made simple with AI technology.
+            </p>
+            <p className="text-xs text-muted-foreground">
+              A digital asset owned by Indus Bridge Ventures Inc.
             </p>
           </div>
 
@@ -74,7 +77,7 @@ export default function Footer() {
               <p>801 Route 1 #1017, Iselin, NJ 08831, United States</p>
             </div>
             <p className="text-sm text-muted-foreground">
-              © {new Date().getFullYear()} Smart Emailer Pro. All rights reserved.
+              © {new Date().getFullYear()} Indus Bridge Ventures Inc. All rights reserved.
             </p>
           </div>
         </div>

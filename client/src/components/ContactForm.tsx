@@ -144,7 +144,7 @@ export default function ContactForm() {
               </div>
               <div>
                 <h3 className="font-semibold mb-1">Email Us</h3>
-                <p className="text-sm text-muted-foreground">support@proemail.ai</p>
+                <p className="text-sm text-muted-foreground">info@indus-bridge.com</p>
               </div>
             </div>
           </Card>
