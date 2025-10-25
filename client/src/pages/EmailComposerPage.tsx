@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useLocation } from "wouter";
 import { Helmet } from "react-helmet-async";
 import EmailStyleCard from "@/components/EmailStyleCard";
 import EmailComposer, { EmailFormData } from "@/components/EmailComposer";
@@ -13,6 +14,7 @@ import { useAuth } from "@/hooks/useAuth";
 import { apiRequest } from "@/lib/queryClient";
 
 export default function EmailComposerPage() {
+  const [, setLocation] = useLocation();
   const [selectedStyle, setSelectedStyle] = useState(emailStyles[0].id);
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [searchTerm, setSearchTerm] = useState('');
@@ -181,7 +183,7 @@ export default function EmailComposerPage() {
               <Button
                 variant="outline"
                 size="sm"
-                onClick={() => window.location.href = '/contact'}
+                onClick={() => setLocation('/contact')}
                 data-testid="button-composer-beta-feedback"
                 className="bg-background/50 hover:bg-background shrink-0"
               >
