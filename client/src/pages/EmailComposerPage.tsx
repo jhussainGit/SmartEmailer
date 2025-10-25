@@ -5,6 +5,7 @@ import EmailComposer, { EmailFormData } from "@/components/EmailComposer";
 import EmailPreview from "@/components/EmailPreview";
 import { emailStyles, emailCategories } from "@/lib/emailStyles";
 import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Search } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
@@ -158,9 +159,35 @@ export default function EmailComposerPage() {
 
       <div className="min-h-screen bg-background">
         <div className="max-w-[1800px] mx-auto p-4 md:p-6">
-          <div className="mb-8">
+          <div className="mb-6">
             <h1 className="text-3xl font-bold mb-2">Email Composer</h1>
             <p className="text-muted-foreground">Choose a style and customize your email</p>
+          </div>
+          
+          {/* Beta Release Notice */}
+          <div className="bg-primary/10 border border-primary/20 rounded-lg p-4 mb-6">
+            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+              <div className="flex items-start gap-2">
+                <Badge variant="default" className="text-xs font-semibold mt-0.5">BETA</Badge>
+                <div>
+                  <p className="text-sm font-medium mb-1">
+                    This is a beta release. Help us improve!
+                  </p>
+                  <p className="text-xs text-muted-foreground">
+                    Experiencing issues? Please send us your feedback using the contact form.
+                  </p>
+                </div>
+              </div>
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => window.location.href = '/contact'}
+                data-testid="button-composer-beta-feedback"
+                className="bg-background/50 hover:bg-background shrink-0"
+              >
+                Send Feedback
+              </Button>
+            </div>
           </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
