@@ -3,6 +3,8 @@
 ## Overview
 Smart Emailer Pro is a free, web-based AI-powered email generation platform designed to help users create professional, academic, and business emails across 30+ writing styles. It leverages OpenAI's GPT-5 model to generate contextually appropriate emails based on user inputs including style preferences, recipient information, LinkedIn profiles, job descriptions, and custom context. The platform supports multi-language email generation, offers robust draft management for authenticated users, and includes a Gmail-integrated contact form. Its primary purpose is to provide a comprehensive, free tool for efficient and high-quality email composition, aiming for broad market adoption through its free-to-use model and SEO-optimized content.
 
+**Current Status**: Beta Release - Users are encouraged to provide feedback via the contact form.
+
 ## User Preferences
 Preferred communication style: Simple, everyday language.
 
@@ -35,3 +37,16 @@ Preferred communication style: Simple, everyday language.
 - **Major NPM Libraries**: React, Radix UI, Tailwind CSS, Express, Passport, Drizzle ORM, OpenAI SDK, Zod.
 - **API Integrations**: Gmail API, LinkedIn profile data extraction (URL-based), job description parsing (URL-based).
 - **Design Assets**: Google Fonts (Inter, DM Sans, Geist Mono, etc.), Lucide icons.
+
+## Recent Updates
+
+### Beta Release Messaging (October 25, 2025)
+- Added prominent beta release notices on Landing and Composer pages
+- Beta banners include direct feedback CTAs linking to the contact form
+- Encourages users to report issues and provide feedback during beta phase
+
+### File Attachment Error Handling (October 25, 2025)
+- Enhanced backend logging for email generation requests with attachment details
+- Improved frontend error handling with detailed toast notifications
+- Added client-side and server-side logging for debugging attachment issues
+- Better error messages surfaced to users when generation fails
