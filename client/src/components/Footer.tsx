@@ -45,11 +45,6 @@ export default function Footer() {
                   Contact Us
                 </Link>
               </li>
-              <li>
-                <a href="#" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
-                  About
-                </a>
-              </li>
             </ul>
           </div>
 
