@@ -1,0 +1,98 @@
+Perfect — here’s the exact Replit “prompt” (command block) you can paste into each of your web app repls to automatically block these WordPress scanner bots before they hit your routes.
+
+You can add this to the top of your main server file (for example, index.js, server.js, or app.py, depending on your stack).
+
+⸻
+
+🚀 For Node.js / Express apps
+
+Paste this at the top of your server.js or index.js (before your main routes):
+
+// 🛡️ Basic security middleware to block malicious WordPress bot scans
+app.use((req, res, next) => {
+  const blockedPatterns = [
+    '/wp-admin',
+    '/wp-login',
+    '/xmlrpc.php',
+    '/wordpress',
+    '/wp-content',
+    '/wp-includes',
+    '/setup-config.php'
+  ];
+
+  const isBlocked = blockedPatterns.some(p => req.url.includes(p));
+  if (isBlocked) {
+    console.log(`🚫 Blocked malicious request: ${req.url} from ${req.ip}`);
+    return res.status(403).send('Forbidden');
+  }
+
+  next();
+});
+
+✅ What it does:
+	•	Instantly blocks requests that contain WordPress-related paths.
+	•	Returns a 403 Forbidden response (so the bot leaves).
+	•	Logs each blocked attempt so you can see it in the Replit console.
+
+⸻
+
+🐍 For Python / Flask apps
+
+Add this middleware near the top of your main Flask file (e.g. main.py):
+
+from flask import Flask, request, abort
+
+app = Flask(__name__)
+
+@app.before_request
+def block_wp_bots():
+    blocked_patterns = [
+        "/wp-admin",
+        "/wp-login",
+        "/xmlrpc.php",
+        "/wordpress",
+        "/wp-content",
+        "/wp-includes",
+        "/setup-config.php"
+    ]
+    for pattern in blocked_patterns:
+        if pattern in request.path:
+            print(f"🚫 Blocked malicious request: {request.path} from {request.remote_addr}")
+            abort(403)
+
+
+⸻
+
+⚙️ Optional: Add rate limiting (extra safety)
+
+If you want to limit the number of requests from any single IP, install and add express-rate-limit (for Node.js):
+
+npm install express-rate-limit
+
+Then in your server file:
+
+import rateLimit from "express-rate-limit";
+
+const limiter = rateLimit({
+  windowMs: 60 * 1000, // 1 minute
+  max: 60, // limit each IP to 60 requests per minute
+  message: "Too many requests, please try again later."
+});
+
+app.use(limiter);
+
+
+⸻
+
+🧠 Summary
+
+Problem	Fix
+Bots probing /wp-admin/setup-config.php	Block these routes using middleware
+Too many unique IPs (bot swarm)	Add rate limiting
+Want to see what’s blocked	Logged in console automatically
+
+
+⸻
+
+Would you like me to give you the same prompt for Replit sites running PHP or static HTML (no backend) too?
+Those require a small .replit or .htaccess–style tweak instead.

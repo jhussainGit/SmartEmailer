@@ -44,6 +44,13 @@ Preferred communication style: Simple, everyday language.
 
 ## Recent Updates
 
+### Security Enhancement - Bot Protection (October 28, 2025)
+- Added WordPress bot blocking middleware to prevent malicious scanner probes
+- Blocks common WordPress attack paths (`/wp-admin`, `/wp-login`, `/xmlrpc.php`, etc.)
+- Returns 403 Forbidden to blocked requests
+- Logs all blocked attempts to console for monitoring
+- Protects against automated bot scans targeting non-WordPress sites
+
 ### Ownership & Contact Information Update (October 25, 2025)
 - Added ownership statement across the site: Smart Emailer Pro is a digital asset owned by Indus Bridge Ventures Inc.
 - Updated support email from support@proemail.ai to info@indus-bridge.com

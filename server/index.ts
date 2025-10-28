@@ -17,6 +17,27 @@ app.use(express.json({
 }));
 app.use(express.urlencoded({ extended: false, limit: '10mb' }));
 
+// Security middleware to block malicious WordPress bot scans
+app.use((req, res, next) => {
+  const blockedPatterns = [
+    '/wp-admin',
+    '/wp-login',
+    '/xmlrpc.php',
+    '/wordpress',
+    '/wp-content',
+    '/wp-includes',
+    '/setup-config.php'
+  ];
+
+  const isBlocked = blockedPatterns.some(p => req.url.includes(p));
+  if (isBlocked) {
+    log(`🚫 Blocked malicious request: ${req.url} from ${req.ip}`);
+    return res.status(403).send('Forbidden');
+  }
+
+  next();
+});
+
 app.use((req, res, next) => {
   const start = Date.now();
   const path = req.path;
