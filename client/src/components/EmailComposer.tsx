@@ -197,6 +197,8 @@ export default function EmailComposer({ selectedStyle, onGenerate, isGenerating 
                     <SelectItem value="Arabic">Arabic (العربية)</SelectItem>
                     <SelectItem value="Russian">Russian (Русский)</SelectItem>
                     <SelectItem value="Hindi">Hindi (हिन्दी)</SelectItem>
+                    <SelectItem value="Urdu">Urdu (اردو)</SelectItem>
+                    <SelectItem value="Farsi">Farsi (فارسی)</SelectItem>
                     <SelectItem value="Dutch">Dutch (Nederlands)</SelectItem>
                     <SelectItem value="Polish">Polish (Polski)</SelectItem>
                     <SelectItem value="Turkish">Turkish (Türkçe)</SelectItem>
@@ -230,6 +232,8 @@ export default function EmailComposer({ selectedStyle, onGenerate, isGenerating 
                     <SelectItem value="Arabic">Arabic (العربية)</SelectItem>
                     <SelectItem value="Russian">Russian (Русский)</SelectItem>
                     <SelectItem value="Hindi">Hindi (हिन्दी)</SelectItem>
+                    <SelectItem value="Urdu">Urdu (اردو)</SelectItem>
+                    <SelectItem value="Farsi">Farsi (فارسی)</SelectItem>
                     <SelectItem value="Dutch">Dutch (Nederlands)</SelectItem>
                     <SelectItem value="Polish">Polish (Polski)</SelectItem>
                     <SelectItem value="Turkish">Turkish (Türkçe)</SelectItem>
