@@ -37,6 +37,10 @@ export interface EmailFormData {
   outputLanguage: string;
   attachmentContent?: string;
   attachmentName?: string;
+  agencyWebsite?: string;
+  endUserHomepage?: string;
+  recruiterOutreachType?: 'intro' | 'second-followup';
+  recruiterOutreachStyle?: string;
 }
 
 export default function EmailComposer({ selectedStyle, onGenerate, isGenerating = false }: EmailComposerProps) {
@@ -55,6 +59,10 @@ export default function EmailComposer({ selectedStyle, onGenerate, isGenerating 
     additionalContext: '',
     inputLanguage: 'English',
     outputLanguage: 'English',
+    agencyWebsite: '',
+    endUserHomepage: '',
+    recruiterOutreachType: 'intro',
+    recruiterOutreachStyle: 'professional-direct',
   });
 
   const getAttachmentConfig = () => {
@@ -299,6 +307,90 @@ export default function EmailComposer({ selectedStyle, onGenerate, isGenerating 
                   data-testid="input-job-description"
                 />
               </div>
+            )}
+
+            {selectedStyle === 'recruiter-outreach' && (
+              <>
+                <div className="space-y-4 p-4 bg-muted/30 rounded-lg border">
+                  <h4 className="font-medium text-sm">Recruitment Context</h4>
+                  
+                  <div>
+                    <Label htmlFor="recruiterOutreachType" className="text-sm font-medium mb-2">Message Type</Label>
+                    <Select
+                      value={formData.recruiterOutreachType}
+                      onValueChange={(value) => setFormData({ ...formData, recruiterOutreachType: value as 'intro' | 'second-followup' })}
+                    >
+                      <SelectTrigger id="recruiterOutreachType" data-testid="select-recruiter-outreach-type">
+                        <SelectValue placeholder="Select message type" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="intro">Initial Outreach</SelectItem>
+                        <SelectItem value="second-followup">2nd Follow-Up Message</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+
+                  <div>
+                    <Label htmlFor="recruiterOutreachStyle" className="text-sm font-medium mb-2">Outreach Style</Label>
+                    <Select
+                      value={formData.recruiterOutreachStyle}
+                      onValueChange={(value) => setFormData({ ...formData, recruiterOutreachStyle: value })}
+                    >
+                      <SelectTrigger id="recruiterOutreachStyle" data-testid="select-recruiter-outreach-style">
+                        <SelectValue placeholder="Select outreach approach" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="professional-direct">Professional & Direct</SelectItem>
+                        <SelectItem value="warm-friendly">Warm & Friendly</SelectItem>
+                        <SelectItem value="executive-brief">Executive Brief</SelectItem>
+                        <SelectItem value="consultative">Consultative Approach</SelectItem>
+                        <SelectItem value="opportunity-focused">Opportunity-Focused</SelectItem>
+                        <SelectItem value="industry-insider">Industry Insider</SelectItem>
+                        <SelectItem value="relationship-building">Relationship Building</SelectItem>
+                        <SelectItem value="urgent-confidential">Urgent & Confidential</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+
+                  <div>
+                    <Label htmlFor="jobDescription" className="text-sm font-medium mb-2">Job Description URL</Label>
+                    <Input
+                      id="jobDescription"
+                      placeholder="Link to job posting or description"
+                      value={formData.jobDescription}
+                      onChange={(e) => setFormData({ ...formData, jobDescription: e.target.value })}
+                      data-testid="input-job-description"
+                    />
+                  </div>
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                      <Label htmlFor="agencyWebsite" className="text-sm font-medium mb-2">Agency Website (Optional)</Label>
+                      <Input
+                        id="agencyWebsite"
+                        placeholder="Your recruiting agency website"
+                        value={formData.agencyWebsite}
+                        onChange={(e) => setFormData({ ...formData, agencyWebsite: e.target.value })}
+                        data-testid="input-agency-website"
+                      />
+                    </div>
+                    <div>
+                      <Label htmlFor="endUserHomepage" className="text-sm font-medium mb-2">Client Company Website (Optional)</Label>
+                      <Input
+                        id="endUserHomepage"
+                        placeholder="Hiring company homepage"
+                        value={formData.endUserHomepage}
+                        onChange={(e) => setFormData({ ...formData, endUserHomepage: e.target.value })}
+                        data-testid="input-end-user-homepage"
+                      />
+                    </div>
+                  </div>
+
+                  <p className="text-xs text-muted-foreground">
+                    Tip: Upload the candidate's resume or detailed job description as an attachment for even better results
+                  </p>
+                </div>
+              </>
             )}
 
             {getAttachmentConfig() && (
