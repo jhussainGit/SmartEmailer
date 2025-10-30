@@ -2,9 +2,10 @@ import { useEffect } from "react";
 import { Helmet } from "react-helmet-async";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { Mail, Loader2 } from "lucide-react";
+import { Mail, Loader2, LogIn } from "lucide-react";
 import { useAuth } from "@/hooks/useAuth";
 import { useLocation } from "wouter";
+import { SiGoogle, SiGithub, SiApple } from "react-icons/si";
 
 export default function Login() {
   const { isAuthenticated, isLoading } = useAuth();
@@ -55,12 +56,39 @@ export default function Login() {
         <Button
           onClick={handleLogin}
           size="lg"
-          className="w-full mb-6"
-          data-testid="button-login-with-replit"
+          className="w-full mb-4"
+          data-testid="button-login"
         >
-          <Mail className="w-4 h-4 mr-2" />
-          Continue with Replit
+          <LogIn className="w-4 h-4 mr-2" />
+          Sign In
         </Button>
+
+        <div className="mb-6">
+          <p className="text-xs text-center text-muted-foreground mb-3">
+            Choose from multiple sign-in options:
+          </p>
+          <div className="flex items-center justify-center gap-3">
+            <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
+              <SiGoogle className="w-4 h-4" />
+              <span>Google</span>
+            </div>
+            <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
+              <SiGithub className="w-4 h-4" />
+              <span>GitHub</span>
+            </div>
+            <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
+              <SiApple className="w-4 h-4" />
+              <span>Apple</span>
+            </div>
+            <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
+              <Mail className="w-4 h-4" />
+              <span>Email</span>
+            </div>
+          </div>
+          <p className="text-xs text-center text-muted-foreground mt-3">
+            No Replit account required
+          </p>
+        </div>
 
         <div className="space-y-4">
           <div className="bg-muted/50 rounded-lg p-4">
