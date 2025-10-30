@@ -1,7 +1,7 @@
 # Smart Emailer Pro - Free AI Email Writing Platform
 
 ## Overview
-Smart Emailer Pro is a free, web-based AI-powered email generation platform designed to help users create professional, academic, and business emails across 30+ writing styles. It leverages OpenAI's GPT-5 model to generate contextually appropriate emails based on user inputs including style preferences, recipient information, LinkedIn profiles, job descriptions, and custom context. The platform supports multi-language email generation, offers robust draft management for authenticated users, and includes a Gmail-integrated contact form. Its primary purpose is to provide a comprehensive, free tool for efficient and high-quality email composition, aiming for broad market adoption through its free-to-use model and SEO-optimized content.
+Smart Emailer Pro is a free, web-based AI-powered email generation platform designed to help users create professional, academic, and business emails across 31 writing styles. It leverages OpenAI's GPT-5 model to generate contextually appropriate emails based on user inputs including style preferences, recipient information, LinkedIn profiles, job descriptions, and custom context. The platform supports multi-language email generation, offers robust draft management for authenticated users, and includes a Gmail-integrated contact form. Its primary purpose is to provide a comprehensive, free tool for efficient and high-quality email composition, aiming for broad market adoption through its free-to-use model and SEO-optimized content.
 
 **Ownership**: Smart Emailer Pro is a digital asset owned by Indus Bridge Ventures Inc. (801 Route 1 #1017, Iselin, NJ 08831, United States).
 
@@ -24,7 +24,7 @@ Preferred communication style: Simple, everyday language.
 - **Server Framework**: Express.js with TypeScript, following a RESTful API design.
 - **Authentication & Session Management**: Replit Auth (OpenID Connect) via Passport.js, PostgreSQL-backed session store with secure cookies.
 - **API Structure**: Dedicated endpoints for authentication, draft management, email history, AI email generation, and contact form submissions. Protected routes require authentication.
-- **AI Integration**: Uses OpenAI's GPT-5 model via Replit AI Integrations for email generation, supporting 30+ style templates. Prompts are context-aware, incorporating LinkedIn profiles and job descriptions.
+- **AI Integration**: Uses OpenAI's GPT-5 model via Replit AI Integrations for email generation, supporting 31 style templates. Prompts are context-aware, incorporating LinkedIn profiles, job descriptions, and specialized recruiter outreach scenarios.
 - **Page Routes**: Includes landing, composer, drafts, FAQ, contact, privacy policy, and terms of service pages.
 
 ### Data Storage
@@ -43,6 +43,27 @@ Preferred communication style: Simple, everyday language.
 - **Design Assets**: Google Fonts (Inter, DM Sans, Geist Mono, etc.), Lucide icons.
 
 ## Recent Updates
+
+### New Writing Style - Recruiter Outreach to Candidate (October 30, 2025)
+- **Added**: New dedicated "Recruiter Outreach to Candidate" writing style with comprehensive recruitment features
+- **Message Types**: Initial outreach and 2nd follow-up message options
+- **Outreach Styles**: 8 flexible approach options:
+  - Professional & Direct
+  - Warm & Friendly
+  - Executive Brief
+  - Consultative Approach
+  - Opportunity-Focused
+  - Industry Insider
+  - Relationship Building
+  - Urgent & Confidential
+- **Recruiter-Specific Inputs**:
+  - Job description URL
+  - Candidate LinkedIn profile integration
+  - Agency website reference
+  - Client company homepage
+  - Resume/JD file upload support (Word/PDF, up to 5MB)
+- **AI Prompt Engineering**: Specialized prompts for each outreach type and style combination, optimized for recruiter-candidate communication
+- **Progressive Disclosure**: Recruiter-specific fields only appear when this style is selected, keeping the UI clean for other email types
 
 ### Security Enhancement - Bot Protection (October 28, 2025)
 - Added WordPress bot blocking middleware to prevent malicious scanner probes
