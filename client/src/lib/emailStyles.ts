@@ -23,6 +23,7 @@ export interface EmailStyle {
 export const emailStyles: EmailStyle[] = [
   { id: 'professional-formal', name: 'Professional Formal', icon: Briefcase, description: 'Polished business communication', category: 'professional' },
   { id: 'professional-casual', name: 'Professional Casual', icon: Coffee, description: 'Approachable yet professional', category: 'professional' },
+  { id: 'recruiter-outreach', name: 'Recruiter Outreach to Candidate', icon: UserSearch, description: 'Professional recruitment communication', category: 'professional', attachmentConfig: { label: 'Resume or Job Description (Optional)', accept: '.pdf,.doc,.docx,.txt', placeholder: 'Upload candidate resume or detailed job description...' } },
   { id: 'executive', name: 'Executive', icon: Building, description: 'C-suite level communication', category: 'professional' },
   { id: 'sales-pitch', name: 'Sales Pitch', icon: TrendingUp, description: 'Persuasive and compelling', category: 'professional' },
   { id: 'networking', name: 'Networking', icon: Users, description: 'Build professional relationships', category: 'professional' },
@@ -56,7 +57,6 @@ export const emailStyles: EmailStyle[] = [
   { id: 'customer-service', name: 'Customer Service', icon: Shield, description: 'Support and assistance', category: 'professional' },
   { id: 'invoice', name: 'Invoice Request', icon: DollarSign, description: 'Payment requests', category: 'professional', attachmentConfig: { label: 'Invoice/Supporting Documents (Optional)', accept: '.pdf,.doc,.docx,.xlsx,.xls,.txt', placeholder: 'Upload invoice or supporting documents...' } },
   { id: 'order-confirmation', name: 'Order Confirmation', icon: Package, description: 'Transaction confirmations', category: 'professional' },
-  { id: 'recruiter-outreach', name: 'Recruiter Outreach to Candidate', icon: UserSearch, description: 'Professional recruitment communication', category: 'professional', attachmentConfig: { label: 'Resume or Job Description (Optional)', accept: '.pdf,.doc,.docx,.txt', placeholder: 'Upload candidate resume or detailed job description...' } },
 ];
 
 export const emailCategories = [
