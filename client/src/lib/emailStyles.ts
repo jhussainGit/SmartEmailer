@@ -4,7 +4,7 @@ import {
   MessageSquare, Award, Coffee, Zap, ChevronRight,
   ClipboardCheck, Send, Bell, Building, UserPlus,
   Calendar, ThumbsUp, AlertCircle, CheckCircle, Info,
-  Package, DollarSign, Handshake, Globe
+  Package, DollarSign, Handshake, Globe, UserSearch
 } from 'lucide-react';
 
 export interface EmailStyle {
@@ -56,6 +56,7 @@ export const emailStyles: EmailStyle[] = [
   { id: 'customer-service', name: 'Customer Service', icon: Shield, description: 'Support and assistance', category: 'professional' },
   { id: 'invoice', name: 'Invoice Request', icon: DollarSign, description: 'Payment requests', category: 'professional', attachmentConfig: { label: 'Invoice/Supporting Documents (Optional)', accept: '.pdf,.doc,.docx,.xlsx,.xls,.txt', placeholder: 'Upload invoice or supporting documents...' } },
   { id: 'order-confirmation', name: 'Order Confirmation', icon: Package, description: 'Transaction confirmations', category: 'professional' },
+  { id: 'recruiter-outreach', name: 'Recruiter Outreach to Candidate', icon: UserSearch, description: 'Professional recruitment communication', category: 'professional', attachmentConfig: { label: 'Resume or Job Description (Optional)', accept: '.pdf,.doc,.docx,.txt', placeholder: 'Upload candidate resume or detailed job description...' } },
 ];
 
 export const emailCategories = [
