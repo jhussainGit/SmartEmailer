@@ -15,6 +15,10 @@ interface EmailGenerationParams {
   additionalContext?: string;
   attachmentContent?: string;
   attachmentName?: string;
+  agencyWebsite?: string;
+  endUserHomepage?: string;
+  recruiterOutreachType?: 'intro' | 'second-followup';
+  recruiterOutreachStyle?: string;
 }
 
 const lengthGuidelines = {
@@ -28,6 +32,7 @@ function getAttachmentType(styleId: string, fileName: string): string {
   if (styleId === 'cover-letter') return 'Resume/CV Content';
   if (styleId === 'proposal') return 'Proposal/Presentation Content';
   if (styleId === 'invoice') return 'Invoice/Document Content';
+  if (styleId === 'recruiter-outreach') return 'Candidate Resume or Job Description';
   return 'Attached Document Content';
 }
 
@@ -65,6 +70,14 @@ export async function generateEmail(params: any): Promise<string> {
     context += `\nJob Description URL: ${params.jobDescription}`;
   }
   
+  if (params.agencyWebsite) {
+    context += `\nRecruiting Agency Website: ${params.agencyWebsite}`;
+  }
+  
+  if (params.endUserHomepage) {
+    context += `\nHiring Company Website: ${params.endUserHomepage}`;
+  }
+  
   if (params.attachmentContent && params.attachmentName) {
     const attachmentType = getAttachmentType(styleId, params.attachmentName);
     context += `\n\n${attachmentType} (${params.attachmentName}):\n${truncateAttachment(params.attachmentContent)}`;
@@ -84,6 +97,49 @@ export async function generateEmail(params: any): Promise<string> {
       attachmentGuidance = '\n\nATTACHMENT GUIDANCE: Supporting documents (proposal/presentation) have been provided. Reference key points, data, or highlights from the attached materials to strengthen your message.';
     } else if (styleId === 'invoice') {
       attachmentGuidance = '\n\nATTACHMENT GUIDANCE: Invoice or supporting documents have been provided. Reference key details, amounts, or relevant information from the attached materials in your message.';
+    } else if (styleId === 'recruiter-outreach') {
+      attachmentGuidance = '\n\nATTACHMENT GUIDANCE: A candidate resume or job description has been provided. Use this to personalize the outreach - reference specific skills, experiences, or job requirements that make this opportunity a strong match. Show you\'ve done your homework.';
+    }
+  }
+  
+  // Special handling for recruiter outreach
+  let recruiterGuidance = '';
+  if (styleId === 'recruiter-outreach') {
+    const outreachType = params.recruiterOutreachType || 'intro';
+    const outreachStyle = params.recruiterOutreachStyle || 'professional-direct';
+    
+    const styleGuidanceMap: Record<string, string> = {
+      'professional-direct': 'Be clear, concise, and respectful of the candidate\'s time. Get straight to the point about the opportunity.',
+      'warm-friendly': 'Use a personable, conversational tone. Build rapport while maintaining professionalism.',
+      'executive-brief': 'Use executive-level language. Be succinct and focus on high-level opportunity highlights.',
+      'consultative': 'Position yourself as a career advisor. Focus on how this opportunity aligns with their career goals.',
+      'opportunity-focused': 'Lead with the exciting aspects of the role - growth potential, innovation, impact.',
+      'industry-insider': 'Demonstrate deep industry knowledge. Show you understand their field and career trajectory.',
+      'relationship-building': 'Focus on starting a long-term professional relationship. This isn\'t just about one role.',
+      'urgent-confidential': 'Convey urgency and exclusivity. This is a time-sensitive, high-priority opportunity.',
+    };
+    
+    const styleGuidance = styleGuidanceMap[outreachStyle] || styleGuidanceMap['professional-direct'];
+    
+    if (outreachType === 'intro') {
+      recruiterGuidance = `\n\nRECRUITER OUTREACH GUIDANCE (INITIAL MESSAGE):
+- This is the FIRST contact with this candidate
+- ${styleGuidance}
+- Clearly state why you're reaching out and how you found them (LinkedIn profile mentioned above)
+- Highlight 2-3 key aspects of the role that match their background
+- Make it easy to respond - include a clear call-to-action (brief call, quick conversation)
+- Show genuine interest in their career, not just filling a position
+- Keep it compelling but not pushy`;
+    } else {
+      recruiterGuidance = `\n\nRECRUITER OUTREACH GUIDANCE (2ND FOLLOW-UP):
+- This is a FOLLOW-UP to a previous initial outreach (assume they haven't responded yet)
+- ${styleGuidance}
+- Acknowledge your previous message politely without being pushy
+- Add new information or a different angle (company growth, team insights, timing update)
+- Reemphasize the value proposition - why this is worth their consideration
+- Provide an easy out - respect their decision if not interested
+- Keep tone professional and understanding - recognize they're busy
+- Include a clear, low-pressure call-to-action`;
     }
   }
 
@@ -102,7 +158,7 @@ Key guidelines:
 4. Use natural, conversational language appropriate to the style
 5. Include proper punctuation and formatting
 6. Make the email ready to send (no placeholders like [Your Name])
-7. Write the entire email in ${outputLanguage}${attachmentGuidance}`;
+7. Write the entire email in ${outputLanguage}${attachmentGuidance}${recruiterGuidance}`;
 
   let userPrompt = `Generate a ${length} ${styleName} style email with the following details:
 
