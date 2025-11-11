@@ -44,8 +44,24 @@ Preferred communication style: Simple, everyday language.
 
 ## Recent Updates
 
+### Internal Business Communication Styles (November 11, 2025)
+- **Added**: 9 new email styles specifically for internal business communication
+- **New Styles**:
+  - **Internal Announcement** - Company-wide updates and news
+  - **Promotion Announcement** - Announce employee promotions or new hires
+  - **Policy Update** - Communicate new or updated policies (supports attachment uploads)
+  - **Team Update** - Department or team-specific communications
+  - **Internal Memo** - Official company memorandums
+  - **Employee Recognition** - Celebrate achievements and milestones
+  - **Meeting Minutes** - Summarize meetings and action items
+  - **Project Update** - Progress updates on ongoing projects
+  - **Urgent Internal Alert** - Time-sensitive company communications
+- **Purpose**: Enables businesses to efficiently generate professional internal emails for announcements, policy changes, employee recognition, team updates, and urgent communications
+- **Total Writing Styles**: Now 40+ writing styles covering external and internal business needs
+
 ### New Writing Style - Recruiter Outreach to Candidate (October 30, 2025)
 - **Added**: New dedicated "Recruiter Outreach to Candidate" writing style with comprehensive recruitment features
+- **Positioned**: 3rd option from the top for easy discovery
 - **Message Types**: Initial outreach and 2nd follow-up message options
 - **Outreach Styles**: 8 flexible approach options:
   - Professional & Direct
