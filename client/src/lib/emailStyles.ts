@@ -4,7 +4,9 @@ import {
   MessageSquare, Award, Coffee, Zap, ChevronRight,
   ClipboardCheck, Send, Bell, Building, UserPlus,
   Calendar, ThumbsUp, AlertCircle, CheckCircle, Info,
-  Package, DollarSign, Handshake, Globe, UserSearch
+  Package, DollarSign, Handshake, Globe, UserSearch,
+  Megaphone, Star, FileCheck, UsersRound, Scroll,
+  Trophy, ClipboardList, BarChart, AlertTriangle
 } from 'lucide-react';
 
 export interface EmailStyle {
@@ -37,6 +39,16 @@ export const emailStyles: EmailStyle[] = [
   { id: 'complaint', name: 'Complaint', icon: AlertCircle, description: 'Address issues diplomatically', category: 'professional' },
   { id: 'apology', name: 'Apology', icon: Heart, description: 'Express regret professionally', category: 'professional' },
   { id: 'proposal', name: 'Business Proposal', icon: Handshake, description: 'Pitch ideas and partnerships', category: 'professional', attachmentConfig: { label: 'Proposal/Presentation (Optional)', accept: '.pdf,.ppt,.pptx,.doc,.docx', placeholder: 'Upload supporting documents for your proposal...' } },
+  
+  { id: 'internal-announcement', name: 'Internal Announcement', icon: Megaphone, description: 'Company-wide updates and news', category: 'professional' },
+  { id: 'promotion-announcement', name: 'Promotion Announcement', icon: Star, description: 'Announce employee promotions or new hires', category: 'professional' },
+  { id: 'policy-update', name: 'Policy Update', icon: FileCheck, description: 'Communicate new or updated policies', category: 'professional', attachmentConfig: { label: 'Policy Documents (Optional)', accept: '.pdf,.doc,.docx,.txt', placeholder: 'Upload policy documents for reference...' } },
+  { id: 'team-update', name: 'Team Update', icon: UsersRound, description: 'Department or team-specific communications', category: 'professional' },
+  { id: 'internal-memo', name: 'Internal Memo', icon: Scroll, description: 'Official company memorandums', category: 'professional' },
+  { id: 'employee-recognition', name: 'Employee Recognition', icon: Trophy, description: 'Celebrate achievements and milestones', category: 'professional' },
+  { id: 'meeting-minutes', name: 'Meeting Minutes', icon: ClipboardList, description: 'Summarize meetings and action items', category: 'professional' },
+  { id: 'project-update', name: 'Project Update', icon: BarChart, description: 'Progress updates on ongoing projects', category: 'professional' },
+  { id: 'urgent-alert', name: 'Urgent Internal Alert', icon: AlertTriangle, description: 'Time-sensitive company communications', category: 'professional' },
   
   { id: 'academic-formal', name: 'Academic Formal', icon: GraduationCap, description: 'Scholarly communication', category: 'academic' },
   { id: 'research-inquiry', name: 'Research Inquiry', icon: Sparkles, description: 'Academic research requests', category: 'academic' },
