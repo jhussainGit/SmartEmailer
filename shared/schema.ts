@@ -60,6 +60,21 @@ export const emailHistory = pgTable("email_history", {
   createdAt: timestamp("created_at").defaultNow(),
 });
 
+// Composer usage tracking table for analytics
+export const composerUsage = pgTable("composer_usage", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  userId: varchar("user_id").references(() => users.id, { onDelete: 'set null' }),
+  sessionId: varchar("session_id"),
+  style: varchar("style").notNull(),
+  inputLanguage: varchar("input_language"),
+  outputLanguage: varchar("output_language"),
+  hasAttachment: boolean("has_attachment").default(false),
+  isAuthenticated: boolean("is_authenticated").default(false),
+  generationSuccess: boolean("generation_success").default(true),
+  userAgent: text("user_agent"),
+  createdAt: timestamp("created_at").defaultNow(),
+});
+
 export type UpsertUser = typeof users.$inferInsert;
 export type User = typeof users.$inferSelect;
 
@@ -79,3 +94,11 @@ export const insertEmailHistorySchema = createInsertSchema(emailHistory).omit({
 
 export type InsertEmailHistory = z.infer<typeof insertEmailHistorySchema>;
 export type EmailHistory = typeof emailHistory.$inferSelect;
+
+export const insertComposerUsageSchema = createInsertSchema(composerUsage).omit({
+  id: true,
+  createdAt: true,
+});
+
+export type InsertComposerUsage = z.infer<typeof insertComposerUsageSchema>;
+export type ComposerUsage = typeof composerUsage.$inferSelect;

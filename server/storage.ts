@@ -2,12 +2,15 @@ import {
   users,
   emailDrafts,
   emailHistory,
+  composerUsage,
   type User,
   type UpsertUser,
   type EmailDraft,
   type InsertEmailDraft,
   type EmailHistory,
   type InsertEmailHistory,
+  type ComposerUsage,
+  type InsertComposerUsage,
 } from "@shared/schema";
 import { db } from "./db";
 import { eq, desc, and } from "drizzle-orm";
@@ -29,6 +32,9 @@ export interface IStorage {
   createHistoryEntry(entry: InsertEmailHistory): Promise<EmailHistory>;
   getUserHistory(userId: string): Promise<EmailHistory[]>;
   deleteHistoryEntry(id: string, userId: string): Promise<void>;
+  
+  // Composer usage tracking
+  trackComposerUsage(usage: InsertComposerUsage): Promise<ComposerUsage>;
 }
 
 export class DatabaseStorage implements IStorage {
@@ -131,6 +137,15 @@ export class DatabaseStorage implements IStorage {
     if (result.length === 0) {
       throw new Error('History entry not found or unauthorized');
     }
+  }
+
+  // Composer usage tracking
+  async trackComposerUsage(usageData: InsertComposerUsage): Promise<ComposerUsage> {
+    const [usage] = await db
+      .insert(composerUsage)
+      .values(usageData)
+      .returning();
+    return usage;
   }
 }
 

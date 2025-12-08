@@ -29,7 +29,7 @@ Preferred communication style: Simple, everyday language.
 
 ### Data Storage
 - **Database**: PostgreSQL via Neon serverless driver, utilizing Drizzle ORM for type-safe queries and schema management.
-- **Schema Design**: Tables for `users` (Replit Auth profiles), `email_drafts` (user-saved drafts), `email_history` (auto-saved generation history), and `sessions`.
+- **Schema Design**: Tables for `users` (Replit Auth profiles), `email_drafts` (user-saved drafts), `email_history` (auto-saved generation history), `composer_usage` (usage analytics tracking), and `sessions`.
 - **Migration Strategy**: Drizzle Kit for schema migrations.
 
 ## External Dependencies
@@ -43,6 +43,19 @@ Preferred communication style: Simple, everyday language.
 - **Design Assets**: Google Fonts (Inter, DM Sans, Geist Mono, etc.), Lucide icons.
 
 ## Recent Updates
+
+### Usage Analytics Tracking (November 11, 2025)
+- **Added**: New `composer_usage` database table to track all email generation usage
+- **Tracked Data**:
+  - User ID (if authenticated) or session ID (for anonymous users)
+  - Email style used
+  - Input and output languages
+  - Whether attachment was included
+  - Authentication status
+  - Generation success/failure
+  - User agent for device analytics
+  - Timestamp
+- **Purpose**: Enables tracking of application usage patterns, popular styles, and user engagement metrics
 
 ### Internal Business Communication Styles (November 11, 2025)
 - **Added**: 9 new email styles specifically for internal business communication

@@ -114,7 +114,10 @@ export async function registerRoutes(app: Express): Promise<Server> {
   });
 
   // Email generation route (public - works without auth)
-  app.post('/api/generate-email', async (req, res) => {
+  app.post('/api/generate-email', async (req: any, res) => {
+    const startTime = Date.now();
+    let generationSuccess = false;
+    
     try {
       console.log('[Email Generation] Request received with style:', req.body.style);
       
@@ -127,6 +130,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const { generateEmail } = await import('./emailGenerator');
       const email = await generateEmail(req.body);
       
+      generationSuccess = true;
       console.log('[Email Generation] Email generated successfully');
       res.json({ email });
     } catch (error: any) {
@@ -144,6 +148,28 @@ export async function registerRoutes(app: Express): Promise<Server> {
         message: error.message || "Failed to generate email",
         details: process.env.NODE_ENV === 'development' ? error.stack : undefined
       });
+    } finally {
+      // Track composer usage asynchronously (don't block response)
+      try {
+        const userId = req.user?.claims?.sub || null;
+        const sessionId = req.sessionID || null;
+        
+        await storage.trackComposerUsage({
+          userId,
+          sessionId,
+          style: req.body.style || 'unknown',
+          inputLanguage: req.body.inputLanguage || null,
+          outputLanguage: req.body.outputLanguage || null,
+          hasAttachment: !!req.body.attachmentName,
+          isAuthenticated: !!req.user,
+          generationSuccess,
+          userAgent: req.headers['user-agent'] || null,
+        });
+        console.log(`[Usage Tracking] Logged composer usage for style: ${req.body.style}`);
+      } catch (trackingError) {
+        // Don't fail the request if tracking fails
+        console.error('[Usage Tracking] Failed to log usage:', trackingError);
+      }
     }
   });
 
