@@ -17,8 +17,11 @@ export default function PrivacyPolicy() {
         <meta property="og:title" content="Privacy Policy | Smart Emailer Pro" />
         <meta property="og:description" content="Read our privacy policy to understand how Smart Emailer Pro protects your personal information." />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://smart-emailer-pro.replit.app/privacy/" />
-        <link rel="canonical" href="https://smart-emailer-pro.replit.app/privacy/" />
+        <meta property="og:url" content="https://smartemailer.pro/privacy" />
+        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:title" content="Privacy Policy | Smart Emailer Pro" />
+        <meta name="twitter:description" content="Read our privacy policy to understand how Smart Emailer Pro protects your personal information." />
+        <link rel="canonical" href="https://smartemailer.pro/privacy" />
       </Helmet>
 
       <div className="min-h-screen bg-background">

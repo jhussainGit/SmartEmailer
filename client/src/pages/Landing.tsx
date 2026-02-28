@@ -126,26 +126,32 @@ export default function Landing() {
     "@context": "https://schema.org",
     "@type": "WebApplication",
     "name": "Smart Emailer Pro",
-    "description": "Free AI-powered email writing platform with 30+ professional writing styles. Generate perfect emails instantly using GPT-5 technology.",
-    "url": "https://smart-emailer-pro.replit.app",
+    "description": "Free AI-powered email writing platform with 40+ professional writing styles. Generate perfect emails instantly using GPT-5 technology.",
+    "url": "https://smartemailer.pro",
     "applicationCategory": "BusinessApplication",
+    "operatingSystem": "Any",
+    "browserRequirements": "Requires JavaScript",
     "offers": {
       "@type": "Offer",
       "price": "0",
       "priceCurrency": "USD"
     },
     "featureList": [
-      "30+ professional writing styles",
-      "Multi-language support (20+ languages)",
+      "40+ professional writing styles",
+      "Multi-language support (22+ languages)",
       "AI-powered email generation with GPT-5",
       "Draft management for authenticated users",
       "LinkedIn profile integration",
+      "Recruiter outreach tools",
       "Job description parsing",
-      "Context-aware file attachments"
+      "Context-aware file attachments up to 5MB",
+      "Internal business communication templates"
     ],
     "creator": {
       "@type": "Organization",
       "name": "Indus Bridge Ventures Inc.",
+      "url": "https://smartemailer.pro",
+      "email": "info@indus-bridge.com",
       "address": {
         "@type": "PostalAddress",
         "streetAddress": "801 Route 1 #1017",
@@ -160,20 +166,23 @@ export default function Landing() {
   return (
     <>
       <Helmet>
-        <title>Smart Emailer Pro - Free AI Email Writer | 30+ Professional Writing Styles</title>
+        <title>Smart Emailer Pro - Free AI Email Writer | 40+ Professional Writing Styles</title>
         <meta 
           name="description" 
-          content="Generate professional emails instantly with Smart Emailer Pro. Free AI-powered email writing tool with 30+ styles, multi-language support, and GPT-5 technology. Perfect for business, academic, and personal emails."
+          content="Generate professional emails instantly with Smart Emailer Pro. Free AI-powered email writing tool with 40+ styles, multi-language support, and GPT-5 technology. Perfect for business, academic, and personal emails."
         />
         <meta 
           name="keywords" 
-          content="AI email writer, free email generator, professional email, business email, email templates, GPT-5, email writing tool, cold email, cover letter, follow-up email, AI writing assistant"
+          content="AI email writer, free email generator, professional email, business email, email templates, GPT-5, email writing tool, cold email, cover letter, follow-up email, AI writing assistant, recruiter outreach, internal communication"
         />
-        <meta property="og:title" content="Smart Emailer Pro - Free AI Email Writer | 30+ Professional Writing Styles" />
-        <meta property="og:description" content="Generate professional emails instantly with Smart Emailer Pro. Free AI-powered email writing tool with 30+ styles, multi-language support, and GPT-5 technology." />
+        <meta property="og:title" content="Smart Emailer Pro - Free AI Email Writer | 40+ Professional Writing Styles" />
+        <meta property="og:description" content="Generate professional emails instantly with Smart Emailer Pro. Free AI-powered email writing tool with 40+ styles, multi-language support, and GPT-5 technology." />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://smart-emailer-pro.replit.app/" />
-        <link rel="canonical" href="https://smart-emailer-pro.replit.app/" />
+        <meta property="og:url" content="https://smartemailer.pro" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Smart Emailer Pro - Free AI Email Writer" />
+        <meta name="twitter:description" content="Free AI-powered email writer with 40+ professional styles. Generate perfect emails instantly." />
+        <link rel="canonical" href="https://smartemailer.pro" />
         <script type="application/ld+json">
           {JSON.stringify(structuredData)}
         </script>

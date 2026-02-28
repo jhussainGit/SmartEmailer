@@ -17,8 +17,11 @@ export default function FAQ() {
         <meta property="og:title" content="Frequently Asked Questions (FAQ) | Smart Emailer Pro" />
         <meta property="og:description" content="Find answers to common questions about Smart Emailer Pro AI email writing tool." />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://smart-emailer-pro.replit.app/faq/" />
-        <link rel="canonical" href="https://smart-emailer-pro.replit.app/faq/" />
+        <meta property="og:url" content="https://smartemailer.pro/faq" />
+        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:title" content="FAQ | Smart Emailer Pro" />
+        <meta name="twitter:description" content="Find answers to common questions about Smart Emailer Pro AI email writing tool." />
+        <link rel="canonical" href="https://smartemailer.pro/faq" />
       </Helmet>
       
       <div className="min-h-screen bg-background">

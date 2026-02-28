@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /login
+Disallow: /drafts
+
+Sitemap: https://smartemailer.pro/sitemap.xml

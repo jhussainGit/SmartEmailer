@@ -17,8 +17,11 @@ export default function Contact() {
         <meta property="og:title" content="Contact Us | Smart Emailer Pro" />
         <meta property="og:description" content="Get in touch with Smart Emailer Pro. We're here to help with your email writing needs." />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://smart-emailer-pro.replit.app/contact/" />
-        <link rel="canonical" href="https://smart-emailer-pro.replit.app/contact/" />
+        <meta property="og:url" content="https://smartemailer.pro/contact" />
+        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:title" content="Contact Us | Smart Emailer Pro" />
+        <meta name="twitter:description" content="Get in touch with Smart Emailer Pro. We're here to help with your email writing needs." />
+        <link rel="canonical" href="https://smartemailer.pro/contact" />
       </Helmet>
       
       <div className="min-h-screen bg-background">

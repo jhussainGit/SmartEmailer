@@ -4,6 +4,60 @@ import { storage } from "./storage";
 import { setupAuth, isAuthenticated } from "./replitAuth";
 
 export async function registerRoutes(app: Express): Promise<Server> {
+  app.get('/sitemap.xml', (_req, res) => {
+    const baseUrl = 'https://smartemailer.pro';
+    const pages = [
+      { loc: '/', priority: '1.0', changefreq: 'weekly' },
+      { loc: '/composer', priority: '0.9', changefreq: 'weekly' },
+      { loc: '/blog', priority: '0.8', changefreq: 'weekly' },
+      { loc: '/faq', priority: '0.7', changefreq: 'monthly' },
+      { loc: '/contact', priority: '0.6', changefreq: 'monthly' },
+      { loc: '/privacy', priority: '0.3', changefreq: 'yearly' },
+      { loc: '/terms', priority: '0.3', changefreq: 'yearly' },
+    ];
+
+    const blogSlugs = [
+      'how-to-cold-email-for-internship',
+      'how-to-say-will-do-professionally-in-email',
+      'how-to-send-video-through-email',
+      'how-to-write-email-to-teacher',
+      'how-to-address-attorney-in-email',
+      'how-to-change-format-outlook-email',
+      'how-to-say-ok-professionally-email',
+      'how-to-put-gif-in-email',
+      'how-to-address-email-to-multiple-people',
+      'how-to-respond-job-rejection-email',
+    ];
+
+    const today = new Date().toISOString().split('T')[0];
+
+    let xml = '<?xml version="1.0" encoding="UTF-8"?>\n';
+    xml += '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n';
+
+    for (const page of pages) {
+      xml += `  <url>\n`;
+      xml += `    <loc>${baseUrl}${page.loc}</loc>\n`;
+      xml += `    <lastmod>${today}</lastmod>\n`;
+      xml += `    <changefreq>${page.changefreq}</changefreq>\n`;
+      xml += `    <priority>${page.priority}</priority>\n`;
+      xml += `  </url>\n`;
+    }
+
+    for (const slug of blogSlugs) {
+      xml += `  <url>\n`;
+      xml += `    <loc>${baseUrl}/blog/${slug}</loc>\n`;
+      xml += `    <lastmod>${today}</lastmod>\n`;
+      xml += `    <changefreq>monthly</changefreq>\n`;
+      xml += `    <priority>0.6</priority>\n`;
+      xml += `  </url>\n`;
+    }
+
+    xml += '</urlset>';
+
+    res.header('Content-Type', 'application/xml');
+    res.send(xml);
+  });
+
   // Auth middleware
   await setupAuth(app);
 

@@ -20,25 +20,25 @@ export default function BlogPost() {
     "@type": "BlogPosting",
     "headline": post.title,
     "description": post.excerpt,
-    "image": "https://smart-emailer-pro.replit.app/og-image.png",
+    "image": "https://smartemailer.pro/favicon.png",
     "datePublished": post.publishedDate,
     "dateModified": post.publishedDate,
     "author": {
       "@type": "Organization",
       "name": "Indus Bridge Ventures Inc.",
-      "url": "https://smart-emailer-pro.replit.app"
+      "url": "https://smartemailer.pro"
     },
     "publisher": {
       "@type": "Organization",
       "name": "Smart Emailer Pro",
       "logo": {
         "@type": "ImageObject",
-        "url": "https://smart-emailer-pro.replit.app/logo.png"
+        "url": "https://smartemailer.pro/favicon.png"
       }
     },
     "mainEntityOfPage": {
       "@type": "WebPage",
-      "@id": `https://smart-emailer-pro.replit.app/blog/${post.slug}/`
+      "@id": `https://smartemailer.pro/blog/${post.slug}`
     },
     "keywords": post.keywords.join(', '),
     "articleSection": post.category,
@@ -53,14 +53,17 @@ export default function BlogPost() {
         <meta property="og:title" content={`${post.title} | Smart Emailer Pro Blog`} />
         <meta property="og:description" content={post.excerpt} />
         <meta property="og:type" content="article" />
-        <meta property="og:url" content={`https://smart-emailer-pro.replit.app/blog/${post.slug}/`} />
+        <meta property="og:url" content={`https://smartemailer.pro/blog/${post.slug}`} />
         <meta property="article:published_time" content={post.publishedDate} />
         <meta property="article:section" content={post.category} />
         {post.keywords.map((keyword, index) => (
           <meta key={index} property="article:tag" content={keyword} />
         ))}
         <meta name="keywords" content={post.keywords.join(', ')} />
-        <link rel="canonical" href={`https://smart-emailer-pro.replit.app/blog/${post.slug}/`} />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={`${post.title} | Smart Emailer Pro`} />
+        <meta name="twitter:description" content={post.excerpt} />
+        <link rel="canonical" href={`https://smartemailer.pro/blog/${post.slug}`} />
         <script type="application/ld+json">
           {JSON.stringify(articleStructuredData)}
         </script>
