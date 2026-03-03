@@ -3,7 +3,7 @@ import { Card } from "@/components/ui/card";
 import { Helmet } from "react-helmet-async";
 import LandingHero from "@/components/LandingHero";
 import { useLocation } from "wouter";
-import { Check, ArrowRight } from "lucide-react";
+import { Check, ArrowRight, Sparkles, Briefcase, GraduationCap, FileText, Settings2, Languages } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 
 const emailExamples = [
@@ -126,7 +126,7 @@ export default function Landing() {
     "@context": "https://schema.org",
     "@type": "WebApplication",
     "name": "Smart Emailer Pro",
-    "description": "Free AI-powered email writing platform with 40+ professional writing styles. Generate perfect emails instantly using GPT-5 technology.",
+    "description": "Free AI-powered email writing platform with 45+ professional writing styles. Generate perfect emails instantly using GPT-5 technology.",
     "url": "https://smartemailer.pro",
     "applicationCategory": "BusinessApplication",
     "operatingSystem": "Any",
@@ -137,7 +137,7 @@ export default function Landing() {
       "priceCurrency": "USD"
     },
     "featureList": [
-      "40+ professional writing styles",
+      "45+ professional writing styles",
       "Multi-language support (22+ languages)",
       "AI-powered email generation with GPT-5",
       "Draft management for authenticated users",
@@ -166,17 +166,17 @@ export default function Landing() {
   return (
     <>
       <Helmet>
-        <title>Smart Emailer Pro - Free AI Email Writer | 40+ Professional Writing Styles</title>
+        <title>Smart Emailer Pro - Free AI Email Writer | 45+ Professional Writing Styles</title>
         <meta 
           name="description" 
-          content="Generate professional emails instantly with Smart Emailer Pro. Free AI-powered email writing tool with 40+ styles, multi-language support, and GPT-5 technology. Perfect for business, academic, and personal emails."
+          content="Generate professional emails instantly with Smart Emailer Pro. Free AI-powered email writing tool with 45+ styles, multi-language support, and GPT-5 technology. Perfect for business, academic, and personal emails."
         />
         <meta 
           name="keywords" 
           content="AI email writer, free email generator, professional email, business email, email templates, GPT-5, email writing tool, cold email, cover letter, follow-up email, AI writing assistant, recruiter outreach, internal communication"
         />
-        <meta property="og:title" content="Smart Emailer Pro - Free AI Email Writer | 40+ Professional Writing Styles" />
-        <meta property="og:description" content="Generate professional emails instantly with Smart Emailer Pro. Free AI-powered email writing tool with 40+ styles, multi-language support, and GPT-5 technology." />
+        <meta property="og:title" content="Smart Emailer Pro - Free AI Email Writer | 45+ Professional Writing Styles" />
+        <meta property="og:description" content="Generate professional emails instantly with Smart Emailer Pro. Free AI-powered email writing tool with 45+ styles, multi-language support, and GPT-5 technology." />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://smartemailer.pro" />
         <meta name="twitter:card" content="summary_large_image" />
@@ -212,6 +212,63 @@ export default function Landing() {
         </div>
       </div>
       
+      <div className="py-12 px-4">
+        <div className="max-w-4xl mx-auto">
+          <div className="flex items-center gap-2 mb-6">
+            <Sparkles className="w-5 h-5 text-primary" />
+            <h2 className="text-2xl font-bold" data-testid="text-whats-new-title">Latest Updates</h2>
+          </div>
+          <p className="text-muted-foreground mb-6">
+            Now supporting Korean business communication with culturally-aware email generation.
+          </p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
+            <div className="flex items-start gap-3 p-4 bg-card border rounded-md" data-testid="card-update-korean-business">
+              <Briefcase className="w-5 h-5 text-primary mt-0.5 flex-shrink-0" />
+              <div>
+                <p className="font-medium text-sm">Korean Business Email Styles</p>
+                <p className="text-xs text-muted-foreground mt-1">Formal hierarchical, peer-level, and seasonal greetings</p>
+              </div>
+            </div>
+            <div className="flex items-start gap-3 p-4 bg-card border rounded-md" data-testid="card-update-korean-academic">
+              <GraduationCap className="w-5 h-5 text-primary mt-0.5 flex-shrink-0" />
+              <div>
+                <p className="font-medium text-sm">Korean Academic Emails</p>
+                <p className="text-xs text-muted-foreground mt-1">Professor correspondence with proper honorifics</p>
+              </div>
+            </div>
+            <div className="flex items-start gap-3 p-4 bg-card border rounded-md" data-testid="card-update-korean-self-intro">
+              <FileText className="w-5 h-5 text-primary mt-0.5 flex-shrink-0" />
+              <div>
+                <p className="font-medium text-sm">Korean Self-Introduction Letters</p>
+                <p className="text-xs text-muted-foreground mt-1">Job application format</p>
+              </div>
+            </div>
+            <div className="flex items-start gap-3 p-4 bg-card border rounded-md" data-testid="card-update-honorific-level">
+              <Settings2 className="w-5 h-5 text-primary mt-0.5 flex-shrink-0" />
+              <div>
+                <p className="font-medium text-sm">Korean Honorific Level Control</p>
+                <p className="text-xs text-muted-foreground mt-1">Choose between formal, polite, and casual speech levels</p>
+              </div>
+            </div>
+            <div className="flex items-start gap-3 p-4 bg-card border rounded-md" data-testid="card-update-dual-language">
+              <Languages className="w-5 h-5 text-primary mt-0.5 flex-shrink-0" />
+              <div>
+                <p className="font-medium text-sm">Dual-Language Output</p>
+                <p className="text-xs text-muted-foreground mt-1">Generate emails in two languages side by side</p>
+              </div>
+            </div>
+          </div>
+          <Button
+            variant="outline"
+            onClick={() => setLocation('/composer')}
+            data-testid="button-whats-new-cta"
+          >
+            Try It Now
+            <ArrowRight className="w-4 h-4 ml-2" />
+          </Button>
+        </div>
+      </div>
+
       <div id="examples-section" className="bg-muted/30 py-20 px-4">
         <div className="max-w-6xl mx-auto mb-16">
           <div className="text-center mb-12">

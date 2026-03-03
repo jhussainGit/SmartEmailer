@@ -21,7 +21,7 @@ export default function LandingHero({ onGetStarted }: LandingHeroProps) {
         </h1>
         
         <p className="text-xl text-muted-foreground mb-8 max-w-3xl mx-auto leading-relaxed">
-          Choose from 40+ professional writing styles. Generate cover letters, business emails, 
+          Choose from 45+ professional writing styles. Generate cover letters, business emails, 
           academic correspondence, and more with AI assistance tailored to your needs.
         </p>
         
@@ -59,7 +59,7 @@ export default function LandingHero({ onGetStarted }: LandingHeroProps) {
             <div className="bg-primary/10 w-12 h-12 rounded-lg flex items-center justify-center mb-4 mx-auto">
               <Sparkles className="w-6 h-6 text-primary" />
             </div>
-            <h3 className="font-semibold mb-2">40+ Writing Styles</h3>
+            <h3 className="font-semibold mb-2">45+ Writing Styles</h3>
             <p className="text-sm text-muted-foreground">
               From formal business to casual networking, find the perfect tone for any situation
             </p>

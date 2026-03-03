@@ -101,6 +101,20 @@ Preferred communication style: Simple, everyday language.
 - Logs all blocked attempts to console for monitoring
 - Protects against automated bot scans targeting non-WordPress sites
 
+### Korean Business Communication Features (March 3, 2026)
+- **Added**: 5 new Korean-specific email styles:
+  - **Korean Business Formal (상사에게)** - Formal communication to superiors with proper hierarchical etiquette
+  - **Korean Business Peer (동료에게)** - Peer-to-peer professional Korean communication
+  - **Korean Self-Introduction Letter (자기소개서)** - Korean job application format with resume upload support
+  - **Korean Academic (교수님께)** - Academic email to professors with proper honorifics
+  - **Korean Seasonal Greeting (인사메일)** - Business seasonal greetings (설날, 추석, etc.)
+- **Added**: Korean honorific level selector (격식체, 해요체, 반말) - appears only when using Korean styles with Korean output language
+- **Added**: Dual-language output option - generates emails in two languages side by side (available for all language combinations, not just Korean)
+- **Added**: Culturally-aware prompt engineering for Korean email norms, self-introduction structure, and seasonal greeting conventions
+- **Added**: "Latest Updates" section on landing page highlighting Korean features
+- **Architecture Note**: Korean features are additive and don't change the core email generation flow. The pattern is extensible for future localization (Japanese, Arabic, etc.)
+- **Total Writing Styles**: Now 45+ writing styles
+
 ### SEO Optimization Overhaul (February 28, 2026)
 - **Fixed**: All canonical URLs and OG URLs updated from `smart-emailer-pro.replit.app` to `smartemailer.pro` (custom domain)
 - **Added**: `robots.txt` with proper Allow/Disallow directives and sitemap reference

@@ -50,6 +50,12 @@ export const emailStyles: EmailStyle[] = [
   { id: 'project-update', name: 'Project Update', icon: BarChart, description: 'Progress updates on ongoing projects', category: 'professional' },
   { id: 'urgent-alert', name: 'Urgent Internal Alert', icon: AlertTriangle, description: 'Time-sensitive company communications', category: 'professional' },
   
+  { id: 'korean-business-formal', name: 'Korean Business Formal (상사에게)', icon: Building, description: 'Formal business email to a superior with proper Korean hierarchical etiquette', category: 'professional' },
+  { id: 'korean-business-peer', name: 'Korean Business Peer (동료에게)', icon: Users, description: 'Professional peer-to-peer Korean business communication', category: 'professional' },
+  { id: 'korean-self-intro', name: 'Korean Self-Introduction Letter (자기소개서)', icon: FileText, description: 'Korean-style job application self-introduction', category: 'professional', attachmentConfig: { label: 'Resume/CV (Optional)', accept: '.pdf,.doc,.docx,.txt', placeholder: 'Upload your resume to tailor the self-introduction letter...' } },
+  { id: 'korean-academic', name: 'Korean Academic (교수님께)', icon: GraduationCap, description: 'Email to a Korean professor with proper academic honorifics', category: 'academic' },
+  { id: 'korean-seasonal', name: 'Korean Seasonal Greeting (인사메일)', icon: Calendar, description: 'Business seasonal greetings for 설날, 추석, and more', category: 'creative' },
+
   { id: 'academic-formal', name: 'Academic Formal', icon: GraduationCap, description: 'Scholarly communication', category: 'academic' },
   { id: 'research-inquiry', name: 'Research Inquiry', icon: Sparkles, description: 'Academic research requests', category: 'academic' },
   { id: 'conference', name: 'Conference', icon: Globe, description: 'Academic event correspondence', category: 'academic' },

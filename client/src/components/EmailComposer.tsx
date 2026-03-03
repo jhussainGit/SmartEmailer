@@ -11,6 +11,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Card } from "@/components/ui/card";
+import { Checkbox } from "@/components/ui/checkbox";
 import { Loader2, Sparkles, Upload, X } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { emailStyles } from "@/lib/emailStyles";
@@ -41,6 +42,8 @@ export interface EmailFormData {
   endUserHomepage?: string;
   recruiterOutreachType?: 'intro' | 'second-followup';
   recruiterOutreachStyle?: string;
+  koreanHonorificLevel: 'formal-highest' | 'polite-standard' | 'casual';
+  dualLanguageOutput: boolean;
 }
 
 export default function EmailComposer({ selectedStyle, onGenerate, isGenerating = false }: EmailComposerProps) {
@@ -63,6 +66,8 @@ export default function EmailComposer({ selectedStyle, onGenerate, isGenerating 
     endUserHomepage: '',
     recruiterOutreachType: 'intro',
     recruiterOutreachStyle: 'professional-direct',
+    koreanHonorificLevel: 'polite-standard',
+    dualLanguageOutput: false,
   });
 
   const getAttachmentConfig = () => {
@@ -254,6 +259,39 @@ export default function EmailComposer({ selectedStyle, onGenerate, isGenerating 
                 </Select>
               </div>
             </div>
+
+            {formData.outputLanguage === 'Korean' && selectedStyle.startsWith('korean-') && (
+              <div>
+                <Label htmlFor="koreanHonorificLevel" className="text-sm font-medium mb-2">Korean Honorific Level</Label>
+                <Select
+                  value={formData.koreanHonorificLevel}
+                  onValueChange={(value) => setFormData({ ...formData, koreanHonorificLevel: value as 'formal-highest' | 'polite-standard' | 'casual' })}
+                >
+                  <SelectTrigger id="koreanHonorificLevel" data-testid="select-korean-honorific-level">
+                    <SelectValue placeholder="Select honorific level" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="formal-highest">Formal Highest (격식체)</SelectItem>
+                    <SelectItem value="polite-standard">Polite Standard (해요체)</SelectItem>
+                    <SelectItem value="casual">Casual (반말)</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+            )}
+
+            {formData.inputLanguage !== formData.outputLanguage && (
+              <div className="flex items-center gap-2">
+                <Checkbox
+                  id="dualLanguageOutput"
+                  checked={formData.dualLanguageOutput}
+                  onCheckedChange={(checked) => setFormData({ ...formData, dualLanguageOutput: checked === true })}
+                  data-testid="checkbox-dual-language-output"
+                />
+                <Label htmlFor="dualLanguageOutput" className="text-sm font-medium cursor-pointer">
+                  Dual-language output (generate in both {formData.outputLanguage} and {formData.inputLanguage})
+                </Label>
+              </div>
+            )}
 
             <div>
               <Label htmlFor="subject" className="text-sm font-medium mb-2">Subject / Purpose</Label>
