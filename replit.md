@@ -101,6 +101,18 @@ Preferred communication style: Simple, everyday language.
 - Logs all blocked attempts to console for monitoring
 - Protects against automated bot scans targeting non-WordPress sites
 
+### Advanced Prompt Engineering Overhaul (March 4, 2026)
+- **Overhauled**: Complete rewrite of `server/emailGenerator.ts` with modular prompt engineering architecture
+- **Added**: Communication framework selection — AIDA (sales), PAS (marketing), STAR (cover letters), SPIN (proposals), NVC (complaints), and 8 more frameworks auto-selected based on email style
+- **Added**: Audience intelligence analysis — automatically extracts signals from LinkedIn URLs, job descriptions, agency websites, and company homepages to personalize emails
+- **Added**: Rhetorical strategy layer — applies persuasion psychology for sales/marketing styles, clarity-first approach for internal communication, authenticity for relational emails, precision for formal styles
+- **Added**: Cultural intelligence for 10+ languages (Japanese, Chinese, Arabic, Hindi, Spanish, French, German, Urdu, Farsi, and more) — language-specific email conventions, honorifics, greeting/closing formulas
+- **Added**: Deep style expertise templates for 25+ individual email styles with specific guidance on structure, tone, vocabulary, and common pitfalls
+- **Added**: Quality assurance directives — 7-point self-evaluation (opening test, specificity test, tone consistency, readability, CTA clarity, authenticity check, trim test)
+- **Added**: Enhanced attachment intelligence — context-aware guidance for each attachment type (resumes, email threads, invoices, policies, proposals)
+- **Added**: Length-aware strategy — different rhetorical approaches for short (ruthless brevity) vs long (structured architecture) emails
+- **Architecture**: Modular function composition — each prompt component (framework, audience, rhetoric, culture, expertise, quality) is an independent function that composes into the final prompt
+
 ### Korean Business Communication Features (March 3, 2026)
 - **Added**: 5 new Korean-specific email styles:
   - **Korean Business Formal (상사에게)** - Formal communication to superiors with proper hierarchical etiquette
