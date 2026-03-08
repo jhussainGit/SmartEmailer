@@ -27,6 +27,10 @@ export async function registerRoutes(app: Express): Promise<Server> {
       'how-to-put-gif-in-email',
       'how-to-address-email-to-multiple-people',
       'how-to-respond-job-rejection-email',
+      'korean-business-email-etiquette',
+      'korean-self-introduction-letter-guide',
+      'japanese-business-email-keigo-guide',
+      'japanese-seasonal-greetings-business-email',
     ];
 
     const today = new Date().toISOString().split('T')[0];

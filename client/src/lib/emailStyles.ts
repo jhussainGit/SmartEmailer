@@ -56,6 +56,11 @@ export const emailStyles: EmailStyle[] = [
   { id: 'korean-academic', name: 'Korean Academic (교수님께)', icon: GraduationCap, description: 'Email to a Korean professor with proper academic honorifics', category: 'academic' },
   { id: 'korean-seasonal', name: 'Korean Seasonal Greeting (인사메일)', icon: Calendar, description: 'Business seasonal greetings for 설날, 추석, and more', category: 'creative' },
 
+  { id: 'japanese-business-formal', name: 'Japanese Business Formal (ビジネス敬語)', icon: Building, description: 'Formal business email using keigo honorifics', category: 'professional' },
+  { id: 'japanese-business-request', name: 'Japanese Business Request (依頼メール)', icon: Send, description: 'Polite request email with proper keigo structure', category: 'professional' },
+  { id: 'japanese-academic', name: 'Japanese Academic (先生へ)', icon: GraduationCap, description: 'Email to professor/teacher with proper academic Japanese honorifics', category: 'academic' },
+  { id: 'japanese-seasonal', name: 'Japanese Seasonal Greeting (時候の挨拶)', icon: Calendar, description: 'Business seasonal greetings with traditional Japanese seasonal references', category: 'creative' },
+
   { id: 'academic-formal', name: 'Academic Formal', icon: GraduationCap, description: 'Scholarly communication', category: 'academic' },
   { id: 'research-inquiry', name: 'Research Inquiry', icon: Sparkles, description: 'Academic research requests', category: 'academic' },
   { id: 'conference', name: 'Conference', icon: Globe, description: 'Academic event correspondence', category: 'academic' },

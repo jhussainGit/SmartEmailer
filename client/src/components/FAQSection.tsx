@@ -18,7 +18,7 @@ const faqs = [
       },
       {
         q: "Is Smart Emailer Pro really free?",
-        a: "Yes! Smart Emailer Pro is completely free to use. You can generate unlimited emails across all 45+ writing styles, in 22+ languages, with file attachments and all advanced features — no charges, no hidden fees, no premium tiers."
+        a: "Yes! Smart Emailer Pro is completely free to use. You can generate unlimited emails across all 50+ writing styles, in 22+ languages, with file attachments and all advanced features — no charges, no hidden fees, no premium tiers."
       },
       {
         q: "Do I need to create an account?",
@@ -31,7 +31,7 @@ const faqs = [
     questions: [
       {
         q: "What writing styles are available?",
-        a: "We offer 45+ writing styles across four categories. Professional styles include Formal, Executive, Sales Pitch, Cover Letter, Proposal, Recruiter Outreach, Resignation, Recommendation, and 9 internal business styles (announcements, policy updates, meeting minutes, project updates, and more). Academic styles cover Formal, Research Inquiry, Conference, Supervisor, and Peer Review. Casual styles include Friendly, Informal, and Enthusiastic. Creative styles include Storytelling, Marketing, Newsletter, Invitation, and Announcement. We also have 5 Korean-specific business styles for culturally-aware Korean communication."
+        a: "We offer 50+ writing styles across four categories. Professional styles include Formal, Executive, Sales Pitch, Cover Letter, Proposal, Recruiter Outreach, Resignation, Recommendation, and 9 internal business styles (announcements, policy updates, meeting minutes, project updates, and more). Academic styles cover Formal, Research Inquiry, Conference, Supervisor, and Peer Review. Casual styles include Friendly, Informal, and Enthusiastic. Creative styles include Storytelling, Marketing, Newsletter, Invitation, and Announcement. We also have 5 Korean-specific and 4 Japanese-specific styles for culturally-aware East Asian business communication."
       },
       {
         q: "What are the Korean email styles?",
@@ -40,6 +40,10 @@ const faqs = [
       {
         q: "What is the Korean Honorific Level selector?",
         a: "When you select a Korean email style and set the output language to Korean, a special honorific level selector appears. It lets you choose between three speech levels: Formal Highest (gyeoksikche) for the most respectful business situations, Polite Standard (haeyoche) for everyday professional use, and Casual (banmal) for close peers. This ensures the generated email uses the culturally appropriate level of formality."
+      },
+      {
+        q: "What are the Japanese email styles?",
+        a: "We offer 4 Japanese-specific styles built around keigo (honorific language) and traditional Japanese email structure. Japanese Business Formal uses proper keigo with sonkeigo and kenjougo for professional correspondence. Japanese Business Request specializes in polite request emails with cushioning phrases (kusshon kotoba). Japanese Academic follows strict sensei honorifics for professor correspondence. Japanese Seasonal Greeting generates traditional jikounoaisatsu seasonal greetings with the haikei/keigu format. All styles follow authentic Japanese email structure and etiquette."
       },
       {
         q: "What is dual-language output?",

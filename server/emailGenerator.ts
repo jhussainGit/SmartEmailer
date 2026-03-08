@@ -275,7 +275,7 @@ function buildCulturalIntelligence(outputLanguage: string, styleId: string): str
 - Close with "با احترام" or "با سپاس" for professional contexts.`,
   };
 
-  if (styleId.startsWith('korean-')) return '';
+  if (styleId.startsWith('korean-') || styleId.startsWith('japanese-')) return '';
 
   return culturalNorms[outputLanguage] || '';
 }
@@ -432,6 +432,39 @@ function buildStyleExpertise(styleId: string): string {
 - Write for scanners: use short paragraphs, bold key phrases, and clear visual hierarchy.
 - Focus on the transformation, not the product. What does their life look like after?
 - One CTA per email. Make it prominent and action-oriented.`,
+
+    'japanese-business-formal': `STYLE EXPERTISE — Japanese Business Formal (ビジネス敬語):
+- Follow the standard Japanese business email structure: 宛名 (addressee with 様), 挨拶 (greeting), 名乗り (self-identification), 本文 (body), 結び (closing), 署名 (signature).
+- Open with "お世話になっております" for existing relationships, or "初めてメールをお送りいたします" for first contact.
+- Use sonkeigo (尊敬語) when referring to the recipient's actions and kenjougo (謙譲語) when referring to your own.
+- Close with "何卒よろしくお願いいたします" or "ご確認のほど、よろしくお願いいたします."
+- Use 様 (sama) after the recipient's name. Never use さん in formal business email.
+- Keep paragraphs short and clearly structured — Japanese business emails value clarity and consideration.`,
+
+    'japanese-business-request': `STYLE EXPERTISE — Japanese Business Request (依頼メール):
+- Use cushioning phrases (クッション言葉) before making requests: "恐れ入りますが," "お手数ですが," "差し支えなければ."
+- State the request indirectly first, then provide context, then make the specific ask.
+- Use "お願い申し上げます" or "お願いいたします" for the request itself.
+- Acknowledge the burden on the recipient: "ご多忙のところ恐縮ですが."
+- Provide clear deadlines politely: "○月○日までにご対応いただけますと幸いです."
+- Close with gratitude for their consideration: "ご検討のほど、何卒よろしくお願いいたします."`,
+
+    'japanese-academic': `STYLE EXPERTISE — Japanese Academic (先生へ):
+- Always address the professor as "先生" — never by first name or with 様.
+- Open with "○○先生" on its own line, followed by a greeting.
+- Identify yourself clearly: name, department, student ID, course if relevant.
+- State your purpose early but politely: "○○についてご相談したくメールいたしました."
+- Use humble forms consistently: いたします, 存じます, 伺いたく.
+- Close with "お忙しいところ恐れ入りますが、ご指導のほどよろしくお願いいたします."
+- Sign with full student information.`,
+
+    'japanese-seasonal': `STYLE EXPERTISE — Japanese Seasonal Greeting (時候の挨拶):
+- Open with 拝啓 (haikei) for formal seasonal letters.
+- Include an appropriate 時候の挨拶 based on the season or month.
+- Express gratitude for the ongoing business relationship: "平素は格別のご高配を賜り、厚く御礼申し上げます."
+- Include warm wishes for the recipient's health and prosperity.
+- Close with 敬具 (keigu) to match 拝啓.
+- The tone should blend warmth with deep respect — Japanese seasonal greetings are an art form that demonstrates cultural refinement.`,
   };
 
   return expertiseMap[styleId] || '';
@@ -506,6 +539,69 @@ function getKoreanStyleGuidance(styleId: string, honorificLevel?: string): strin
 - Include warm wishes for health and prosperity: "건강하시고 행복한 시간 보내시기 바랍니다".
 - Maintain professional warmth — Korean seasonal greetings blend personal warmth with business respect.
 - Close with hopes for continued cooperation: "앞으로도 좋은 관계 이어가길 바랍니다".`,
+  };
+
+  return styleGuidanceMap[styleId] || '';
+}
+
+function getJapaneseStyleGuidance(styleId: string): string {
+  const styleGuidanceMap: Record<string, string> = {
+    'japanese-business-formal': `JAPANESE BUSINESS FORMAL EMAIL (ビジネス敬語) GUIDANCE:
+- This is a formal Japanese business email requiring proper keigo (敬語) usage.
+- STRUCTURE: Follow the standard format strictly:
+  1. 宛名 (Addressee): "[Company name] [Department] [Name]様" on its own line.
+  2. 挨拶 (Greeting): "お世話になっております。" for existing contacts, or "突然のご連絡失礼いたします。" for first contact.
+  3. 名乗り (Self-identification): "[Company] の [Name] でございます。"
+  4. 本文 (Body): State purpose clearly, use keigo consistently.
+  5. 結び (Closing): "何卒よろしくお願いいたします。" or "ご確認のほど、よろしくお願い申し上げます。"
+  6. 署名 (Signature): Full name, company, department, contact information.
+- Use 尊敬語 (sonkeigo) for the recipient's actions: いらっしゃる, おっしゃる, ご覧になる, ご存じ.
+- Use 謙譲語 (kenjougo) for your own actions: 参る, 申す, 拝見する, 存じる.
+- Use 丁寧語 (teineigo) as the base politeness level: です/ます form throughout.
+- Address the recipient with 様 (sama). Never use さん in formal business email.
+- Avoid overly direct language. Japanese business culture values 配慮 (consideration) and indirect expression.`,
+
+    'japanese-business-request': `JAPANESE BUSINESS REQUEST EMAIL (依頼メール) GUIDANCE:
+- This email makes a request of the recipient and requires extra politeness and indirectness.
+- Use クッション言葉 (cushioning phrases) before every request:
+  - "恐れ入りますが" (I'm sorry to trouble you, but...)
+  - "お手数ですが" (I know it's troublesome, but...)
+  - "差し支えなければ" (If it's not too much trouble...)
+  - "ご多忙のところ恐縮ですが" (I know you are busy, and I apologize, but...)
+  - "もしよろしければ" (If you wouldn't mind...)
+- Structure the request: context first, then the indirect request, then the specific details.
+- Express the request using: "お願い申し上げます," "お願いいたします," or "いただけますと幸いです."
+- State deadlines politely: "○月○日までにご対応いただけますと大変助かります。"
+- Acknowledge the imposition: "お忙しいところ大変恐縮ではございますが。"
+- Close with deep gratitude: "ご検討のほど、何卒よろしくお願いいたします。"`,
+
+    'japanese-academic': `JAPANESE ACADEMIC EMAIL (先生へ) GUIDANCE:
+- This is an email to a Japanese professor or teacher requiring strict academic honorifics.
+- ALWAYS address as "先生" — never by first name, never with 様.
+- Open with "○○先生" on its own line, followed by an appropriate greeting.
+- Immediately identify yourself: "○○学部○○学科の○○と申します。" (I am [Name] from [Department].)
+- If it's a class-related inquiry, mention the specific course: "○○の授業を受講しております○○です。"
+- State your purpose clearly but humbly: "○○についてお伺いしたく、メールをお送りいたしました。"
+- Use humble verb forms consistently: いたします, 存じます, 伺いたく, お送りいたしました.
+- Close with: "お忙しいところ恐れ入りますが、ご指導のほどよろしくお願いいたします。"
+- Sign with: full name, department, student ID, and contact information.`,
+
+    'japanese-seasonal': `JAPANESE SEASONAL GREETING EMAIL (時候の挨拶) GUIDANCE:
+- This is a formal Japanese seasonal/holiday business greeting.
+- STRUCTURE: Use the traditional 拝啓/敬具 format:
+  1. 拝啓 (Dear Sir/Madam — formal letter opening)
+  2. 時候の挨拶 — seasonal greeting appropriate to the current season:
+     - Spring (3-5月): "春暖の候" "桜花の候" "新緑の候"
+     - Summer (6-8月): "盛夏の候" "猛暑の候" "残暑の候"
+     - Autumn (9-11月): "初秋の候" "紅葉の候" "晩秋の候"
+     - Winter (12-2月): "師走の候" "厳寒の候" "立春の候"
+     - New Year: "謹んで新年のお慶びを申し上げます"
+  3. 安否の挨拶: "皆様におかれましては、ますますご健勝のこととお慶び申し上げます。"
+  4. Business gratitude: "平素は格別のご高配を賜り、厚く御礼申し上げます。"
+  5. Main message: seasonal well-wishes and relationship affirmation.
+  6. Closing wish: "皆様のご健康とご多幸をお祈り申し上げます。"
+  7. 敬具 (Respectfully — formal letter closing)
+- The tone should convey deep respect and genuine warmth — seasonal greetings in Japanese business culture demonstrate 教養 (cultural refinement).`,
   };
 
   return styleGuidanceMap[styleId] || '';
@@ -624,6 +720,7 @@ export async function generateEmail(params: any): Promise<string> {
   const culturalIntelligence = buildCulturalIntelligence(outputLanguage, styleId);
   const styleExpertise = buildStyleExpertise(styleId);
   const koreanGuidance = styleId.startsWith('korean-') ? getKoreanStyleGuidance(styleId, params.koreanHonorificLevel) : '';
+  const japaneseGuidance = styleId.startsWith('japanese-') ? getJapaneseStyleGuidance(styleId) : '';
   const attachmentGuidance = buildAttachmentGuidance(styleId, !!(params.attachmentContent && params.attachmentName));
   const recruiterGuidance = buildRecruiterGuidance(params);
   const qualityDirectives = buildQualityDirectives();
@@ -642,7 +739,7 @@ OUTPUT LANGUAGE: ${outputLanguage}
 LANGUAGE DIRECTIVE: The email MUST be written entirely in ${outputLanguage}. All content — greeting, body, closing, signature — must be in natural, fluent ${outputLanguage}. Do not mix languages unless the context specifically calls for a term that has no equivalent.
 
 ${communicationFramework ? communicationFramework + '\n' : ''}${styleExpertise ? styleExpertise + '\n' : ''}${rhetoricalStrategy}
-${audienceIntelligence}${culturalIntelligence ? '\n' + culturalIntelligence : ''}${koreanGuidance ? '\n\n' + koreanGuidance : ''}${attachmentGuidance}${recruiterGuidance}${dualLanguageGuidance}
+${audienceIntelligence}${culturalIntelligence ? '\n' + culturalIntelligence : ''}${koreanGuidance ? '\n\n' + koreanGuidance : ''}${japaneseGuidance ? '\n\n' + japaneseGuidance : ''}${attachmentGuidance}${recruiterGuidance}${dualLanguageGuidance}
 ${qualityDirectives}
 
 FORMATTING RULES:

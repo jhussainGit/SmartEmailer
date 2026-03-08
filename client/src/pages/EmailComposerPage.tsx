@@ -146,19 +146,19 @@ export default function EmailComposerPage() {
         <title>Email Composer - AI-Powered Email Generator | Smart Emailer Pro</title>
         <meta 
           name="description" 
-          content="Create professional emails instantly with our AI-powered composer. Choose from 45+ writing styles including business, academic, technical, and casual. Free email generation with GPT-5 technology."
+          content="Create professional emails instantly with our AI-powered composer. Choose from 50+ writing styles including business, academic, technical, and casual. Free email generation with GPT-5 technology."
         />
         <meta 
           name="keywords" 
           content="email composer, AI email generator, write email, professional email writer, business email generator, email creator, GPT-5 email, automated email writing"
         />
         <meta property="og:title" content="Email Composer - AI-Powered Email Generator | Smart Emailer Pro" />
-        <meta property="og:description" content="Create professional emails instantly with our AI-powered composer. Choose from 45+ writing styles and generate perfect emails in seconds." />
+        <meta property="og:description" content="Create professional emails instantly with our AI-powered composer. Choose from 50+ writing styles and generate perfect emails in seconds." />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://smartemailer.pro/composer" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="AI Email Composer | Smart Emailer Pro" />
-        <meta name="twitter:description" content="Create professional emails instantly. Choose from 45+ writing styles and generate perfect emails in seconds." />
+        <meta name="twitter:description" content="Create professional emails instantly. Choose from 50+ writing styles and generate perfect emails in seconds." />
         <link rel="canonical" href="https://smartemailer.pro/composer" />
       </Helmet>
 
