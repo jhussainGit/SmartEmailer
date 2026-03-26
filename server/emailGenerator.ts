@@ -23,6 +23,7 @@ interface EmailGenerationParams {
   dualLanguageOutput?: boolean;
   inputLanguage?: string;
   outputLanguage?: string;
+  emailSignature?: string;
 }
 
 const lengthGuidelines: Record<string, string> = {
@@ -746,7 +747,7 @@ FORMATTING RULES:
 - Use proper email structure: greeting, body paragraphs, closing, signature.
 - Make the email ready to send as-is. No placeholders like [Your Name], [Company], or [Date].
 - If specific details are unknown, infer reasonable specifics from context rather than leaving blanks.
-- Do not include a subject line in the output — the user provides that separately.`;
+- Do not include a subject line in the output — the user provides that separately.${params.emailSignature ? `\n- SIGNATURE: End the email with EXACTLY this signature block, preserving its exact formatting and line breaks:\n\n${params.emailSignature}` : ''}`;
 
   let userPrompt = `COMPOSE a ${lengthGuidelines[length]} ${styleName} email with the following parameters:
 

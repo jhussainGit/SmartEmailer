@@ -34,6 +34,7 @@ export interface EmailFormData {
   sampleEmail: string;
   jobDescription: string;
   additionalContext: string;
+  emailSignature: string;
   inputLanguage: string;
   outputLanguage: string;
   attachmentContent?: string;
@@ -55,6 +56,7 @@ export default function EmailComposer({ selectedStyle, onGenerate, isGenerating 
     senderLinkedIn: '',
     subject: '',
     topic: '',
+    emailSignature: '',
     length: 'medium',
     tone: [],
     sampleEmail: '',
@@ -294,12 +296,14 @@ export default function EmailComposer({ selectedStyle, onGenerate, isGenerating 
             )}
 
             <div>
-              <Label htmlFor="subject" className="text-sm font-medium mb-2">Subject / Purpose</Label>
-              <Input
+              <Label htmlFor="subject" className="text-sm font-medium mb-1">Subject / Purpose <span className="text-destructive">*</span></Label>
+              <p className="text-xs text-muted-foreground mb-2">Describe what this email is about and what you want to achieve. The more detail you provide here, the better the AI can craft a targeted, effective email.</p>
+              <Textarea
                 id="subject"
-                placeholder="What is this email about?"
+                placeholder="e.g. Following up on our meeting last Tuesday about the Q2 marketing proposal — I want to confirm next steps and ask if they need any additional materials before the Friday deadline."
                 value={formData.subject}
                 onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
+                className="min-h-28"
                 data-testid="input-subject"
               />
             </div>
@@ -509,6 +513,19 @@ export default function EmailComposer({ selectedStyle, onGenerate, isGenerating 
                 onChange={(e) => setFormData({ ...formData, additionalContext: e.target.value })}
                 className="min-h-20"
                 data-testid="textarea-additional-context"
+              />
+            </div>
+
+            <div>
+              <Label htmlFor="emailSignature" className="text-sm font-medium mb-1">Email Signature (Optional)</Label>
+              <p className="text-xs text-muted-foreground mb-2">If provided, the AI will use exactly this signature at the end of the email. Leave blank to let the AI generate a signature from your name.</p>
+              <Textarea
+                id="emailSignature"
+                placeholder={`e.g.\nBest regards,\nJane Smith\nSenior Marketing Manager | Acme Corp\njane.smith@acme.com | +1 (555) 123-4567`}
+                value={formData.emailSignature}
+                onChange={(e) => setFormData({ ...formData, emailSignature: e.target.value })}
+                className="min-h-28 font-mono text-sm"
+                data-testid="textarea-email-signature"
               />
             </div>
           </div>
