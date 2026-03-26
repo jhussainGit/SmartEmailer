@@ -54,7 +54,7 @@ export async function sendContactEmail(name: string, email: string, subject: str
   const gmail = await getUncachableGmailClient();
 
   const emailContent = `From: ${name} <${email}>
-To: info@indus-bridge.com
+To: indusbridgedigital@gmail.com
 Subject: Contact Form: ${subject}
 
 Name: ${name}

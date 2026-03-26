@@ -151,7 +151,7 @@ export default function Landing() {
       "@type": "Organization",
       "name": "Indus Bridge Ventures Inc.",
       "url": "https://smartemailer.pro",
-      "email": "info@indus-bridge.com",
+      "email": "indusbridgedigital@gmail.com",
       "address": {
         "@type": "PostalAddress",
         "streetAddress": "801 Route 1 #1017",

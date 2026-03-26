@@ -199,7 +199,7 @@ The `composer_usage` table tracks anonymized usage data for every email generati
 
 ## Support
 
-For questions, feedback, or issues, contact us at **info@indus-bridge.com** or use the in-app contact form.
+For questions, feedback, or issues, contact us at **indusbridgedigital@gmail.com** or use the in-app contact form.
 
 ---
 
