@@ -309,7 +309,7 @@ export default function EmailComposer({ selectedStyle, onGenerate, isGenerating 
             </div>
 
             <div>
-              <Label htmlFor="topic" className="text-sm font-medium mb-2">Main Topic</Label>
+              <Label htmlFor="topic" className="text-sm font-medium mb-2">Main Topic <span className="text-destructive">*</span></Label>
               <Input
                 id="topic"
                 placeholder="Key points to cover"
