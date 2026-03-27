@@ -3,6 +3,7 @@ import {
   emailDrafts,
   emailHistory,
   composerUsage,
+  aiActivityLogs,
   type User,
   type UpsertUser,
   type EmailDraft,
@@ -11,6 +12,8 @@ import {
   type InsertEmailHistory,
   type ComposerUsage,
   type InsertComposerUsage,
+  type AiActivityLog,
+  type InsertAiActivityLog,
 } from "@shared/schema";
 import { db } from "./db";
 import { eq, desc, and } from "drizzle-orm";
@@ -35,6 +38,10 @@ export interface IStorage {
   
   // Composer usage tracking
   trackComposerUsage(usage: InsertComposerUsage): Promise<ComposerUsage>;
+
+  // AI activity log
+  createActivityLog(log: InsertAiActivityLog): Promise<AiActivityLog>;
+  getUserActivityLogs(userId: string): Promise<AiActivityLog[]>;
 }
 
 export class DatabaseStorage implements IStorage {
@@ -146,6 +153,24 @@ export class DatabaseStorage implements IStorage {
       .values(usageData)
       .returning();
     return usage;
+  }
+
+  // AI activity log
+  async createActivityLog(logData: InsertAiActivityLog): Promise<AiActivityLog> {
+    const [log] = await db
+      .insert(aiActivityLogs)
+      .values(logData)
+      .returning();
+    return log;
+  }
+
+  async getUserActivityLogs(userId: string): Promise<AiActivityLog[]> {
+    return await db
+      .select()
+      .from(aiActivityLogs)
+      .where(eq(aiActivityLogs.userId, userId))
+      .orderBy(desc(aiActivityLogs.createdAt))
+      .limit(100);
   }
 }
 

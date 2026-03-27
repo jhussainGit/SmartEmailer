@@ -22,6 +22,7 @@ export default function Navigation() {
     { href: '/', label: 'Home' },
     { href: '/composer', label: 'Composer' },
     { href: '/drafts', label: 'Drafts', authRequired: true },
+    { href: '/activity-log', label: 'Activity Log', authRequired: true },
     { href: '/blog', label: 'Blog' },
     { href: '/faq', label: 'FAQs' },
     { href: '/contact', label: 'Contact' },

@@ -12,6 +12,7 @@ import FAQ from "@/pages/FAQ";
 import Contact from "@/pages/Contact";
 import Login from "@/pages/Login";
 import Drafts from "@/pages/Drafts";
+import ActivityLog from "@/pages/ActivityLog";
 import Blog from "@/pages/Blog";
 import BlogPost from "@/pages/BlogPost";
 import PrivacyPolicy from "@/pages/PrivacyPolicy";
@@ -24,6 +25,7 @@ function Router() {
       <Route path="/" component={Landing} />
       <Route path="/composer" component={EmailComposerPage} />
       <Route path="/drafts" component={Drafts} />
+      <Route path="/activity-log" component={ActivityLog} />
       <Route path="/blog" component={Blog} />
       <Route path="/blog/:slug" component={BlogPost} />
       <Route path="/faq" component={FAQ} />

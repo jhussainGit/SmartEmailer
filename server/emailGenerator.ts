@@ -1,6 +1,16 @@
 import { openai } from "./openai";
 import { emailStyles } from "../client/src/lib/emailStyles";
 
+export interface EmailGenerationResult {
+  email: string;
+  systemPrompt: string;
+  userPrompt: string;
+  model: string;
+  promptTokens: number;
+  completionTokens: number;
+  totalTokens: number;
+}
+
 interface EmailGenerationParams {
   style: string;
   recipientName?: string;
@@ -762,9 +772,11 @@ KEY POINTS TO ADDRESS: ${topic}${contextSignals}`;
 
   userPrompt += `\n\nGenerate the email now. Output ONLY the email content in ${outputLanguage} — no commentary, no meta-discussion, no explanations before or after the email.`;
 
+  const model = "gpt-5";
+
   try {
     const completion = await openai.chat.completions.create({
-      model: "gpt-5",
+      model,
       messages: [
         { role: "system", content: systemPrompt },
         { role: "user", content: userPrompt },
@@ -779,7 +791,15 @@ KEY POINTS TO ADDRESS: ${topic}${contextSignals}`;
       throw new Error('No email content generated');
     }
 
-    return generatedEmail;
+    return {
+      email: generatedEmail,
+      systemPrompt,
+      userPrompt,
+      model,
+      promptTokens: completion.usage?.prompt_tokens || 0,
+      completionTokens: completion.usage?.completion_tokens || 0,
+      totalTokens: completion.usage?.total_tokens || 0,
+    };
   } catch (error: any) {
     console.error('Email generation error:', error.message);
     throw new Error(`Failed to generate email: ${error.message}`);

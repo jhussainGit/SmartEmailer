@@ -186,11 +186,35 @@ export async function registerRoutes(app: Express): Promise<Server> {
       }
       
       const { generateEmail } = await import('./emailGenerator');
-      const email = await generateEmail(req.body);
+      const result = await generateEmail(req.body);
       
       generationSuccess = true;
       console.log('[Email Generation] Email generated successfully');
-      res.json({ email });
+
+      // Save detailed activity log for authenticated users
+      const userId = req.user?.claims?.sub;
+      if (userId) {
+        const wordCount = result.email.trim().split(/\s+/).length;
+        await storage.createActivityLog({
+          userId,
+          style: req.body.style || 'unknown',
+          inputLanguage: req.body.inputLanguage || null,
+          outputLanguage: req.body.outputLanguage || null,
+          subject: req.body.subject || null,
+          systemPrompt: result.systemPrompt,
+          userPrompt: result.userPrompt,
+          model: result.model,
+          promptTokens: result.promptTokens,
+          completionTokens: result.completionTokens,
+          totalTokens: result.totalTokens,
+          durationMs: Date.now() - startTime,
+          success: true,
+          errorMessage: null,
+          outputWordCount: wordCount,
+        }).catch(err => console.error('[Activity Log] Failed to save:', err));
+      }
+
+      res.json({ email: result.email });
     } catch (error: any) {
       console.error("[Email Generation] Error:", error);
       console.error("[Email Generation] Error details:", {
@@ -202,6 +226,28 @@ export async function registerRoutes(app: Express): Promise<Server> {
           attachmentSize: req.body.attachmentContent?.length || 0
         }
       });
+      // Log failed generation for authenticated users
+      const userId = req.user?.claims?.sub;
+      if (userId) {
+        await storage.createActivityLog({
+          userId,
+          style: req.body.style || 'unknown',
+          inputLanguage: req.body.inputLanguage || null,
+          outputLanguage: req.body.outputLanguage || null,
+          subject: req.body.subject || null,
+          systemPrompt: null,
+          userPrompt: null,
+          model: 'gpt-5',
+          promptTokens: null,
+          completionTokens: null,
+          totalTokens: null,
+          durationMs: Date.now() - startTime,
+          success: false,
+          errorMessage: error.message || 'Unknown error',
+          outputWordCount: null,
+        }).catch(err => console.error('[Activity Log] Failed to save error log:', err));
+      }
+
       res.status(500).json({ 
         message: error.message || "Failed to generate email",
         details: process.env.NODE_ENV === 'development' ? error.stack : undefined
@@ -247,6 +293,18 @@ export async function registerRoutes(app: Express): Promise<Server> {
     } catch (error: any) {
       console.error("Error sending contact email:", error);
       res.status(500).json({ message: error.message || "Failed to send message" });
+    }
+  });
+
+  // Activity log route (authenticated users only)
+  app.get('/api/activity-logs', isAuthenticated, async (req: any, res) => {
+    try {
+      const userId = req.user.claims.sub;
+      const logs = await storage.getUserActivityLogs(userId);
+      res.json(logs);
+    } catch (error: any) {
+      console.error("Error fetching activity logs:", error);
+      res.status(500).json({ message: "Failed to fetch activity logs" });
     }
   });
 

@@ -1,6 +1,7 @@
 import { sql } from 'drizzle-orm';
 import {
   index,
+  integer,
   jsonb,
   pgTable,
   text,
@@ -102,3 +103,32 @@ export const insertComposerUsageSchema = createInsertSchema(composerUsage).omit(
 
 export type InsertComposerUsage = z.infer<typeof insertComposerUsageSchema>;
 export type ComposerUsage = typeof composerUsage.$inferSelect;
+
+// AI activity log table — detailed per-request log for authenticated users
+export const aiActivityLogs = pgTable("ai_activity_logs", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  userId: varchar("user_id").notNull().references(() => users.id, { onDelete: 'cascade' }),
+  style: varchar("style").notNull(),
+  inputLanguage: varchar("input_language"),
+  outputLanguage: varchar("output_language"),
+  subject: text("subject"),
+  systemPrompt: text("system_prompt"),
+  userPrompt: text("user_prompt"),
+  model: varchar("model"),
+  promptTokens: integer("prompt_tokens"),
+  completionTokens: integer("completion_tokens"),
+  totalTokens: integer("total_tokens"),
+  durationMs: integer("duration_ms"),
+  success: boolean("success").default(true),
+  errorMessage: text("error_message"),
+  outputWordCount: integer("output_word_count"),
+  createdAt: timestamp("created_at").defaultNow(),
+});
+
+export const insertAiActivityLogSchema = createInsertSchema(aiActivityLogs).omit({
+  id: true,
+  createdAt: true,
+});
+
+export type InsertAiActivityLog = z.infer<typeof insertAiActivityLogSchema>;
+export type AiActivityLog = typeof aiActivityLogs.$inferSelect;
