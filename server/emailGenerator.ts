@@ -1,4 +1,4 @@
-import { openai } from "./openai";
+import { groq } from "./groq";
 import { emailStyles } from "../client/src/lib/emailStyles";
 
 export interface EmailGenerationResult {
@@ -772,22 +772,22 @@ KEY POINTS TO ADDRESS: ${topic}${contextSignals}`;
 
   userPrompt += `\n\nGenerate the email now. Output ONLY the email content in ${outputLanguage} — no commentary, no meta-discussion, no explanations before or after the email.`;
 
-  const model = "gpt-5";
+  const model = "llama-3.3-70b-versatile";
 
   try {
-    const completion = await openai.chat.completions.create({
+    const completion = await groq.chat.completions.create({
       model,
       messages: [
         { role: "system", content: systemPrompt },
         { role: "user", content: userPrompt },
       ],
-      max_completion_tokens: 5000,
+      max_tokens: 5000,
     });
 
     const generatedEmail = completion.choices[0]?.message?.content || '';
 
     if (!generatedEmail) {
-      console.error('Email generation failed: No content in OpenAI response');
+      console.error('Email generation failed: No content in Groq response');
       throw new Error('No email content generated');
     }
 
