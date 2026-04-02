@@ -1,18 +1,20 @@
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Copy, Download, RefreshCw, Save, Clock, FileText } from "lucide-react";
+import { Copy, Download, RefreshCw, Save, Clock, FileText, Mail } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { useAuth } from "@/hooks/useAuth";
 import { useState, useMemo } from "react";
 
 interface EmailPreviewProps {
   content: string;
+  recipientEmail?: string;
+  subject?: string;
   onRefine?: () => void;
   onSave?: () => void;
   onRegenerate?: () => void;
 }
 
-export default function EmailPreview({ content, onRefine, onSave, onRegenerate }: EmailPreviewProps) {
+export default function EmailPreview({ content, recipientEmail, subject, onRefine, onSave, onRegenerate }: EmailPreviewProps) {
   const { toast } = useToast();
   const { isAuthenticated } = useAuth();
   const [isSaving, setIsSaving] = useState(false);
@@ -107,6 +109,23 @@ export default function EmailPreview({ content, onRefine, onSave, onRegenerate }
             >
               <Save className="w-4 h-4 mr-2" />
               {isSaving ? 'Saving...' : 'Save Draft'}
+            </Button>
+          )}
+          {content && recipientEmail && (
+            <Button
+              variant="outline"
+              size="sm"
+              asChild
+              data-testid="button-open-in-mail"
+            >
+              <a
+                href={`mailto:${encodeURIComponent(recipientEmail)}?subject=${encodeURIComponent(subject || '')}&body=${encodeURIComponent(content)}`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Mail className="w-4 h-4 mr-2" />
+                Open in Mail
+              </a>
             </Button>
           )}
           {onRegenerate && content && (

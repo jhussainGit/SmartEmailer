@@ -24,6 +24,7 @@ interface EmailComposerProps {
 
 export interface EmailFormData {
   recipientName: string;
+  recipientEmail: string;
   recipientLinkedIn: string;
   senderName: string;
   senderLinkedIn: string;
@@ -51,6 +52,7 @@ export default function EmailComposer({ selectedStyle, onGenerate, isGenerating 
   const { toast } = useToast();
   const [formData, setFormData] = useState<EmailFormData>({
     recipientName: '',
+    recipientEmail: '',
     recipientLinkedIn: '',
     senderName: '',
     senderLinkedIn: '',
@@ -150,6 +152,20 @@ export default function EmailComposer({ selectedStyle, onGenerate, isGenerating 
                   data-testid="input-recipient-name"
                 />
               </div>
+              <div>
+                <Label htmlFor="recipientEmail" className="text-sm font-medium mb-2">Recipient Email (Optional)</Label>
+                <Input
+                  id="recipientEmail"
+                  type="email"
+                  placeholder="recipient@example.com"
+                  value={formData.recipientEmail}
+                  onChange={(e) => setFormData({ ...formData, recipientEmail: e.target.value })}
+                  data-testid="input-recipient-email"
+                />
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
                 <Label htmlFor="recipientLinkedIn" className="text-sm font-medium mb-2">Recipient LinkedIn (Optional)</Label>
                 <Input

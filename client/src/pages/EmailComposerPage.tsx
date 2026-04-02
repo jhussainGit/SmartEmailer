@@ -259,6 +259,8 @@ export default function EmailComposerPage() {
           <div className="lg:col-span-4">
             <EmailPreview
               content={generatedEmail}
+              recipientEmail={currentFormData?.recipientEmail}
+              subject={currentFormData?.subject}
               onSave={isAuthenticated ? handleSaveDraft : undefined}
               onRegenerate={currentFormData ? handleRegenerate : undefined}
             />
