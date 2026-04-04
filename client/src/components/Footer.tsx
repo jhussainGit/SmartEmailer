@@ -71,9 +71,23 @@ export default function Footer() {
               <p className="font-semibold">Indus Bridge Ventures Inc.</p>
               <p>801 Route 1 #1017, Iselin, NJ 08831, United States</p>
             </div>
-            <p className="text-sm text-muted-foreground">
-              © {new Date().getFullYear()} Indus Bridge Ventures Inc. All rights reserved.
-            </p>
+            <div className="flex flex-col items-center md:items-end gap-1">
+              <p className="text-sm text-muted-foreground">
+                © {new Date().getFullYear()} Indus Bridge Ventures Inc. All rights reserved.
+              </p>
+              <p className="text-xs text-muted-foreground">
+                Built by{" "}
+                <a
+                  href="https://indusbridge.digital"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-foreground transition-colors underline underline-offset-2"
+                  data-testid="link-built-by"
+                >
+                  Indus Bridge Digital
+                </a>
+              </p>
+            </div>
           </div>
         </div>
       </div>
