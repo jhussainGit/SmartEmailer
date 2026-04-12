@@ -79,10 +79,6 @@ const faqs = [
         a: "The AI automatically selects the most effective framework based on your email style. Sales emails use AIDA (Attention, Interest, Desire, Action). Cover letters use STAR (Situation, Task, Action, Result). Proposals use SPIN (Situation, Problem, Implication, Need-Payoff). Marketing emails use PAS (Problem, Agitation, Solution). Complaints use NVC (Nonviolent Communication). Executive emails use an inverted-pyramid approach. Recruiter outreach uses a Value Proposition Canvas. Each framework is chosen to maximize the impact of that specific email type."
       },
       {
-        q: "How long does it take to generate an email?",
-        a: "Most emails are generated in 20-40 seconds. The AI takes a bit longer than simpler tools because it applies multiple layers of analysis — communication frameworks, cultural intelligence, rhetorical strategy, and quality checks — to produce higher-quality results. Complex requests with attachments or dual-language output may take slightly longer."
-      },
-      {
         q: "Does the AI support cultural conventions for different languages?",
         a: "Yes. When generating emails in non-English languages, the AI applies language-specific cultural intelligence. For example, Japanese emails follow keigo (honorific) conventions. French emails use proper formules de politesse. German emails respect Sie/du distinctions. Arabic emails include appropriate Islamic or formal greetings. Chinese emails account for guanxi (relationship) norms. Korean emails have dedicated honorific level control. This ensures emails feel natural to native speakers, not like translated English."
       },
