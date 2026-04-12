@@ -176,9 +176,6 @@ export default function EmailComposer({ selectedStyle, onGenerate, isGenerating 
                   data-testid="input-recipient-linkedin"
                 />
               </div>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
                 <Label htmlFor="senderName" className="text-sm font-medium mb-2">Your Name</Label>
                 <Input
@@ -189,6 +186,9 @@ export default function EmailComposer({ selectedStyle, onGenerate, isGenerating 
                   data-testid="input-sender-name"
                 />
               </div>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
                 <Label htmlFor="senderLinkedIn" className="text-sm font-medium mb-2">Your LinkedIn (Optional)</Label>
                 <Input
@@ -557,7 +557,7 @@ export default function EmailComposer({ selectedStyle, onGenerate, isGenerating 
           {isGenerating ? (
             <>
               <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-              Generating (20-40 seconds)...
+              Generating...
             </>
           ) : (
             <>
