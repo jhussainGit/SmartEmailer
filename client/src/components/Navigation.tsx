@@ -32,11 +32,11 @@ export default function Navigation() {
     <nav className="sticky top-0 z-50 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/80 border-b">
       <div className="max-w-[1800px] mx-auto px-4">
         <div className="flex items-center justify-between h-16">
-          <Link href="/" className="flex items-center gap-2 hover-elevate active-elevate-2 px-3 py-2 rounded-lg">
-            <div className="bg-primary text-primary-foreground p-2 rounded-lg">
-              <Mail className="w-5 h-5" />
+          <Link href="/" className="flex items-center gap-2.5 hover-elevate active-elevate-2 px-2.5 py-1.5 rounded-md">
+            <div className="bg-primary text-primary-foreground p-1.5 rounded-md">
+              <Mail className="w-4 h-4" />
             </div>
-            <span className="font-bold text-xl">Smart Emailer Pro</span>
+            <span className="font-display text-lg tracking-tight">Smart Emailer Pro</span>
           </Link>
 
           <div className="hidden md:flex items-center gap-1">

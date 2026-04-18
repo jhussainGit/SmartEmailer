@@ -216,7 +216,7 @@ export default function Landing() {
         <div className="max-w-4xl mx-auto">
           <div className="flex items-center gap-2 mb-6">
             <Sparkles className="w-5 h-5 text-primary" />
-            <h2 className="text-2xl font-bold" data-testid="text-whats-new-title">Latest Updates</h2>
+            <h2 className="font-display text-3xl md:text-4xl" data-testid="text-whats-new-title">Latest updates</h2>
           </div>
           <p className="text-muted-foreground mb-6">
             Now supporting Korean business communication with culturally-aware email generation.
@@ -272,7 +272,7 @@ export default function Landing() {
       <div id="examples-section" className="bg-muted/30 py-20 px-4">
         <div className="max-w-6xl mx-auto mb-16">
           <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">Real Email Examples</h2>
+            <h2 className="font-display text-4xl md:text-5xl mb-4">Real email examples</h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
               See what Smart Emailer Pro can create for you. Each example shows the inputs and the professional output.
             </p>
@@ -319,7 +319,7 @@ export default function Landing() {
         
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">Why Choose Smart Emailer Pro?</h2>
+            <h2 className="font-display text-4xl md:text-5xl mb-4">Why choose Smart Emailer Pro?</h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
               Professional email writing made simple with advanced AI technology
             </p>
