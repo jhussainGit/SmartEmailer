@@ -14,7 +14,7 @@ const faqs = [
     questions: [
       {
         q: "How does Smart Emailer Pro work?",
-        a: "Smart Emailer Pro uses an advanced multi-layered AI engine powered by GPT-5 to generate professional emails. It analyzes your selected writing style, recipient context, language preferences, and any supporting materials you provide (like LinkedIn profiles or attachments) to craft emails that are strategically structured and culturally appropriate. Simply choose a style, fill in the details, and the AI handles the rest."
+        a: "Smart Emailer Pro uses an advanced multi-layered AI engine powered by OpenAI GPT-4o to generate professional emails. It analyzes your selected writing style, recipient context, language preferences, and any supporting materials you provide (like LinkedIn profiles or attachments) to craft emails that are strategically structured and culturally appropriate. Optional advanced controls let you tune tone, voice, formatting, and the underlying API parameters, and you can export the generated email together with all input parameters and the actual prompts used. Simply choose a style, fill in the details, and the AI handles the rest."
       },
       {
         q: "Is Smart Emailer Pro really free?",
@@ -64,6 +64,43 @@ const faqs = [
       {
         q: "What is the sample email feature?",
         a: "You can paste a sample email to help the AI match a specific writing style or tone. The AI analyzes the sample's sentence structure, vocabulary level, formality, and personality, then replicates those qualities in the generated email. This is perfect for maintaining consistency with previous correspondence or matching a particular voice."
+      },
+    ]
+  },
+  {
+    category: "Advanced Controls & Export",
+    questions: [
+      {
+        q: "What are the Advanced Controls?",
+        a: "Below the standard composer fields you'll find an Advanced Controls accordion with four sections. Tone & Voice gives you sliders (1-10) for formality, warmth, directness, confidence, and urgency. Style gives you reading level, point of view (first / second / third person), a contractions toggle, emoji policy (none / minimal / moderate / liberal), sentence style (short-punchy / balanced / long-flowing), and structure format (paragraphs / bullets / hybrid). Content Shaping covers sender persona, reader seniority, CTA type, must-include words, must-avoid words, and free-form custom instructions. API Parameters gives you direct control over the underlying model call: temperature, top_p, frequency penalty, presence penalty, max tokens, model selection, and an optional seed for reproducible output. There is also a 'Reset advanced to defaults' button that returns every advanced control to its baseline."
+      },
+      {
+        q: "Do I have to use the Advanced Controls?",
+        a: "No. The advanced section is collapsed by default and every control has a sensible baseline that matches the legacy behavior. If you don't open the accordion or don't change a value, the email is generated exactly as it would be without the controls. The advanced directives are only added to the prompt when you actually move a control off its default."
+      },
+      {
+        q: "What does the temperature slider actually do?",
+        a: "Temperature controls how 'creative' the model is. Lower values (0.0-0.4) produce focused, predictable, mostly deterministic output that's great for formal or legal-style emails. Mid-range values (0.5-0.9) are good for everyday business emails. Higher values (1.0-1.5) produce more varied, surprising, and creative phrasing that's useful for marketing copy or storytelling. Values above 1.5 can get incoherent."
+      },
+      {
+        q: "What about top_p, frequency penalty, and presence penalty?",
+        a: "Top_p (nucleus sampling) is an alternative way to constrain randomness — lower values keep the model on a tighter set of likely words. Frequency penalty discourages the model from repeating the same words; raise it slightly if outputs feel repetitive. Presence penalty pushes the model to introduce new topics; raise it slightly if you want broader, less narrow emails. Most users never need to touch these — leave them at their defaults unless you have a specific reason to change them."
+      },
+      {
+        q: "Can I pick which AI model is used?",
+        a: "Signed-in users can pick between gpt-4o, gpt-4o-mini, and gpt-4-turbo from the API Parameters section. They can also set a numeric seed for (mostly) reproducible output, and raise the max-tokens cap up to 16,000. Anonymous users always run on gpt-4o with a 5,000-token cap to keep the free tier sustainable; the model and seed fields are simply ignored on those requests."
+      },
+      {
+        q: "What is the 'Export details' button?",
+        a: "After an email is generated, the preview panel has an 'Export details' button next to Copy and Download. It downloads a single Markdown file containing: the generated email, every input parameter you used (style, language, tone sliders, custom instructions, must-include / must-avoid lists, etc.), the timestamp, the model and token usage, and the actual system prompt and user prompt that were sent to the model. It's perfect for documenting prompt-engineering experiments, sharing reproducible recipes with a team, or auditing what the AI was actually told."
+      },
+      {
+        q: "How does the recipient field and 'Open in Mail' button work?",
+        a: "If you fill in the recipient email address before generating, an 'Open in Mail' button appears in the preview panel after generation. Clicking it opens your default mail client (Gmail, Outlook, Apple Mail, etc.) via a mailto: link with the recipient, subject, and full email body pre-filled. From there you just review and send. Nothing is sent on your behalf and the address is not stored unless you also save the result as a draft."
+      },
+      {
+        q: "Are 'must include' and 'must avoid' word lists strict?",
+        a: "Yes. Anything you put in the must-include list is added to the prompt as words or phrases the model is required to weave into the email naturally. Anything in the must-avoid list is added as words or phrases the model must not use under any circumstances — useful for banning corporate buzzwords, clichés, or words that have a specific meaning in your industry."
       },
     ]
   },

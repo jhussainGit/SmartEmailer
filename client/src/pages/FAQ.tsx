@@ -8,11 +8,11 @@ export default function FAQ() {
         <title>Frequently Asked Questions (FAQ) | Smart Emailer Pro</title>
         <meta 
           name="description" 
-          content="Find answers to common questions about Smart Emailer Pro. Learn about our AI email writing features, language support, authentication, drafts, and more."
+          content="Find answers to common questions about Smart Emailer Pro. Learn about our AI email writing features, advanced tone controls, prompt parameter controls, prompt export, language support, authentication, drafts, and more."
         />
         <meta 
           name="keywords" 
-          content="email generator FAQ, AI email writer help, Smart Emailer Pro questions, email writing support, GPT-5 email help"
+          content="email generator FAQ, AI email writer help, Smart Emailer Pro questions, email writing support, GPT-4o email help, advanced controls, prompt export, tone sliders"
         />
         <meta property="og:title" content="Frequently Asked Questions (FAQ) | Smart Emailer Pro" />
         <meta property="og:description" content="Find answers to common questions about Smart Emailer Pro AI email writing tool." />

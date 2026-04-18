@@ -126,7 +126,7 @@ export default function Landing() {
     "@context": "https://schema.org",
     "@type": "WebApplication",
     "name": "Smart Emailer Pro",
-    "description": "Free AI-powered email writing platform with 50+ professional writing styles. Generate perfect emails instantly using GPT-5 technology.",
+    "description": "Free AI-powered email writing platform with 50+ professional writing styles, advanced tone & voice controls, multi-language support, and full prompt-export. Powered by OpenAI GPT-4o.",
     "url": "https://smartemailer.pro",
     "applicationCategory": "BusinessApplication",
     "operatingSystem": "Any",
@@ -139,7 +139,13 @@ export default function Landing() {
     "featureList": [
       "50+ professional writing styles",
       "Multi-language support (22+ languages)",
-      "AI-powered email generation with GPT-5",
+      "AI-powered email generation with OpenAI GPT-4o",
+      "Advanced tone & voice controls (formality, warmth, directness, confidence, urgency)",
+      "Reading level, point-of-view, contractions, emoji policy, sentence and structure controls",
+      "Custom instructions, must-include and must-avoid word lists",
+      "API parameter controls (temperature, top_p, frequency/presence penalties, model, seed)",
+      "Export the email, all input parameters, and the generated system + user prompts",
+      "Recipient field with one-click 'Open in Mail' (mailto)",
       "Draft management for authenticated users",
       "LinkedIn profile integration",
       "Recruiter outreach tools",
@@ -166,17 +172,17 @@ export default function Landing() {
   return (
     <>
       <Helmet>
-        <title>Smart Emailer Pro - Free AI Email Writer | 50+ Professional Writing Styles</title>
+        <title>Smart Emailer Pro - Free AI Email Writer | 50+ Styles, Advanced Tone Controls & Prompt Export</title>
         <meta 
           name="description" 
-          content="Generate professional emails instantly with Smart Emailer Pro. Free AI-powered email writing tool with 50+ styles, multi-language support, and GPT-5 technology. Perfect for business, academic, and personal emails."
+          content="Generate professional emails instantly with Smart Emailer Pro. Free AI email writer with 50+ styles, 22+ languages, advanced tone & voice controls, custom prompt parameters, and full prompt export. Powered by OpenAI GPT-4o."
         />
         <meta 
           name="keywords" 
-          content="AI email writer, free email generator, professional email, business email, email templates, GPT-5, email writing tool, cold email, cover letter, follow-up email, AI writing assistant, recruiter outreach, internal communication"
+          content="AI email writer, free email generator, professional email, business email, email templates, GPT-4o, OpenAI email, email writing tool, cold email, cover letter, follow-up email, AI writing assistant, recruiter outreach, internal communication, advanced prompt controls, tone control, custom prompt export"
         />
-        <meta property="og:title" content="Smart Emailer Pro - Free AI Email Writer | 50+ Professional Writing Styles" />
-        <meta property="og:description" content="Generate professional emails instantly with Smart Emailer Pro. Free AI-powered email writing tool with 50+ styles, multi-language support, and GPT-5 technology." />
+        <meta property="og:title" content="Smart Emailer Pro - Free AI Email Writer | 50+ Styles, Advanced Controls & Prompt Export" />
+        <meta property="og:description" content="Generate professional emails instantly with Smart Emailer Pro. Free AI email writer with 50+ styles, 22+ languages, advanced tone & voice controls, and full prompt export. Powered by OpenAI GPT-4o." />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://smartemailer.pro" />
         <meta name="twitter:card" content="summary_large_image" />
@@ -219,7 +225,7 @@ export default function Landing() {
             <h2 className="font-display text-3xl md:text-4xl" data-testid="text-whats-new-title">Latest updates</h2>
           </div>
           <p className="text-muted-foreground mb-6">
-            Now supporting Korean business communication with culturally-aware email generation.
+            New: advanced tone & voice controls, custom prompt parameters, recipient mailto, and full prompt export — plus Korean and Japanese business styles with culturally-aware generation.
           </p>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
             <div className="flex items-start gap-3 p-4 bg-card border rounded-md" data-testid="card-update-korean-business">
@@ -255,6 +261,20 @@ export default function Landing() {
               <div>
                 <p className="font-medium text-sm">Dual-Language Output</p>
                 <p className="text-xs text-muted-foreground mt-1">Generate emails in two languages side by side</p>
+              </div>
+            </div>
+            <div className="flex items-start gap-3 p-4 bg-card border rounded-md" data-testid="card-update-advanced-controls">
+              <Settings2 className="w-5 h-5 text-primary mt-0.5 flex-shrink-0" />
+              <div>
+                <p className="font-medium text-sm">Advanced Tone & Prompt Controls</p>
+                <p className="text-xs text-muted-foreground mt-1">Sliders for formality, warmth, directness, plus temperature, top_p, model, and seed</p>
+              </div>
+            </div>
+            <div className="flex items-start gap-3 p-4 bg-card border rounded-md" data-testid="card-update-export">
+              <FileText className="w-5 h-5 text-primary mt-0.5 flex-shrink-0" />
+              <div>
+                <p className="font-medium text-sm">Export Email + Prompts</p>
+                <p className="text-xs text-muted-foreground mt-1">Download the email together with every input parameter and the actual system + user prompts used</p>
               </div>
             </div>
           </div>

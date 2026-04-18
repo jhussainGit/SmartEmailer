@@ -141,8 +141,7 @@ export default function BlogPost() {
         <div className="mt-12 p-6 bg-primary/5 rounded-lg border">
           <h3 className="text-xl font-bold mb-2">Try Smart Emailer Pro</h3>
           <p className="text-muted-foreground mb-4">
-            Generate professional emails instantly with AI. Choose from 30+ writing styles 
-            and get perfect emails every time.
+            Generate professional emails instantly with AI. Choose from 50+ writing styles, dial in tone with advanced controls, and export the email together with the underlying prompts.
           </p>
           <Link href="/composer">
             <Button data-testid="button-try-composer">

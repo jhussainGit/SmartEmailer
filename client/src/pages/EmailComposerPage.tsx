@@ -163,11 +163,11 @@ export default function EmailComposerPage() {
         <title>Email Composer - AI-Powered Email Generator | Smart Emailer Pro</title>
         <meta 
           name="description" 
-          content="Create professional emails instantly with our AI-powered composer. Choose from 50+ writing styles including business, academic, technical, and casual. Free email generation with GPT-5 technology."
+          content="Create professional emails instantly with our AI-powered composer. 50+ writing styles, 22+ languages, advanced tone & voice controls, custom prompt parameters, recipient mailto, and one-click export of the email plus all parameters and prompts. Powered by OpenAI GPT-4o."
         />
         <meta 
           name="keywords" 
-          content="email composer, AI email generator, write email, professional email writer, business email generator, email creator, GPT-5 email, automated email writing"
+          content="email composer, AI email generator, write email, professional email writer, business email generator, email creator, GPT-4o email, OpenAI email writer, automated email writing, advanced tone controls, prompt parameter controls, prompt export, mailto generator"
         />
         <meta property="og:title" content="Email Composer - AI-Powered Email Generator | Smart Emailer Pro" />
         <meta property="og:description" content="Create professional emails instantly with our AI-powered composer. Choose from 50+ writing styles and generate perfect emails in seconds." />

@@ -91,7 +91,7 @@ export default function PrivacyPolicy() {
             
             <h3 className="text-xl font-semibold mb-3 mt-6">4.1 AI-Powered Email Generation</h3>
             <p>
-              Smart Emailer Pro uses OpenAI's GPT-5 model to generate email content. When you use our email generation feature:
+              Smart Emailer Pro uses OpenAI's GPT-4o model (signed-in users may select gpt-4o, gpt-4o-mini, or gpt-4-turbo) to generate email content. When you use our email generation feature:
             </p>
             <ul className="list-disc pl-6 space-y-2 mt-3">
               <li>Your input data (prompts, context, preferences) is sent to OpenAI's API for processing</li>

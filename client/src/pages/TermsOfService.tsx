@@ -56,8 +56,10 @@ export default function TermsOfService() {
               academic, casual, and creative emails based on user inputs. The Service includes:
             </p>
             <ul className="list-disc pl-6 space-y-2 mt-3">
-              <li>AI-powered email generation using OpenAI's GPT-5 model</li>
-              <li>30+ email writing styles across multiple categories</li>
+              <li>AI-powered email generation using OpenAI's GPT-4o model (with optional model selection for signed-in users)</li>
+              <li>50+ email writing styles across multiple categories</li>
+              <li>Advanced tone, voice, and prompt parameter controls</li>
+              <li>Export of the generated email together with all input parameters and the underlying system + user prompts</li>
               <li>Draft saving and management for authenticated users</li>
               <li>Customization options including tone, length, and context</li>
               <li>Contact form for support inquiries</li>
@@ -168,7 +170,7 @@ export default function TermsOfService() {
 
             <h3 className="text-xl font-semibold mb-3 mt-6">6.2 Third-Party AI Services</h3>
             <p>
-              The Service uses OpenAI's GPT-5 model. While we select reliable AI providers, we are not 
+              The Service uses OpenAI's GPT-4o model. While we select reliable AI providers, we are not 
               responsible for the performance, availability, or outputs of third-party AI services.
             </p>
 

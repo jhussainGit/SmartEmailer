@@ -115,7 +115,7 @@ export default function Blog() {
         <div className="max-w-6xl mx-auto px-4 py-12 text-center">
           <h2 className="text-2xl font-bold mb-4">Need AI-Powered Email Help?</h2>
           <p className="text-muted-foreground mb-6">
-            Try Smart Emailer Pro to generate professional emails in seconds with 30+ writing styles.
+            Try Smart Emailer Pro to generate professional emails in seconds with 50+ writing styles, advanced tone controls, and full prompt export.
           </p>
           <Link href="/composer">
             <Button size="lg" data-testid="button-try-composer">
