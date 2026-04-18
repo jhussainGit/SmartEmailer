@@ -113,11 +113,11 @@ export default function EmailPreview({ content, recipientEmail, subject, onRefin
       '',
     ].filter(Boolean).join('\n');
 
-    const blob = new Blob([md], { type: 'text/markdown' });
+    const blob = new Blob([md], { type: 'text/plain' });
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = `smart-emailer-${slugify(subject || styleId || '', 'export')}-${Date.now()}.md`;
+    a.download = `smart-emailer-${slugify(subject || styleId || '', 'export')}-${Date.now()}.txt`;
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
@@ -125,7 +125,7 @@ export default function EmailPreview({ content, recipientEmail, subject, onRefin
 
     toast({
       title: "Exported!",
-      description: "Email + parameters + prompts saved as a Markdown file.",
+      description: "Email + parameters + prompts saved as a text file.",
     });
   };
 
@@ -181,7 +181,7 @@ export default function EmailPreview({ content, recipientEmail, subject, onRefin
             size="sm"
             onClick={exportFullDetails}
             disabled={!content}
-            title="Download a Markdown file containing the email, all input parameters, and the system + user prompts used to generate it."
+            title="Download a text file containing the email, all input parameters, and the system + user prompts used to generate it."
             data-testid="button-export-details"
           >
             <FileDown className="w-4 h-4 mr-2" />
