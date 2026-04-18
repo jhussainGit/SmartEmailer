@@ -34,6 +34,213 @@ interface EmailGenerationParams {
   inputLanguage?: string;
   outputLanguage?: string;
   emailSignature?: string;
+  // Advanced tone & voice (1-10)
+  formalityLevel?: number;
+  warmthLevel?: number;
+  directnessLevel?: number;
+  confidenceLevel?: number;
+  urgencyLevel?: number;
+  // Advanced style
+  readingLevel?: 'elementary' | 'middle-school' | 'high-school' | 'college' | 'professional' | 'expert';
+  pointOfView?: 'first-person' | 'second-person' | 'third-person';
+  useContractions?: boolean;
+  emojiPolicy?: 'none' | 'minimal' | 'moderate';
+  sentenceStyle?: 'short-punchy' | 'balanced' | 'long-flowing';
+  structureFormat?: 'paragraphs' | 'bullets' | 'hybrid';
+  // Content shaping
+  senderPersona?: string;
+  readerSeniority?: 'auto' | 'individual-contributor' | 'manager' | 'director' | 'executive' | 'c-suite';
+  ctaType?: 'auto' | 'schedule-meeting' | 'reply' | 'click-link' | 'review-document' | 'no-cta' | 'custom';
+  customCta?: string;
+  mustInclude?: string;
+  mustAvoid?: string;
+  customInstructions?: string;
+  // API parameters
+  model?: 'gpt-4o' | 'gpt-4o-mini' | 'gpt-4-turbo';
+  temperature?: number;
+  topP?: number;
+  frequencyPenalty?: number;
+  presencePenalty?: number;
+  maxOutputTokens?: number;
+  seed?: string;
+}
+
+const ALLOWED_MODELS = new Set(['gpt-4o', 'gpt-4o-mini', 'gpt-4-turbo']);
+
+const ADVANCED_BASELINE = {
+  formalityLevel: 6,
+  warmthLevel: 5,
+  directnessLevel: 6,
+  confidenceLevel: 6,
+  urgencyLevel: 4,
+  readingLevel: 'professional',
+  pointOfView: 'first-person',
+  useContractions: true,
+  emojiPolicy: 'none',
+  sentenceStyle: 'balanced',
+  structureFormat: 'paragraphs',
+  readerSeniority: 'auto',
+  ctaType: 'auto',
+};
+
+function clamp(n: number, min: number, max: number): number {
+  if (Number.isNaN(n) || typeof n !== 'number') return min;
+  return Math.max(min, Math.min(max, n));
+}
+
+function describeLevel(value: number, low: string, mid: string, high: string): string {
+  if (value <= 3) return low;
+  if (value <= 7) return mid;
+  return high;
+}
+
+function buildAdvancedDirectives(params: EmailGenerationParams): string {
+  const lines: string[] = [];
+
+  // Tone & voice sliders — only emit if user moved them off baseline
+  const toneLines: string[] = [];
+  if (typeof params.formalityLevel === 'number' && params.formalityLevel !== ADVANCED_BASELINE.formalityLevel) {
+    toneLines.push(`- FORMALITY (${params.formalityLevel}/10): ${describeLevel(params.formalityLevel,
+      'Highly casual — write like a quick note to a friend. Use first names, contractions, and conversational phrasing. Skip honorifics.',
+      'Professional but approachable — neutral register suitable for most workplace communication.',
+      'Highly formal — use full titles, complete sentences, no contractions or colloquialisms. Maintain ceremonial register throughout.')}`);
+  }
+  if (typeof params.warmthLevel === 'number' && params.warmthLevel !== ADVANCED_BASELINE.warmthLevel) {
+    toneLines.push(`- WARMTH (${params.warmthLevel}/10): ${describeLevel(params.warmthLevel,
+      'Cool and detached — purely transactional. No personal touches, no warmth signals.',
+      'Professionally cordial — polite acknowledgement of the human relationship without overdoing it.',
+      'Warm and personal — express genuine care, use empathetic language, acknowledge the recipient as a whole person.')}`);
+  }
+  if (typeof params.directnessLevel === 'number' && params.directnessLevel !== ADVANCED_BASELINE.directnessLevel) {
+    toneLines.push(`- DIRECTNESS (${params.directnessLevel}/10): ${describeLevel(params.directnessLevel,
+      'Indirect and diplomatic — soften requests, use hedging, give the reader face-saving outs.',
+      'Clear but considerate — state the point plainly while remaining polite.',
+      'Direct and unambiguous — lead with the ask, no hedging, no preamble. Get to the point in the first sentence.')}`);
+  }
+  if (typeof params.confidenceLevel === 'number' && params.confidenceLevel !== ADVANCED_BASELINE.confidenceLevel) {
+    toneLines.push(`- CONFIDENCE (${params.confidenceLevel}/10): ${describeLevel(params.confidenceLevel,
+      'Humble and deferential — acknowledge the recipient\'s expertise, frame your input modestly, use phrases like "I might be wrong but…"',
+      'Quietly confident — state positions clearly without bravado.',
+      'Assertive and authoritative — state positions with conviction. No hedge words ("just," "maybe," "I think"). Speak from authority.')}`);
+  }
+  if (typeof params.urgencyLevel === 'number' && params.urgencyLevel !== ADVANCED_BASELINE.urgencyLevel) {
+    toneLines.push(`- URGENCY (${params.urgencyLevel}/10): ${describeLevel(params.urgencyLevel,
+      'Relaxed timing — make clear there is no time pressure. "Whenever convenient" framing.',
+      'Standard business pacing — reasonable response timeframe expected.',
+      'Time-critical — convey genuine urgency. Reference deadlines, time-sensitive consequences, and the need for prompt action — without being shrill.')}`);
+  }
+  if (toneLines.length) {
+    lines.push('TONE & VOICE CALIBRATION — Apply these dimensions precisely:\n' + toneLines.join('\n'));
+  }
+
+  // Reading level
+  if (params.readingLevel && params.readingLevel !== ADVANCED_BASELINE.readingLevel) {
+    const readingMap: Record<string, string> = {
+      'elementary': 'Use simple, common words (Flesch reading ease 80+). Short sentences. Avoid technical terms entirely.',
+      'middle-school': 'Use everyday vocabulary. Sentences average 12-15 words. Explain any specialized terms.',
+      'high-school': 'Standard general-audience prose. Clear, accessible, no jargon unless defined.',
+      'college': 'Moderately sophisticated vocabulary. Industry terms acceptable. Sentences may be more complex.',
+      'professional': 'Polished business prose with industry-appropriate terminology. Assume the reader is fluent in the domain.',
+      'expert': 'Use precise technical/specialist vocabulary freely. Assume the reader has deep domain expertise — no need to define standard terms in the field.',
+    };
+    lines.push(`READING LEVEL — ${readingMap[params.readingLevel]}`);
+  }
+
+  // POV
+  if (params.pointOfView && params.pointOfView !== ADVANCED_BASELINE.pointOfView) {
+    const povMap: Record<string, string> = {
+      'first-person': 'Write in first person ("I" / "we"). Center the sender\'s perspective and ownership.',
+      'second-person': 'Write in second person ("you"-focused). Center the recipient\'s perspective, needs, and benefits. Minimize "I" statements.',
+      'third-person': 'Write in third person where natural — objective and observational rather than personal. Useful for announcements and reports.',
+    };
+    lines.push(`POINT OF VIEW — ${povMap[params.pointOfView]}`);
+  }
+
+  // Contractions — only emit when user explicitly disables (baseline = enabled)
+  if (params.useContractions === false) {
+    lines.push('CONTRACTIONS — Do NOT use contractions. Write "I am" not "I\'m," "we will" not "we\'ll," "do not" not "don\'t."');
+  }
+
+  // Emoji
+  if (params.emojiPolicy && params.emojiPolicy !== ADVANCED_BASELINE.emojiPolicy) {
+    const emojiMap: Record<string, string> = {
+      'none': 'EMOJI POLICY — Do NOT use any emoji whatsoever.',
+      'minimal': 'EMOJI POLICY — At most ONE emoji in the entire email, and only if it adds genuine value.',
+      'moderate': 'EMOJI POLICY — Use emoji sparingly where they enhance warmth or clarity. Never replace words with emoji; never use more than one per paragraph.',
+    };
+    lines.push(emojiMap[params.emojiPolicy]);
+  }
+
+  // Sentence style
+  if (params.sentenceStyle && params.sentenceStyle !== ADVANCED_BASELINE.sentenceStyle) {
+    const sentenceMap: Record<string, string> = {
+      'short-punchy': 'SENTENCE STYLE — Write in short, punchy sentences. Average 8-12 words. Use sentence fragments for emphasis when appropriate. Aim for high impact density.',
+      'balanced': 'SENTENCE STYLE — Vary sentence length deliberately. Mix short impactful statements with longer descriptive ones to create rhythm.',
+      'long-flowing': 'SENTENCE STYLE — Use longer, more flowing sentences with subordinate clauses. Average 20-25 words. Maintain sophisticated prose rhythm.',
+    };
+    lines.push(sentenceMap[params.sentenceStyle]);
+  }
+
+  // Structure format
+  if (params.structureFormat && params.structureFormat !== ADVANCED_BASELINE.structureFormat) {
+    const structureMap: Record<string, string> = {
+      'paragraphs': 'STRUCTURE — Use prose paragraphs only. Do NOT use bullet points or numbered lists.',
+      'bullets': 'STRUCTURE — Use bullet points for the body content. Brief intro paragraph, then bulleted points, then a brief closing paragraph.',
+      'hybrid': 'STRUCTURE — Mix paragraphs with bulleted lists where bullets aid scannability (e.g., for action items, options, or enumerated points).',
+    };
+    lines.push(structureMap[params.structureFormat]);
+  }
+
+  // Sender persona
+  if (params.senderPersona?.trim()) {
+    lines.push(`SENDER PERSONA — Write as if you are: "${params.senderPersona.trim()}". Let this identity shape vocabulary, references, and authority signals.`);
+  }
+
+  // Reader seniority
+  if (params.readerSeniority && params.readerSeniority !== 'auto') {
+    const seniorityMap: Record<string, string> = {
+      'individual-contributor': 'Reader is an individual contributor — collegial peer-level register. Focus on practical specifics.',
+      'manager': 'Reader is a manager — balance strategic context with execution detail. Respect their team-leadership perspective.',
+      'director': 'Reader is a director or VP — emphasize cross-functional impact, business outcomes, and strategic implications. Skip operational minutiae.',
+      'executive': 'Reader is an executive — front-load the recommendation, supporting data points minimal but precise. Total reading time under 60 seconds.',
+      'c-suite': 'Reader is C-Suite (CEO/CFO/CTO/etc.) — the email must be readable in 30 seconds. Lead with the ask or insight. Every sentence earns its place. Use board-level language.',
+    };
+    lines.push(`READER SENIORITY — ${seniorityMap[params.readerSeniority]}`);
+  }
+
+  // CTA
+  if (params.ctaType && params.ctaType !== 'auto') {
+    const ctaMap: Record<string, string> = {
+      'schedule-meeting': 'CALL-TO-ACTION — End with a clear, specific request to schedule a meeting. Offer 2-3 specific time windows or invite them to suggest a time.',
+      'reply': 'CALL-TO-ACTION — End with a focused yes/no or short-answer question that makes replying effortless.',
+      'click-link': 'CALL-TO-ACTION — End by directing the reader to click a specific link. Make the reason to click compelling.',
+      'review-document': 'CALL-TO-ACTION — End by asking the reader to review the attached document and respond with feedback or approval.',
+      'no-cta': 'CALL-TO-ACTION — Do NOT include a call-to-action. This email is purely informational.',
+      'custom': params.customCta?.trim()
+        ? `CALL-TO-ACTION — End with this specific call-to-action: "${params.customCta.trim()}". Phrase it naturally in the email's voice.`
+        : 'CALL-TO-ACTION — End with a clear, single call-to-action.',
+    };
+    lines.push(ctaMap[params.ctaType]);
+  }
+
+  // Must include
+  if (params.mustInclude?.trim()) {
+    const phrases = params.mustInclude.split(',').map(s => s.trim()).filter(Boolean);
+    if (phrases.length) {
+      lines.push(`MUST INCLUDE — The following phrases MUST appear verbatim in the email, woven in naturally: ${phrases.map(p => `"${p}"`).join(', ')}.`);
+    }
+  }
+
+  // Must avoid
+  if (params.mustAvoid?.trim()) {
+    const words = params.mustAvoid.split(',').map(s => s.trim()).filter(Boolean);
+    if (words.length) {
+      lines.push(`MUST AVOID — Do NOT use any of these words or phrases under any circumstances: ${words.map(w => `"${w}"`).join(', ')}. Find alternatives.`);
+    }
+  }
+
+  if (lines.length === 0) return '';
+  return '\n\nADVANCED USER CONTROLS — Apply these in addition to (not in place of) the formatting rules and language directive above:\n\n' + lines.join('\n\n');
 }
 
 const lengthGuidelines: Record<string, string> = {
@@ -686,7 +893,7 @@ ${styleGuidance}
   }
 }
 
-export async function generateEmail(params: any): Promise<string> {
+export async function generateEmail(params: any): Promise<any> {
   const selectedStyle = emailStyles.find(s => s.id === params.style);
   const styleName = selectedStyle?.name || 'Professional';
   const styleDescription = selectedStyle?.description || 'Professional tone';
@@ -735,6 +942,7 @@ export async function generateEmail(params: any): Promise<string> {
   const attachmentGuidance = buildAttachmentGuidance(styleId, !!(params.attachmentContent && params.attachmentName));
   const recruiterGuidance = buildRecruiterGuidance(params);
   const qualityDirectives = buildQualityDirectives();
+  const advancedDirectives = buildAdvancedDirectives(params);
 
   const secondLanguage = inputLanguage !== outputLanguage ? inputLanguage : 'English';
   const dualLanguageGuidance = params.dualLanguageOutput
@@ -750,7 +958,7 @@ OUTPUT LANGUAGE: ${outputLanguage}
 LANGUAGE DIRECTIVE: The email MUST be written entirely in ${outputLanguage}. All content — greeting, body, closing, signature — must be in natural, fluent ${outputLanguage}. Do not mix languages unless the context specifically calls for a term that has no equivalent.
 
 ${communicationFramework ? communicationFramework + '\n' : ''}${styleExpertise ? styleExpertise + '\n' : ''}${rhetoricalStrategy}
-${audienceIntelligence}${culturalIntelligence ? '\n' + culturalIntelligence : ''}${koreanGuidance ? '\n\n' + koreanGuidance : ''}${japaneseGuidance ? '\n\n' + japaneseGuidance : ''}${attachmentGuidance}${recruiterGuidance}${dualLanguageGuidance}
+${audienceIntelligence}${culturalIntelligence ? '\n' + culturalIntelligence : ''}${koreanGuidance ? '\n\n' + koreanGuidance : ''}${japaneseGuidance ? '\n\n' + japaneseGuidance : ''}${attachmentGuidance}${recruiterGuidance}${dualLanguageGuidance}${advancedDirectives}
 ${qualityDirectives}
 
 FORMATTING RULES:
@@ -770,9 +978,30 @@ KEY POINTS TO ADDRESS: ${topic}${contextSignals}`;
     userPrompt += `\n\nSTYLE REFERENCE — The following sample email demonstrates the tone and voice the user wants to match. Analyze its sentence structure, vocabulary level, formality, and personality, then replicate these qualities:\n\n${params.sampleEmail}`;
   }
 
+  if (params.customInstructions?.trim()) {
+    userPrompt += `\n\nADDITIONAL USER INSTRUCTIONS (honor these where they don't conflict with the language directive or formatting rules in the system prompt):\n${params.customInstructions.trim()}`;
+  }
+
   userPrompt += `\n\nGenerate the email now. Output ONLY the email content in ${outputLanguage} — no commentary, no meta-discussion, no explanations before or after the email.`;
 
-  const model = "gpt-4o";
+  // Cost-abuse mitigation: only authenticated users can override model, push high token caps, or pin a seed.
+  const isAuthenticated = !!(params as any).__isAuthenticated;
+  const requestedModel = isAuthenticated && params.model && ALLOWED_MODELS.has(params.model)
+    ? params.model
+    : 'gpt-4o';
+  const model = requestedModel;
+
+  const temperature = typeof params.temperature === 'number' ? clamp(params.temperature, 0, 2) : 0.7;
+  const topP = typeof params.topP === 'number' ? clamp(params.topP, 0, 1) : 1;
+  const frequencyPenalty = typeof params.frequencyPenalty === 'number' ? clamp(params.frequencyPenalty, -2, 2) : 0;
+  const presencePenalty = typeof params.presencePenalty === 'number' ? clamp(params.presencePenalty, -2, 2) : 0;
+  const maxTokenCeiling = isAuthenticated ? 16000 : 5000;
+  const maxTokens = typeof params.maxOutputTokens === 'number'
+    ? clamp(params.maxOutputTokens, 100, maxTokenCeiling)
+    : 5000;
+  const seedValue = isAuthenticated && params.seed && /^-?\d+$/.test(String(params.seed).trim())
+    ? parseInt(String(params.seed).trim(), 10)
+    : undefined;
 
   try {
     const completion = await openai.chat.completions.create({
@@ -781,7 +1010,12 @@ KEY POINTS TO ADDRESS: ${topic}${contextSignals}`;
         { role: "system", content: systemPrompt },
         { role: "user", content: userPrompt },
       ],
-      max_tokens: 5000,
+      max_tokens: maxTokens,
+      temperature,
+      top_p: topP,
+      frequency_penalty: frequencyPenalty,
+      presence_penalty: presencePenalty,
+      ...(seedValue !== undefined ? { seed: seedValue } : {}),
     });
 
     const generatedEmail = completion.choices[0]?.message?.content || '';

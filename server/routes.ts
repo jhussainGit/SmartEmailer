@@ -186,7 +186,10 @@ export async function registerRoutes(app: Express): Promise<Server> {
       }
       
       const { generateEmail } = await import('./emailGenerator');
-      const result = await generateEmail(req.body);
+      const result = await generateEmail({
+        ...req.body,
+        __isAuthenticated: !!req.user?.claims?.sub,
+      });
       
       generationSuccess = true;
       console.log('[Email Generation] Email generated successfully');
