@@ -217,7 +217,15 @@ export async function registerRoutes(app: Express): Promise<Server> {
         }).catch(err => console.error('[Activity Log] Failed to save:', err));
       }
 
-      res.json({ email: result.email });
+      res.json({
+        email: result.email,
+        systemPrompt: result.systemPrompt,
+        userPrompt: result.userPrompt,
+        model: result.model,
+        promptTokens: result.promptTokens,
+        completionTokens: result.completionTokens,
+        totalTokens: result.totalTokens,
+      });
     } catch (error: any) {
       console.error("[Email Generation] Error:", error);
       console.error("[Email Generation] Error details:", {

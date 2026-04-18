@@ -1,9 +1,18 @@
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Copy, Download, RefreshCw, Save, Clock, FileText, Mail } from "lucide-react";
+import { Copy, Download, RefreshCw, Save, Clock, FileText, Mail, FileDown } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { useAuth } from "@/hooks/useAuth";
 import { useState, useMemo } from "react";
+
+interface GenerationDetails {
+  systemPrompt?: string;
+  userPrompt?: string;
+  model?: string;
+  promptTokens?: number;
+  completionTokens?: number;
+  totalTokens?: number;
+}
 
 interface EmailPreviewProps {
   content: string;
@@ -12,9 +21,12 @@ interface EmailPreviewProps {
   onRefine?: () => void;
   onSave?: () => void;
   onRegenerate?: () => void;
+  styleId?: string;
+  formData?: Record<string, any> | null;
+  generationDetails?: GenerationDetails | null;
 }
 
-export default function EmailPreview({ content, recipientEmail, subject, onRefine, onSave, onRegenerate }: EmailPreviewProps) {
+export default function EmailPreview({ content, recipientEmail, subject, onRefine, onSave, onRegenerate, styleId, formData, generationDetails }: EmailPreviewProps) {
   const { toast } = useToast();
   const { isAuthenticated } = useAuth();
   const [isSaving, setIsSaving] = useState(false);
@@ -49,6 +61,71 @@ export default function EmailPreview({ content, recipientEmail, subject, onRefin
     toast({
       title: "Downloaded!",
       description: "Email saved as text file",
+    });
+  };
+
+  const slugify = (s: string, fallback: string) => {
+    const base = (s || '').trim().toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+    return (base || fallback).slice(0, 60);
+  };
+
+  const exportFullDetails = () => {
+    const generatedAt = new Date().toISOString();
+    const fd: Record<string, any> = formData ? { ...formData } : {};
+    if (typeof fd.attachmentContent === 'string' && fd.attachmentContent.length > 0) {
+      fd.attachmentContent = `[omitted — ${fd.attachmentContent.length} characters]`;
+    }
+    const parametersBlock = Object.keys(fd).length
+      ? '```json\n' + JSON.stringify(fd, null, 2) + '\n```'
+      : '_No input parameters available._';
+
+    const tokenLine = generationDetails && (generationDetails.promptTokens || generationDetails.completionTokens || generationDetails.totalTokens)
+      ? `- **Tokens:** prompt ${generationDetails.promptTokens ?? '?'}, completion ${generationDetails.completionTokens ?? '?'}, total ${generationDetails.totalTokens ?? '?'}`
+      : '';
+
+    const md = [
+      '# Smart Emailer Pro — Generation Export',
+      '',
+      `- **Generated at:** ${generatedAt}`,
+      styleId ? `- **Style:** ${styleId}` : '',
+      generationDetails?.model ? `- **Model:** ${generationDetails.model}` : '',
+      tokenLine,
+      '',
+      '## Generated email',
+      '',
+      content || '_No email content._',
+      '',
+      '## Input parameters',
+      '',
+      parametersBlock,
+      '',
+      '## System prompt',
+      '',
+      generationDetails?.systemPrompt
+        ? '```\n' + generationDetails.systemPrompt + '\n```'
+        : '_System prompt not available for this generation._',
+      '',
+      '## User prompt',
+      '',
+      generationDetails?.userPrompt
+        ? '```\n' + generationDetails.userPrompt + '\n```'
+        : '_User prompt not available for this generation._',
+      '',
+    ].filter(Boolean).join('\n');
+
+    const blob = new Blob([md], { type: 'text/markdown' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `smart-emailer-${slugify(subject || styleId || '', 'export')}-${Date.now()}.md`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+
+    toast({
+      title: "Exported!",
+      description: "Email + parameters + prompts saved as a Markdown file.",
     });
   };
 
@@ -98,6 +175,17 @@ export default function EmailPreview({ content, recipientEmail, subject, onRefin
           >
             <Download className="w-4 h-4 mr-2" />
             Download
+          </Button>
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={exportFullDetails}
+            disabled={!content}
+            title="Download a Markdown file containing the email, all input parameters, and the system + user prompts used to generate it."
+            data-testid="button-export-details"
+          >
+            <FileDown className="w-4 h-4 mr-2" />
+            Export details
           </Button>
           {isAuthenticated && onSave && content && (
             <Button

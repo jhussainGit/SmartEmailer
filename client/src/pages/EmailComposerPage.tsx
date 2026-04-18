@@ -21,6 +21,14 @@ export default function EmailComposerPage() {
   const [generatedEmail, setGeneratedEmail] = useState('');
   const [isGenerating, setIsGenerating] = useState(false);
   const [currentFormData, setCurrentFormData] = useState<EmailFormData | null>(null);
+  const [generationDetails, setGenerationDetails] = useState<{
+    systemPrompt?: string;
+    userPrompt?: string;
+    model?: string;
+    promptTokens?: number;
+    completionTokens?: number;
+    totalTokens?: number;
+  } | null>(null);
   const { toast } = useToast();
   const { isAuthenticated } = useAuth();
 
@@ -62,6 +70,14 @@ export default function EmailComposerPage() {
 
       const data = await response.json();
       setGeneratedEmail(data.email);
+      setGenerationDetails({
+        systemPrompt: data.systemPrompt,
+        userPrompt: data.userPrompt,
+        model: data.model,
+        promptTokens: data.promptTokens,
+        completionTokens: data.completionTokens,
+        totalTokens: data.totalTokens,
+      });
       
       // Save to history for authenticated users
       if (isAuthenticated && data.email) {
@@ -79,6 +95,7 @@ export default function EmailComposerPage() {
       
       const errorMessage = error.message || 'Failed to generate email';
       setGeneratedEmail('');
+      setGenerationDetails(null);
       
       toast({
         title: "Generation Failed",
@@ -263,6 +280,9 @@ export default function EmailComposerPage() {
               subject={currentFormData?.subject}
               onSave={isAuthenticated ? handleSaveDraft : undefined}
               onRegenerate={currentFormData ? handleRegenerate : undefined}
+              styleId={selectedStyle}
+              formData={currentFormData}
+              generationDetails={generationDetails}
             />
           </div>
         </div>
